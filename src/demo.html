@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; }
+        th, td { padding: 10px; }
+    </style>
+</head>
+<body>
+   <h2>Registered Students</h2>
+    <table id="studentTable">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Course</th>
+            <th>Email</th>
+        </tr>
+    </table>
+
+    <script>
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            fetch('/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message);
+                loadStudents(); // Refresh the student list after registration
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Fetch and display student data
+        function loadStudents() {
+            fetch('/students')
+                .then(response => response.json())
+                .then(data => {
+                    const table = document.getElementById('studentTable');
+                    table.innerHTML = `
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Course</th>
+                            <th>Email</th>
+                        </tr>`;
+                    
+                    data.forEach(student => {
+                        const row = table.insertRow();
+                        row.innerHTML = `
+                            <td>${stud.StudentID}</td>
+                            <td>${student.FirstName}</td>
+                            <td>${student.LastName}</td>
+                            <td>${student.Course}</td>
+                            <td>${student.EmailID}</td>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Load students when the page loads
+        window.onload = loadStudents;
+    </script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-//const { addRegistration } = require('./app');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -15,8 +14,8 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '1234',
-    database: 'medhaxl'
+    password: 'mysql',
+    database: 'mdb'
 });
 
 db.connect((err) => {
@@ -24,46 +23,41 @@ db.connect((err) => {
     console.log('Connected to MySQL Database.');
 });
 
-// API endpoint to handle form submission
+// Your existing endpoint to handle the registration form data
 app.post('/register', (req, res) => {
-    // Destructure the request body to get the required fields
-    const { firstName, lastName, phoneNumber, email, course, city, highestQualification } = req.body;
+    const {
+        trainingPartner, course, candidateName, surname, gender, dob, age, religion, category, subCategory,
+        mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification,
+        physicallyHandicapped, guardianName, guardianOccupation, guardianContact, guardianIncome,
+        doorNo, village, mandal, pincode, district, state, aadhar
+    } = req.body;
 
-    // Define the SQL query to insert data into the registrations table
-    const sql = `INSERT INTO registrations (firstName, lastName, phoneNumber, email, course, city, highestQualification) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const sql = `INSERT INTO student (TrainingPartner, Course, FirstName, LastName, Gender, DateOfBirth, Age, Religion, Category, SubCategory, MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName, GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    // Execute the SQL query with the provided data
-    db.query(sql, [firstName, lastName, phoneNumber, email, course, city, highestQualification], (err, result) => {
+    db.query(sql, [trainingPartner, course, candidateName, surname, gender, dob, age, religion, category, subCategory, mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped, guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar], (err, result) => {
         if (err) {
-            // Log the error and send a 500 response with the error message
             console.error('Error storing data:', err);
-            return res.status(500).send('Error storing data: ' + err.message);
+            return res.status(500).json({ success: false, message: 'Error storing data: ' + err.message });
         }
-
-        // Log the success message and send a response to the client
         console.log('Data inserted successfully:', result);
-        res.send('Registration successful!');
+        res.json({ success: true, message: 'Student Registration successful!' });
     });
 });
 
+app.get('/students', (req, res) => {
+    const sql = 'SELECT * FROM student';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching data:', err);
+            return res.status(500).send('Error fetching data');
+        }
+        res.json(results);
+    });
+});
 
-/*
-checking git merge updated 
-exanpl edited code
-
-console.log(123); 456
-
-console.log(123); 123-999
-
-console.log(123);console.log(123);console.log(123);
-*/
-//this is edited file by rishi aug 13 19:30
-
-// Serve static files from the "src" directory
 app.use(express.static(path.join(__dirname, 'src')));
-
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/`);
 });
-

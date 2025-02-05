@@ -1,5 +1,5 @@
 {
-  "name": "samplewebsite1",
+  "name": "medhaxlserver",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.3",
     "express": "^4.19.2",
+    "medhaxlserver": "file:",
     "mysql": "^2.18.1",
     "nodemailer": "^6.9.14"
   },

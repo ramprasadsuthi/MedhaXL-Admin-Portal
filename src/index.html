@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,20 +10,26 @@
     <title>Home - Medha XL</title>
     <style>
         .splide__slide {
-            margin: 0 0px; /* Adjust the margin to create gap */
+            margin: 0 0px;
+            /* Adjust the margin to create gap */
         }
+
         .course-card {
-            height: 500px; /* Fixed height for the course cards */
+            height: 500px;
+            /* Fixed height for the course cards */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
+
         .course-card img {
             flex-shrink: 0;
         }
+
         .course-card h3 {
             flex-shrink: 0;
         }
+
         .course-card p {
             flex-grow: 1;
         }
@@ -39,13 +46,15 @@
         }
 
         .overlay1 {
-            display: none; /* Initially hidden */
+            display: none;
+            /* Initially hidden */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Semi-transparent background */
             justify-content: center;
             align-items: center;
         }
@@ -87,9 +96,10 @@
             align-items: center;
         }
 
-        .registration-container1 input, 
+        .registration-container1 input,
         .registration-container1 select {
-            width: calc(100% - 20px); /* Ensure the select element has the same width */
+            width: calc(100% - 20px);
+            /* Ensure the select element has the same width */
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -97,16 +107,18 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .registration-container1 input:focus, 
+        .registration-container1 input:focus,
         .registration-container1 select:focus {
-            border-color:  #3b82f6;;
+            border-color: #3b82f6;
+            ;
             box-shadow: 0 0 5px rgba(133, 167, 253, 0.5);
         }
 
         .registration-container1 button {
             width: calc(50% - 15px);
             padding: 10px;
-            background: #3b82f6;;
+            background: #3b82f6;
+            ;
             border: none;
             border-radius: 5px;
             color: white;
@@ -121,7 +133,7 @@
 
         .button-container1 {
             display: flex;
-            
+
             justify-content: space-between;
             width: 100%;
         }
@@ -140,6 +152,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -152,6 +165,7 @@
             margin-top: -10px;
             margin-bottom: 10px;
         }
+
         .dropdown:hover .dropdown-content {
             display: block;
         }
@@ -191,22 +205,23 @@
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
-
     </style>
 </head>
+
 <body class="h-screen bg-gradient-to-r from-[#7088c6] via-[#b5b9dc] to-[#015869] animate-aurora">
-    
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <a href="index.html"><img src="img/logo1.png" alt="Logo" class="h-16 w-25"></a> <!-- Logo -->
-            </div>
-            <div class="flex-grow text-center">
-                <ul class="flex justify-center space-x-6">
-                    <li><a href="index.html" class="text-white hover:text-gray-300">Home</a></li>
-                    <li><a href="about.html" class="text-white hover:text-gray-300">About</a></li>
-                    <li><a href="courses.html" class="text-white  hover:text-gray-300">Courses</a></li>
-                    <li class="dropdown relative">
-                        <a href="#" class="text-white  hover:text-gray-300">Tools</a>
+
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+            <a href="index.html"><img src="img/logo1.png" alt="Logo" class="h-16 w-25"></a> <!-- Logo -->
+        </div>
+        <div class="flex-grow text-center">
+            <ul class="flex justify-center space-x-6">
+                <li><a href="index.html" class="text-white hover:text-gray-300">Home</a></li>
+                <li><a href="about.html" class="text-white hover:text-gray-300">About</a></li>
+                <li><a href="courses.html" class="text-white  hover:text-gray-300">Courses</a></li>
+                <ul class="flex items-center space-x-4">
+                    <li class="dropdown relative group">
+                        <a href="#" class="text-white hover:text-gray-300">Tools</a>
                         <div class="dropdown-content absolute bg-white text-black mt-1 rounded shadow-lg">
                             <a
                                 href="https://appv2.resumebuilder.com/build-resume/section/cntc?skin=null&theme=null&templateflow=selectresume">Resume
@@ -215,7 +230,8 @@
                                 <a href="#" class="hover:text-black-300">Online Test</a>
                                 <div
                                     class="nested-dropdown-content absolute bg-white text-black mt-1 rounded shadow-lg">
-                                    <a href="https://www.wscubetech.com/resources/html/quiz/its-time-to-quiz-01">HTML</a>
+                                    <a
+                                        href="https://www.wscubetech.com/resources/html/quiz/its-time-to-quiz-01">HTML</a>
                                     <a href="https://www.wscubetech.com/resources/css/quiz/its-time-to-quiz">CSS</a>
                                     <a href="https://www.wscubetech.com/resources/java/quiz/its-time-to-quiz-7">Java</a>
                                     <a href="https://www.wscubetech.com/resources/python/quiz/quiz-6">Python</a>
@@ -224,20 +240,24 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href="contact.html" class="text-white hover:text-gray-300">Contact</a></li>
-                    <li><a href="team.html" class="text-white hover:text-gray-300">Team</a></li>
                 </ul>
-            </div>
-            <div class="flex items-center">
-                
-                <a href="https://wa.me/9989443915" target="_blank" class="text-white hover:text-gray-300 flex items-center">
-                    <img src="img/icons8-whatsapp-96.png" alt="WhatsApp" class="h-6 w-6 mr-2"> WhatsApp
-                </a>
-            </div>
+                <li><a href="contact.html" class="text-white hover:text-gray-300">Contact</a></li>
+                <li><a href="team.html" class="text-white hover:text-gray-300">Team</a></li>
+            </ul>
         </div>
-    
+        <div class="flex items-center">
+            <a href="https://wa.me/9989443915" target="_blank" class="text-white hover:text-gray-300 flex items-center">
+                <img src="img/icons8-whatsapp-96.png" alt="WhatsApp" class="h-6 w-6 mr-2"> WhatsApp
+            </a>
 
-    <main class ="container mx-auto flex flex-col lg:flex-row items-center justify-between mt-10 px-6">
+            <!-- Add margin-left for spacing -->
+            <a href="loginpagge.html" class="text-white hover:text-gray-300 ml-4">Sign In</a>
+        </div>
+
+    </div>
+
+
+    <main class="container mx-auto flex flex-col lg:flex-row items-center justify-between mt-10 px-6">
         <div class="lg:w-1/2 glass p-10 rounded-lg">
             <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6">
                 Welcome To Medha XL
@@ -251,14 +271,19 @@
                 </button>
             </a>
             &nbsp;
-            <button class="bg-white hover:bg-blue-500 px-6 py-3 rounded-lg text-lg" onclick="openPopup()" style="margin-right:20px ;">Registration Form</button>
+            <a href="studentform.html">
+                <button class="bg-white hover:bg-blue-500 px-6 py-3 rounded-lg text-lg">
+                    Registration Form
+                </button>
+            </a>
         </div>
         <div class="lg:w-1/2 mt-10 lg:mt-0 flex justify-center">
-            <img src="img/futuristic-school-classroom-future-students_23-2150906106.avif" alt="classroom" class="h-96 rounded-lg glass">
+            <img src="img/futuristic-school-classroom-future-students_23-2150906106.avif" alt="classroom"
+                class="h-96 rounded-lg glass">
         </div>
     </main>
 
-    
+
 
     <section class="container mx-auto px-4 py-10">
         <h2 class="text-4xl font-bold mb-6 text-center">Courses Offered</h2>
@@ -268,81 +293,121 @@
                     <li class="splide__slide">
                         <div class="bg-gray-100 rounded-lg shadow-lg p-5 course-card">
                             <div class="flex justify-between items-center mb-4">
-                                <span class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">Running Batch</span> <!-- New Batch tag -->
-                                <span class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration: 60 Days</span> <!-- Duration tag -->
+                                <span
+                                    class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">Running
+                                    Batch</span> <!-- New Batch tag -->
+                                <span
+                                    class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration:
+                                    60 Days</span> <!-- Duration tag -->
                             </div>
-                            <img src="img/javafullstack.jpg" alt="Java Full Stack Development" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <img src="img/javafullstack.jpg" alt="Java Full Stack Development"
+                                class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-xl font-semibold text-red-600 text-center">
                                 <a href="javafullstack.html">Java Full Stack Development</a>
                             </h3>
-                            <p class="mt-2 text-gray-700 flex-grow">This course offers comprehensive end-to-end Java development, including front-end, back-end, and database solutions.</p>
+                            <p class="mt-2 text-gray-700 flex-grow">This course offers comprehensive end-to-end Java
+                                development, including front-end, back-end, and database solutions.</p>
                             <div class="mt-4 text-center">
-                                <a href="javafullstack.html" class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read More</a>
+                                <a href="javafullstack.html"
+                                    class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
                     <li class="splide__slide">
                         <div class="bg-gray-100 rounded-lg shadow-lg p-5 course-card">
                             <div class="flex justify-between items-center mb-4">
-                                <span class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">Running Batch</span> <!-- New Batch tag -->
-                                <span class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration: 25 Days</span> <!-- Duration tag -->
+                                <span
+                                    class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">Running
+                                    Batch</span> <!-- New Batch tag -->
+                                <span
+                                    class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration:
+                                    25 Days</span> <!-- Duration tag -->
                             </div>
-                            <img src="img/manualtesting.jpg" alt="Manual Testing" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <img src="img/manualtesting.jpg" alt="Manual Testing"
+                                class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-xl font-semibold text-red-600 text-center">
                                 <a href="manualtesting.html">Manual Testing</a>
                             </h3>
-                            <p class="mt-2 text-gray-700 flex-grow">Manual Testing Concepts, Test Management Tools (QA Touch / ALM), Project Management Tools (JIRA).</p>
+                            <p class="mt-2 text-gray-700 flex-grow">Manual Testing Concepts, Test Management Tools (QA
+                                Touch / ALM), Project Management Tools (JIRA).</p>
                             <div class="mt-4 text-center">
-                                <a href="manualtesting.html" class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read More</a>
+                                <a href="manualtesting.html"
+                                    class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
                     <li class="splide__slide">
                         <div class="bg-gray-100 rounded-lg shadow-lg p-5 course-card">
                             <div class="flex justify-between items-center mb-4">
-                                <span class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">Running Batch</span> <!-- New Batch tag -->
-                                <span class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration: 45 Days</span> <!-- Duration tag -->
+                                <span
+                                    class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">Running
+                                    Batch</span> <!-- New Batch tag -->
+                                <span
+                                    class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration:
+                                    45 Days</span> <!-- Duration tag -->
                             </div>
-                            <img src="img/automationtesting.jpg" alt="Automation Testing" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <img src="img/automationtesting.jpg" alt="Automation Testing"
+                                class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-xl font-semibold text-red-600 text-center">
                                 <a href="automationtesting.html">Automation - Live Project</a>
                             </h3>
-                            <p class="mt-2 text-gray-700 flex-grow">This course is entirely practical, involving a real-time project from start to end And also we can have a good testing knowledge.</p>
+                            <p class="mt-2 text-gray-700 flex-grow">This course is entirely practical, involving a
+                                real-time project from start to end And also we can have a good testing knowledge.</p>
                             <div class="mt-4 text-center">
-                                <a href="automationtesting.html" class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read More</a>
+                                <a href="automationtesting.html"
+                                    class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read
+                                    More</a>
                             </div>
-                         </div>
+                        </div>
                     </li>
-                     <!-- Python And Web Development Course Added by S V R Vivek Vardhan And Chandu-->
-                     <li class="splide__slide">
+                    <!-- Python And Web Development Course Added by S V R Vivek Vardhan And Chandu-->
+                    <li class="splide__slide">
                         <div class="bg-gray-100 rounded-lg shadow-lg p-5 course-card">
                             <div class="flex justify-between items-center mb-4">
-                                <span class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">New Batch</span> <!-- New Batch tag -->
-                                <span class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration: 45 Days</span> <!-- Duration tag -->
+                                <span
+                                    class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">New
+                                    Batch</span> <!-- New Batch tag -->
+                                <span
+                                    class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration:
+                                    45 Days</span> <!-- Duration tag -->
                             </div>
-                            <img src="img/python.JPG" alt="Python Foundation" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <img src="img/python.JPG" alt="Python Foundation"
+                                class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-xl font-semibold text-red-600 text-center">
                                 <a href="python.html">Python Foundation</a>
                             </h3>
-                            <p class="mt-2 text-gray-700 flex-grow">This course is useful for everyone and also a basic foundation, who wants to start a career in python programming language.</p>
+                            <p class="mt-2 text-gray-700 flex-grow">This course is useful for everyone and also a basic
+                                foundation, who wants to start a career in python programming language.</p>
                             <div class="mt-4 text-center">
-                                <a href="python.html" class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read More</a>
+                                <a href="python.html"
+                                    class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
                     <li class="splide__slide">
                         <div class="bg-gray-100 rounded-lg shadow-lg p-5 course-card">
                             <div class="flex justify-between items-center mb-4">
-                                <span class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">New Batch</span> <!-- New Batch tag -->
-                                <span class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration: 45 Days</span> <!-- Duration tag -->
+                                <span
+                                    class="bg-yellow-500 text-white text-sm font-semibold px-2 py-1 rounded-full ml-2">New
+                                    Batch</span> <!-- New Batch tag -->
+                                <span
+                                    class="bg-blue-500 text-white text-sm font-semibold px-2 py-1 rounded-full">Duration:
+                                    45 Days</span> <!-- Duration tag -->
                             </div>
-                            <img src="img/webdevelopment.JPG" alt="Web Development" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <img src="img/webdevelopment.JPG" alt="Web Development"
+                                class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-xl font-semibold text-red-600 text-center">
                                 <a href="webdevelopment.html">Web Development</a>
                             </h3>
-                            <p class="mt-2 text-gray-700 flex-grow">This course offers basic knowledge in Html, CSS and JavaScript. And also enhance a good path in front-end.</p>
+                            <p class="mt-2 text-gray-700 flex-grow">This course offers basic knowledge in Html, CSS and
+                                JavaScript. And also enhance a good path in front-end.</p>
                             <div class="mt-4 text-center">
-                                <a href="webdevelopment.html" class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read More</a>
+                                <a href="webdevelopment.html"
+                                    class="mt-4 inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
@@ -351,61 +416,66 @@
             </div>
         </div>
     </section>
-        <div class="overlay1" id="overlay">
-            <div class="registration-container1">
-                
-                <div class="header1">
-                    <h1 class="h11">Register</h1>
-                </div>
-                <form id="registrationForm1">
-                    <input type="text" id="firstName" placeholder="First Name" required style="color: black;" required>
-                    <input type="text" id="lastName" placeholder="Last Name" required style="color: black;" required>
-                    <input type="tel" id="phoneNumber" placeholder="Phone Number" required style="color: black;" required>
-                    <span class="error" id="phoneError"></span>
-                    <input type="email" id="email" placeholder="Email" required style="color: black;" required>
-                    <span class="error" id="emailError"></span>
-        
-                    <!-- Dropdown menu for course selection -->
-                    <select id="course" required style="width: 420px;padding: 10px 10px;color: rgb(19, 20, 20);">
-                        <option value="" disabled selected>Courses:</option>
-                        <option value="Python Full Stack Development" style="color: black;">Python Full Stack Development</option>
-                        <option value="Java Full Stack Development" style="color: black;">Java Full Stack Development</option>
-                        <option value="Automation Testing" style="color: black;">Automation Testing</option>
-                        <option value="Software Testing" style="color: black;">Software Testing</option>
+    <div class="overlay1" id="overlay">
+        <div class="registration-container1">
 
-                    </select>
-        
-                    <input type="text" id="city" placeholder="City" required style="color: black;" required>
-                    <input type="text" id="highestQualification" placeholder="Highest Qualification" required style="color: black;" required>
-                    <div class="button-container1">
-                        <button type="submit" style="background: #3b82f6;">Submit</button>
-                        <button type="reset" onclick="closePopup()" style="background: #3b82f6;">Cancel</button>
-                    </div>
-                </form>
+            <div class="header1">
+                <h1 class="h11">Register</h1>
             </div>
+            <form id="registrationForm1">
+                <input type="text" id="firstName" placeholder="First Name" required style="color: black;" required>
+                <input type="text" id="lastName" placeholder="Last Name" required style="color: black;" required>
+                <input type="tel" id="phoneNumber" placeholder="Phone Number" required style="color: black;" required>
+                <span class="error" id="phoneError"></span>
+                <input type="email" id="email" placeholder="Email" required style="color: black;" required>
+                <span class="error" id="emailError"></span>
+
+                <!-- Dropdown menu for course selection -->
+                <select id="course" required style="width: 420px;padding: 10px 10px;color: rgb(19, 20, 20);">
+                    <option value="" disabled selected>Courses:</option>
+                    <option value="Python Full Stack Development" style="color: black;">Python Full Stack Development
+                    </option>
+                    <option value="Java Full Stack Development" style="color: black;">Java Full Stack Development
+                    </option>
+                    <option value="Automation Testing" style="color: black;">Automation Testing</option>
+                    <option value="Software Testing" style="color: black;">Software Testing</option>
+
+                </select>
+
+                <input type="text" id="city" placeholder="City" required style="color: black;" required>
+                <input type="text" id="highestQualification" placeholder="Highest Qualification" required
+                    style="color: black;" required>
+                <div class="button-container1">
+                    <button type="submit" style="background: #3b82f6;">Submit</button>
+                    <button type="reset" onclick="closePopup()" style="background: #3b82f6;">Cancel</button>
+                </div>
+            </form>
         </div>
+    </div>
 
     <footer class="bg-indigo-800 text-center py-4">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <p class="text-white">&copy; 2024 Medha XL. All rights reserved.</p>
-            
+
             <div class="mt-4 text-center md:mt-0">
-                <p class="text-white">Visitors: 
+                <p class="text-white">Visitors:
                     <script type="text/javascript" src="https://freehitcounters.org/count/fwjm"></script><br>
-                    <a href='https://hauckautoren.de/schreiben-einer-masterarbeit' class="text-indigo-300 hover:underline">Ghostwriter Masterarbeit</a>
-                    <script type='text/javascript' src='https://www.whomania.com/ctr?id=4bcb3f0e044fdab99635da8686d63f3c662a44cf'></script>
+                    <a href='https://hauckautoren.de/schreiben-einer-masterarbeit'
+                        class="text-indigo-300 hover:underline">Ghostwriter Masterarbeit</a>
+                    <script type='text/javascript'
+                        src='https://www.whomania.com/ctr?id=4bcb3f0e044fdab99635da8686d63f3c662a44cf'></script>
                 </p>
             </div>
         </div>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.9/dist/js/splide.min.js"></script>
     <script>
-        document.addEventListener( 'DOMContentLoaded', function () {
-            new Splide( '#course-carousel', {
-                type   : 'loop',
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#course-carousel', {
+                type: 'loop',
                 perPage: 3,
-                gap    : '20px', // Adjust the gap between slides
+                gap: '20px', // Adjust the gap between slides
                 breakpoints: {
                     1024: {
                         perPage: 2,
@@ -414,8 +484,8 @@
                         perPage: 1,
                     },
                 },
-            } ).mount();
-        } );
+            }).mount();
+        });
         function openPopup() {
             document.getElementById('overlay').style.display = 'flex';
         }
@@ -424,70 +494,71 @@
             document.getElementById('overlay').style.display = 'none';
         }
 
-    document.getElementById('registrationForm1').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-    
-    var phoneNumber = document.getElementById('phoneNumber').value;
-    var email = document.getElementById('email').value;
-    var phoneError = document.getElementById('phoneError');
-    var emailError = document.getElementById('emailError');
-    
-    var phoneRegex = /^\d{10}$/;
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    var valid = true;
-    
-    // Validate phone number
-    if (!phoneRegex.test(phoneNumber)) {
-        phoneError.textContent = 'Phone number must be 10 digits.';
-        valid = false;
-    } else {
-        phoneError.textContent = '';
-    }
-    
-    // Validate email
-    if (!emailRegex.test(email)) {
-        emailError.textContent = 'Invalid email format.';
-        valid = false;
-    } else {
-        emailError.textContent = '';
-    }
-    
-    // If validation fails, prevent form submission
-    if (!valid) {
-        return; // Stop execution if the form is not valid
-    }
-    
-    // If validation passes, submit the form data to the server
-    var formData = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        phoneNumber: phoneNumber,
-        email: email,
-        course: document.getElementById('course').value,
-        city: document.getElementById('city').value,
-        highestQualification: document.getElementById('highestQualification').value
-    };
-    
-    // Send the form data to the server via POST request
-    fetch('/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert(data); // Show a success message
-        closePopup(); // Close the popup on successful submission
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('There was an error submitting your registration.');
-    });
-});
+        document.getElementById('registrationForm1').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var email = document.getElementById('email').value;
+            var phoneError = document.getElementById('phoneError');
+            var emailError = document.getElementById('emailError');
+
+            var phoneRegex = /^\d{10}$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            var valid = true;
+
+            // Validate phone number
+            if (!phoneRegex.test(phoneNumber)) {
+                phoneError.textContent = 'Phone number must be 10 digits.';
+                valid = false;
+            } else {
+                phoneError.textContent = '';
+            }
+
+            // Validate email
+            if (!emailRegex.test(email)) {
+                emailError.textContent = 'Invalid email format.';
+                valid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            // If validation fails, prevent form submission
+            if (!valid) {
+                return; // Stop execution if the form is not valid
+            }
+
+            // If validation passes, submit the form data to the server
+            var formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                phoneNumber: phoneNumber,
+                email: email,
+                course: document.getElementById('course').value,
+                city: document.getElementById('city').value,
+                highestQualification: document.getElementById('highestQualification').value
+            };
+
+            // Send the form data to the server via POST request
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data); // Show a success message
+                    closePopup(); // Close the popup on successful submission
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error submitting your registration.');
+                });
+        });
 
     </script>
 </body>
+
 </html>
