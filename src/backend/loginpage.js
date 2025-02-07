@@ -27,7 +27,7 @@ function setupMobileView() {
                 const switchButton = document.createElement('button');
                 switchButton.type = 'button';
                 switchButton.className = 'ghost';
-                switchButton.textContent = form.closest('.sign-in-container') ? 
+                switchButton.textContent = form.closest('.sign-in-container') ?
                     'Switch to Student Login' : 'Switch to Admin Login';
                 switchButton.onclick = () => {
                     container.classList.toggle('right-panel-active');
@@ -44,3 +44,25 @@ window.addEventListener('resize', setupMobileView);
 
 // Initial setup
 document.addEventListener('DOMContentLoaded', setupMobileView);
+
+
+// **Admin Login API**
+document.getElementById("adminLoginForm").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent form submission
+
+    const email = document.getElementById("adminEmail").value;
+    const password = document.getElementById("adminPassword").value;
+
+    const response = await fetch("/loginpage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    if (data.success) {
+        window.location.href = "/studentform.html"; // Redirect on success
+    } else {
+        alert("Invalid credentials! Try again.");
+    }
+});

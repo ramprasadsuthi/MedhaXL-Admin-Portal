@@ -174,8 +174,8 @@ function previewForm() {
 
         fields.forEach(field => {
             const element = document.getElementById(field);
-            const value = element.type === 'select-one' ?
-                element.options[element.selectedIndex]?.text :
+            const value = element.type === 'select-one' ? 
+                element.options[element.selectedIndex]?.text : 
                 element.value;
 
             if (value) {
@@ -222,24 +222,24 @@ function confirmSubmission() {
         },
         body: JSON.stringify(formObject), // Send data as JSON
     })
-        .then(response => response.json())
-        .then(data => {
-            // Handle success
-            if (data.success) {
-                alert('Registration successful!');
-                form.reset();  // Optionally reset the form
-                closePreview();  // Close the modal
-                // Redirect to the home page
-                window.location.href = '/index.html'; // Ensure this points to the correct home page URL
-            } else {
-                alert('Registration failed. Please try again.');
-            }
-        })
-        .catch(error => {
-            // Handle error
-            console.error('Error:', error);
-            alert('There was an error submitting the registration. Please try again.');
-        });
+    .then(response => response.json())
+    .then(data => {
+        // Handle success
+        if (data.success) {
+            alert('Registration successful!');
+            form.reset();  // Optionally reset the form
+            closePreview();  // Close the modal
+            // Redirect to the home page
+            window.location.href = '/'; // Ensure this points to the correct home page URL
+        } else {
+            alert('Registration failed. Please try again.');
+        }
+    })
+    .catch(error => {
+        // Handle error
+        console.error('Error:', error);
+        alert('There was an error submitting the registration. Please try again.');
+    });
 }
 
 // Function to handle form submission
@@ -287,21 +287,21 @@ function handleSubmit(event) {
         },
         body: JSON.stringify(formData)
     })
-        .then(response => {
-            if (response.ok) {
-                return response.text();
-            } else {
-                throw new Error('Error: ' + response.statusText);
-            }
-        })
-        .then(data => {
-            alert('Registration successful: ' + data); // Show success message
-            // Redirect to the home page
-            window.location.href = '/index.html'; // Ensure this points to the correct home page URL
-        })
-        .catch(error => {
-            alert('Registration failed: ' + error.message); // Show error message
-        });
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw new Error('Error: ' + response.statusText);
+        }
+    })
+    .then(data => {
+        alert('Registration successful: ' + data); // Show success message
+        // Redirect to the home page
+        window.location.href = '/'; // Ensure this points to the correct home page URL
+    })
+    .catch(error => {
+        alert('Registration failed: ' + error.message); // Show error message
+    });
 }
 
 // Initialize form
