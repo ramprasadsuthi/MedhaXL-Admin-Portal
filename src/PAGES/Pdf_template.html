@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainee Bio-Data</title>
+    <link rel="stylesheet" href="../CSS/Pdf_template.css">
+</head>
+
+<body>
+    <div class="container" id="pdfContent">
+        <h2 style="text-align: center;">SKILL DEVELOPMENT INSTITUTE - VISAKHAPATNAM <br> TRAINEE BIO-DATA</h2>
+        <table class="info-table">
+            <tr>
+                <td rowspan="2" class="wide-cell" style="width: 40%; font-size: large;"><b>CAMPUS:</b>
+                    <p id="Campus" style="font-size: medium;"></p>
+                </td>
+                <td colspan="2"><B>SDI S.No:</B></td>
+                <td><B>BED No:</B></td>
+            </tr>
+            <tr>
+                <td><B>CASH RECEIPT No:</B></td>
+                <td colspan="2"><B>CASH RECEIPT DATE:</B></td>
+            </tr>
+        </table>
+        &nbsp;
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>TRAINEE DETAILS</th>
+                <th>DETAILS TO BE FILLED BY THE TRAINEE</th>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>1</B></td>
+                <td style="font-size: 12px;"><B>TRAINING PARTNER</B></td>
+                <td id="TrainingPartner"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>2</B></td>
+                <td style="font-size: 12px;"><B>NAME OF THE COURSE</B></td>
+                <td id="Course"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>3</B></td>
+                <td style="font-size: 12px;"><B>NAME OF THE CANDIDATE(As Per SSC)
+                    </B></td>
+                <td id="FirstName"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>4</B></td>
+                <td style="font-size: 12px;"><B>SURNAME OF THE TRAINEE</B></td>
+                <td id="LastName"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>5</B></td>
+                <td style="font-size: 12px;"><B>GENDER</B></td>
+                <td id="Gender"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>6</B></td>
+                <td style="font-size: 12px;"><B>DATE OF BIRTH (DD-MM-YYYY)</B></td>
+                <td id="DateOfBirth"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>7</B></td>
+                <td style="font-size: 12px;"><B>AGE</B></td>
+                <td id="Age"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>8</B></td>
+                <td style="font-size: 12px;"><B>RELIGION</B></td>
+                <td id="Religion"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>9</B></td>
+                <td style="font-size: 12px;"><B>CATEGORY</B></td>
+                <td id="Category"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>10</B></td>
+                <td style="font-size: 12px;"><B>SUB CATEGORY</B></td>
+                <td id="SubCategory"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>11</B></td>
+                <td style="font-size: 12px;"><B>MOBILE NUMBER OF CANDIDATE</B></td>
+                <td id="MobileNumber"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>12</B></td>
+                <td style="font-size: 12px;"><B>MARTIAL STATUS</B></td>
+                <td id="MaritalStatus"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>13</B></td>
+                <td style="font-size: 12px;"><B>BLOOD GROUP</B></td>
+                <td id="BloodGroup"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>14</B></td>
+                <td style="font-size: 12px;"><B>E-MAIL ID (In Capitals)</B></td>
+                <td id="EmailID"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><b>15</b></td>
+                <td style="font-size: 12px;"><b>MINIMUM QUALIFICATION FOR JOB ROLE</b></td>
+                <td id="MinQualification"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>16</B></td>
+                <td style="font-size: 12px;"><B>YEAR OF PASSING QUALIFYING EXAM</B></td>
+                <td id="YearOfPassingQualifyingExam"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>17</B></td>
+                <td style="font-size: 12px;"><B>HIGHEST QUALIFICATION</B></td>
+                <td id="HighestQualification"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>18</B></td>
+                <td style="font-size: 12px;"><B>PHYSICALLY HANDICAPPED</B></td>
+                <td id="PhysicallyHandicapped"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>19</B></td>
+                <td style="font-size: 12px;"><B>FATHER'S / MOTHER'S / GAURDIAN'S NAME</B></td>
+                <td id="GuardianName"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>20</B></td>
+                <td style="font-size: 12px;"><B>PARENT'S / GAURDIAN'S OCCUPATION </B></td>
+                <td id="GuardianOccupation"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>21</B></td>
+                <td style="font-size: 12px;"><B>PARENT'S / GAURDIAN'S CONTACT No</B></td>
+                <td id="GuardianPhone"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>22</B></td>
+                <td style="font-size: 12px;"><B>PARENT'S / GAURDIAN'S ANNUAL INCOME</B></td>
+                <td id="GuardianAnnualIncome"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>23</B></td>
+                <td style="font-size: 12px;"><B>D.No / LOCALITY</B></td>
+                <td id="DoorNo"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>24</B></td>
+                <td style="font-size: 12px;"><B>VILLAGE / TOWN</B></td>
+                <td id="Town"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>25</B></td>
+                <td style="font-size: 12px;"><B>MANDAL / TAHASIL</B></td>
+                <td id="Mandal"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>26</B></td>
+                <td style="font-size: 12px;"><B>DISTRICT</B></td>
+                <td id="District"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>27</B></td>
+                <td style="font-size: 12px;"><B>STATE</B></td>
+                <td id="State"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>28</B></td>
+                <td style="font-size: 12px;"><B>PIN CODE</B></td>
+                <td id="PinCode"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>29</B></td>
+                <td style="font-size: 12px;"><B>PASSPORT NUMBER</B></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>30</B></td>
+                <td style="font-size: 12px;"><B>AADHAR NUMBER (Copy to be Submitted)</B></td>
+                <td id="AadharNumber"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><b>31</b></td>
+                <td style="font-size: 12px;"><b>AROGYASRI CARD SUBMITTED (Yes/No) (Copy to be Submitted)</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><b>32</b></td>
+                <td style="font-size: 12px;"><b>REGISTRATION FEE (Rs) (Rs.300 / Rs.600 / Rs.1000 / N/A)</b> </p>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>33</B></td>
+                <td style="font-size: 12px;"><B>HOSTEL ACCOMMODATION REQUIRED (Yes/No)</B></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><b>34</b></td>
+                <td style="font-size: 12px;"><b>BANK ACCOUNT No</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>35</B></td>
+                <td style="font-size: 12px;"><B>NAME OF BANK / BRANCH</B></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>36</B></td>
+                <td style="font-size: 12px;"><B>IFSC CODE</B></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>37</B></td>
+                <td style="font-size: 12px;"><B>COVID VACCINATION COMPLETED</B></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;"><B>38</B></td>
+                <td style="font-size: 12px;"><B>PLEASE MENTION MAJOR HEALTH PROBLEMS IF YOU HAVE ANY</极B>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        <p><B>I hereby certify that the details provided as above are correct and in case found false at any time during
+                or
+                after my tenure at SDI-VSKP, I confirm that I is liable for any action taken by the Training Partner or
+                Skill Development institute and the same is acceptable to me. Also, I abide by all the rules and
+                regulations
+                of the Institute</B></p>
+        &nbsp;
+        &nbsp;
+        <div class="signature-container">
+            <div class="left-sign">
+                <p>Signature of the candidate:</p>
+                <p>Signature of the Parent / Guardian:</p>
+                <p>Name of the Parent / Guardian:</p>
+            </div>
+            <div class="right-sign">
+                <p>Signature of TP:</p>
+                <p>Seal</p>
+            </div>
+        </div>
+        <div class="btn">
+            <!-- Save Button to Print/Download PDF -->
+            <button class="save-btn" onclick="printPDF()">Download PDF</button>
+            &nbsp;
+            &nbsp;
+            <button class="return-home-btn" onclick="window.location.href = 'Dashboard.html'">Return Home</button>
+
+
+        </div>
+    </div>
+
+    <!-- jsPDF and html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="../JS/Pdf_template.js"></script>
+
+
+</html>

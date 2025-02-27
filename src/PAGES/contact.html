@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Contact - Medha XL</title>
+    <style>
+        .full-screen-iframe {
+            width: 100%;
+            height: calc(100vh - 12rem);
+            /* Adjust for the height of the navbar and margins */
+            border: none;
+        }
+
+        .container-fullscreen {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+    <nav class="bg-indigo-800 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="../index.html"><img src="../img/logo1.png" alt="Logo" class="h-16 w-25"></a> <!-- Logo -->
+            </div>
+            <div class="flex-grow text-center">
+                <ul class="flex justify-center space-x-6">
+                    <li><a href="../index.html" class="text-white hover:text-gray-300">Home</a></li>
+                    <li><a href="../PAGES/about.html" class="text-white hover:text-gray-300">About</a></li>
+                    <li><a href="../PAGES/courses.html" class="text-white hover:text-gray-300">Courses</a></li>
+                    <li><a href="../PAGES/contact.html" class="text-white hover:text-gray-300">Contact</a></li>
+                    <li><a href="../PAGES/team.html" class="text-white hover:text-gray-300">Team</a></li>
+                </ul>
+            </div>
+            <div class="flex items-center">
+                <a href="https://wa.me/9989443915" target="_blank"
+                    class="text-white hover:text-gray-300 flex items-center">
+                    <img src="../img/icons8-whatsapp-96.png" alt="WhatsApp" class="h-6 w-6 mr-2"> WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container-fullscreen mx-auto px-4 py-10">
+        <h1 class="text-4xl font-bold mb-4 text-center">Contact Us</h1>
+        <p class="text-lg mb-6 text-center">We'd love to hear from you!</p>
+
+        <div class="flex-grow">
+            <iframe class="full-screen-iframe"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSdzXzFRN7Q-P7QU3zcUgFysHhzG01g69WWGE4sFUc96ERNMXA/viewform?embedded=true">Loading…</iframe>
+        </div>
+
+        <div class="text-center mt-6">
+            <a href="../index.html"
+                class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-500 transition">Back to Home</a>
+        </div>
+    </section>
+
+    <footer class="bg-indigo-800 text-center py-4">
+        <p class="text-white">&copy; 2024 Medha XL. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,416 @@
+   /* General Styles */
+   * {
+   	margin: 0;
+   	padding: 0;
+   	box-sizing: border-box;
+   	font-family: Arial, sans-serif;
+   }
+
+   body {
+   	background-color: #f0f0f0;
+   }
+
+   /* Header */
+   .header {
+   	display: flex;
+   	justify-content: space-between;
+   	align-items: center;
+   	padding: 1rem;
+   	background-color: #ffffff;
+   	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   	position: relative;
+   }
+
+   .logo {
+   	font-size: 1.5rem;
+   	font-weight: bold;
+   }
+
+   .menu-icon {
+   	display: none;
+   	font-size: 1.8rem;
+   	cursor: pointer;
+   }
+
+   .profile-icon {
+   	position: relative;
+   	cursor: pointer;
+   }
+
+   .profile-dropdown {
+   	display: none;
+   	position: absolute;
+   	right: 0;
+   	top: 100%;
+   	background-color: #ffffff;
+   	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   	border-radius: 4px;
+   	z-index: 10;
+   }
+
+   .profile-dropdown.show {
+   	display: block;
+   }
+
+   .profile-dropdown a {
+   	display: flex;
+   	align-items: center;
+   	padding: 0.5rem 1rem;
+   	text-decoration: none;
+   	color: #333;
+   }
+
+   .profile-dropdown a:hover {
+   	background-color: #f0f0f0;
+   }
+
+   /* Sidebar */
+   .sidebar {
+   	width: 250px;
+   	background-color: #333;
+   	height: 100vh;
+   	position: fixed;
+   	top: 0;
+   	left: 0;
+   	padding-top: 70px;
+   	transition: 0.3s;
+   }
+
+   .sidebar a {
+   	display: flex;
+   	align-items: center;
+   	color: white;
+   	text-decoration: none;
+   	padding: 1rem;
+   	transition: 0.3s;
+   }
+
+   .sidebar a:hover {
+   	background-color: #444;
+   }
+
+   .sidebar .material-icons {
+   	margin-right: 10px;
+   }
+
+   /* Dropdown Menus */
+   .dropdown-menu {
+   	cursor: pointer;
+   	display: flex;
+   	justify-content: space-between;
+   	align-items: center;
+   	color: white;
+   }
+
+   .submenu {
+   	display: none;
+   	background-color: #444;
+   }
+
+   .submenu a {
+   	padding-left: 2.5rem;
+   }
+
+   .submenu.show {
+   	display: block;
+   }
+
+   /* Dashboard Content */
+   .main-content {
+   	margin-left: 250px;
+   	padding: 1rem;
+   }
+
+   /* Wrapper for Search Bar & Container */
+   .wrapper {
+   	display: flex;
+   	align-items: center;
+   	justify-content: space-between;
+   	gap: 30px;
+   	padding: 15px;
+   	flex-wrap: wrap;
+   	/* Allows wrapping for smaller screens */
+   }
+
+   /* Search Bar Styling */
+   .search-bar {
+   	display: flex;
+   	align-items: center;
+   	background: #ffffff;
+   	padding: 10px 15px;
+   	border-radius: 8px;
+   	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   	width: 465px;
+   	/* Adjust width */
+   	flex-grow: 1;
+   }
+
+   .search-bar input {
+   	border: none;
+   	outline: none;
+   	padding: 5px 10px;
+   	font-size: 14px;
+   	flex-grow: 1;
+   }
+
+   .search-bar span {
+   	font-size: 22px;
+   	color: #555;
+   	cursor: pointer;
+   }
+
+   /* Fixed Width Container */
+   .container {
+   	width: 700px;
+   	max-width: 100%;
+   	background: #ffffff;
+   	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   	border-radius: 8px;
+   	padding: 20px;
+   	display: flex;
+   	flex-direction: column;
+   	gap: 20px;
+   }
+
+   /* Button Container */
+   .btn-container {
+   	list-style: none;
+   	display: flex;
+   	align-items: center;
+   	justify-content: space-between;
+   	flex-wrap: wrap;
+   	padding: 0;
+   	margin: 0;
+   	gap: 15px;
+   }
+
+   /* Dropdown Styling */
+   #batchCodeDropdown {
+   	padding: 8px;
+   	border-radius: 5px;
+   	border: 1px solid #ccc;
+   }
+
+   /* Buttons */
+   button {
+   	padding: 8px 12px;
+   	border: none;
+   	border-radius: 5px;
+   	background: #007bff;
+   	color: white;
+   	cursor: pointer;
+   	font-size: 14px;
+   }
+
+   button:hover {
+   	background: #0056b3;
+   }
+
+   /* New Registration Button */
+   .btn-new-registration {
+   	display: flex;
+   	align-items: center;
+   	background: #28a745;
+   	color: white;
+   	padding: 8px 15px;
+   	border-radius: 5px;
+   	text-decoration: none;
+   	font-size: 14px;
+   }
+
+   /* Responsive Design */
+   @media screen and (max-width: 900px) {
+   	.wrapper {
+   		flex-direction: column;
+   		align-items: center;
+   		gap: 15px;
+   	}
+
+   	.search-bar {
+   		width: 100%;
+   	}
+
+   	.container {
+   		width: 90%;
+   		max-width: 600px;
+   	}
+
+   	.btn-container {
+   		flex-direction: column;
+   		align-items: center;
+   	}
+   }
+
+
+
+   /* Table Container */
+   .table {
+   	width: 1210px;
+   	overflow-x: auto;
+   	background: white;
+   	padding: 1rem;
+   	border-radius: 8px;
+   	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   	margin-top: 1rem;
+   }
+
+   /* Table Header Section */
+   .head h3 {
+   	font-size: 1.2rem;
+   	font-weight: bold;
+   	color: #333;
+   	padding-bottom: 0.75rem;
+   	border-bottom: 2px solid #0e8faf;
+   	margin-bottom: 1rem;
+   }
+
+   /* Table Styles */
+   .enquiries-table {
+   	width: 100%;
+   	border-collapse: collapse;
+   }
+
+   /* Table Headers */
+   .enquiries-table th {
+   	background: #0e8faf;
+   	color: white;
+   	padding: 0.75rem;
+   	text-align: left;
+   	font-weight: bold;
+   }
+
+   /* Table Rows */
+   .enquiries-table td {
+   	padding: 0.75rem;
+   	border-bottom: 1px solid #ddd;
+   	text-align: left;
+   }
+
+   /* Empty Row Styling */
+   .enquiries-table tbody td[colspan="6"] {
+   	text-align: center;
+   	color: #777;
+   	padding: 1rem;
+   	font-style: italic;
+   }
+
+   /* Alternate Row Colors */
+   .enquiries-table tbody tr:nth-child(even) {
+   	background: #f9f9f9;
+   }
+
+   /* Hover Effect */
+   .enquiries-table tbody tr:hover {
+   	background: #f1f1f1;
+   }
+
+   /* Responsive Table */
+   @media (max-width: 768px) {
+
+   	.enquiries-table th,
+   	.enquiries-table td {
+   		padding: 0.5rem;
+   		font-size: 14px;
+   	}
+
+   	.head h3 {
+   		font-size: 1rem;
+   	}
+   }
+
+   /* Dashboard Stats */
+   .stats {
+   	display: flex;
+   	flex-wrap: wrap;
+   	gap: 20px;
+   	padding: 20px;
+   }
+
+   .stat-card {
+   	display: flex;
+   	align-items: center;
+   	justify-content: start;
+   	width: 280px;
+   	background: #f8f9fa;
+   	padding: 15px;
+   	border-radius: 8px;
+   	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   }
+
+   .stat-icon {
+   	font-size: 80px;
+   	color: #3498db;
+   	margin-right: 15px;
+   }
+
+   .stat-content {
+   	display: flex;
+   	flex-direction: column;
+   	justify-content: center;
+   }
+
+   .stat-content h3 {
+   	margin: 0;
+   	font-size: 18px;
+   }
+
+   .stat-content p {
+   	margin: 5px 0 0;
+   	font-size: 16px;
+   	font-weight: bold;
+   }
+
+   /* Responsive Styles */
+   @media (max-width: 768px) {
+   	.menu-icon {
+   		display: block;
+   	}
+
+   	.sidebar {
+   		width: 0;
+   		overflow: hidden;
+   	}
+
+   	.sidebar.show {
+   		width: 250px;
+   	}
+
+   	.main-content {
+   		margin-left: 0;
+   	}
+   }
+
+   /* pop modal */
+   .modal {
+   	display: none;
+   	position: fixed;
+   	top: 0;
+   	left: 0;
+   	width: 100%;
+   	height: 100%;
+   	background: rgba(0, 0, 0, 0.5);
+   }
+
+   .modal-content {
+   	background: white;
+   	padding: 20px;
+   	width: 50%;
+   	margin: auto;
+   	margin-top: 10%;
+   	border-radius: 5px;
+   }
+
+   .close {
+   	float: right;
+   	font-size: 20px;
+   	cursor: pointer;
+   }
+
+   .pagination {
+   	margin-top: 10px;
+   	display: flex;
+   	justify-content: center;
+   	gap: 10px;
+   }
+
+   /* end teh pop up modal*/

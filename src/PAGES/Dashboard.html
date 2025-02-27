@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="../CSS/Dashboard.css">
+	<script src="../backend/middleware/tokenvalidity.js"></script>
+
+</head>
+
+<body>
+
+	<!-- Header -->
+	<header class="header">
+		<img src="../img/Medhalogo.png" alt="Medhalogo" width="175">
+		<span class="menu-icon material-icons">menu</span>
+		<div class="profile-icon">
+			<span class="material-icons">account_circle</span>
+			<div class="profile-dropdown">
+				<a href="#"><span class="material-icons">account_circle</span> Profile</a>
+				<a href="#"><span class="material-icons">settings</span> Settings</a>
+				<a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
+			</div>
+		</div>
+	</header>
+
+	<!-- Sidebar Navigation -->
+	<nav class="sidebar">
+		<a href="Dashboard.html"><span class="material-icons">dashboard</span> Home</a>
+
+		<div class="dropdown-menu students-menu">
+			<a><span class="material-icons">person</span> Students</a>
+			<span class="material-icons toggle-icon students-toggle">expand_more</span>
+		</div>
+		<div class="submenu students-submenu">
+			<a href="#"><span class="material-icons">add</span> Add Student</a>
+			<a href="#"><span class="material-icons">visibility</span> View Students</a>
+		</div>
+
+		<div class="dropdown-menu trainers-menu">
+			<a><span class="material-icons">group</span> Trainers</a>
+			<span class="material-icons toggle-icon trainers-toggle">expand_more</span>
+		</div>
+		<div class="submenu trainers-submenu">
+			<a href="addtrainer.html"><span class="material-icons">add</span> Add Trainer</a>
+			<a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+		</div>
+
+		<a href="#"><span class="material-icons">analytics</span> Analytics</a>
+		<a href="#"><span class="material-icons">notifications</span> Notifications</a>
+		<a href="#"><span class="material-icons">settings</span> Settings</a>
+	</nav>
+
+	<!-- Main Content -->
+	<main class="main-content">
+
+		<div class="wrapper">
+			<form onsubmit="return redirectToSearch()">
+				<div class="search-bar">
+					<input type="text" id="searchInput" placeholder="Search..." onkeydown="handleKeyPress(event)">
+					<span class="material-icons" onclick="redirectToSearch()">search</span>
+				</div>
+			</form>
+
+			<div class="container">
+
+				<ul class="btn-container">
+					<li>
+						<label for="batchCode">Select Batch:</label>
+						<select id="batchCodeDropdown">
+							<option value="">Select batchCode</option>
+						</select>
+					</li>
+
+					<li>
+						<button onclick="viewStudents()">View</button>
+						&nbsp;
+						<button onclick="downloadExcel()">Download Excel</button>
+					</li>
+					<a href="../PAGES/studentform.html" class="btn-new-registration">
+						<i class='bx bxs-user-plus'></i>
+						<span class="text">New Registration</span>
+					</a>
+				</ul>
+			</div>
+		</div>
+
+		<div class="stats">
+			<div class="stat-card">
+				<span class="material-icons stat-icon">school</span>
+				<div class="stat-content">
+					<h3>Total Students</h3>
+					<p id="totalStudents">Loading...</p>
+					<!-- The value will be updated dynamically or Ensure default value  -->
+
+				</div>
+			</div>
+
+			<div class="stat-card">
+				<span class="material-symbols-outlined stat-icon">groups</span>
+				<div class="stat-content">
+					<h3>Total Enquiries</h3>
+					<p id="totalEnquiries">Loading...</p>
+					<!-- The value will be updated dynamically or Ensure default value  -->
+
+				</div>
+			</div>
+
+
+			<div class="stat-card">
+				<span class="material-symbols-outlined stat-icon">auto_stories</span>
+				<div class="stat-content">
+					<h3>Total Courses</h3>
+					<p>Loading..</p> <!-- The value will be updated dynamically or Ensure default value  -->
+				</div>
+			</div>
+
+			<div class="stat-card">
+				<span class="material-symbols-outlined stat-icon">auto_stories</span>
+				<div class="stat-content">
+					<h3>Total Courses</h3>
+					<p>Loading</p> <!-- The value will be updated dynamically or Ensure default value  -->
+				</div>
+
+			</div>
+
+
+
+			<div>
+				<div class="table">
+					<div class="head">
+						<h3>Latest 10 Student Registrations</h3>
+					</div>
+					<table class="enquiries-table">
+						<thead>
+							<tr>
+								<th>Student ID</th>
+								<th>Batch Code</th>
+								<th>Full Name</th>
+								<th>Mobile Number</th>
+								<th>Course</th>
+								<th>City</th>
+							</tr>
+						</thead>
+						<tbody id="latestStudents">
+							<tr>
+								<td colspan="6">Loading...</td>
+								<!-- The value will be updated dynamically or Ensure default value  -->
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+
+				<div class="table">
+					<div class="head">
+						<h3>Latest 10 Enquiries</h3>
+					</div>
+					<table class="enquiries-table">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>Name</th>
+								<th>Phone</th>
+								<th>Course</th>
+								<th>City</th>
+							</tr>
+						</thead>
+						<tbody id="latestEnquiries">
+							<tr>
+								<td colspan="5">Loading...</td>
+								<!-- The value will be updated dynamically or Ensure default value  -->
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+	</main>
+
+	<!-- Popup Modal for Viewing Students -->
+	<div id="studentModal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<h2>Student List</h2>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Student ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Course</th>
+						<th>Mobile</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody id="studentTableBody"></tbody>
+			</table>
+			<div class="pagination">
+				<button onclick="prevPage()" id="prevBtn" disabled>Previous</button>
+				<span id="pageInfo"></span>
+				<ul>
+					<li id="studentCountContainer">
+						<p id="studentCount"></p>
+					</li>
+				</ul>
+				<button onclick="nextPage()" id="nextBtn">Next</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Styling -->
+
+	<script src="../JS/Dashboard.js"></script>
+
+</body>
+
+</html>

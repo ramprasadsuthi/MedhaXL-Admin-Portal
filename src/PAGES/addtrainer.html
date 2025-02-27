@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/addtrainer.css">
+    <script src="../backend/middleware/tokenvalidity.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Admin Dashboard</div>
+        <span class="menu-icon material-icons">menu</span>
+        <div class="profile-icon">
+            <span class="material-icons">account_circle</span>
+            <div class="profile-dropdown">
+                <a href="#"><span class="material-icons">account_circle</span> Profile</a>
+                <a href="#"><span class="material-icons">settings</span> Settings</a>
+                <a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <a href="Dashboard.html"><span class="material-icons">dashboard</span> Home</a>
+
+        <div class="dropdown-menu students-menu">
+            <a><span class="material-icons">person</span> Students</a>
+            <span class="material-icons toggle-icon students-toggle">expand_more</span>
+        </div>
+        <div class="submenu students-submenu">
+            <a href="#"><span class="material-icons">add</span> Add Student</a>
+            <a href="#"><span class="material-icons">visibility</span> View Students</a>
+        </div>
+
+        <div class="dropdown-menu trainers-menu">
+            <a><span class="material-icons">group</span> Trainers</a>
+            <span class="material-icons toggle-icon trainers-toggle">expand_more</span>
+        </div>
+        <div class="submenu trainers-submenu">
+            <a href="addtrainer.html"><span class="material-icons">add</span> Add Trainer</a>
+            <a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+        </div>
+
+        <a href="#"><span class="material-icons">analytics</span> Analytics</a>
+        <a href="#"><span class="material-icons">notifications</span> Notifications</a>
+        <a href="#"><span class="material-icons">settings</span> Settings</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1>Add Trainer</h1>
+            <form id="trainerForm">
+                <div class="form-group">
+                    <label for="trainerId">Trainer ID</label>
+                    <input type="text" id="trainerId" name="trainerId" placeholder="Enter Trainer ID (e.g., T001)"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="trainerName">Trainer Name</label>
+                    <input type="text" id="trainerName" name="trainerName" placeholder="Enter Trainer Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" maxlength="10" placeholder="Enter Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="skill1">Primary Skill</label>
+                    <input type="text" id="skill1" name="skill1" placeholder="Enter Primary Skill" required>
+                </div>
+                <div class="form-group">
+                    <label for="skill2">Secondary Skill (Optional)</label>
+                    <input type="text" id="skill2" name="skill2" placeholder="Enter Secondary Skill">
+                </div>
+                <div class="form-group">
+                    <label for="skill3">Additional Skill (Optional)</label>
+                    <input type="text" id="skill3" name="skill3" placeholder="Enter Additional Skill">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button type="submit">Add Trainer</button>
+                    <button type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+    <script src="../JS/addtrainer.js"></script>
+
+</body>
+
+</html>

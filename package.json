@@ -14,9 +14,15 @@
     "tailwindcss": "^3.4.4"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
+    "exceljs": "^4.4.0",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "jspdf": "^2.5.2",
     "medhaxlserver": "file:",
     "mysql": "^2.18.1",
     "nodemailer": "^6.9.14"
