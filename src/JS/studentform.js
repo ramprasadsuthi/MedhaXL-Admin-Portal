@@ -1,3 +1,13 @@
+// text to upper case
+document.getElementById("registrationForm").addEventListener("submit", function () {
+    const inputs = document.querySelectorAll("input[type='text']");
+    inputs.forEach(input => {
+        input.value = input.value.toUpperCase();
+    });
+});
+// end the upper case
+
+
 // Function to populate year of passing dropdown
 function populateYearDropdown() {
     const yearSelect = document.getElementById('yearPassing');
@@ -54,10 +64,10 @@ function updateSubCategory() {
 
     // Add sub-categories based on selected category
     const subCategories = {
-        'sc': ['A', 'B', 'C', 'D'],
-        'st': ['Tribal', 'Non-Tribal'],
-        'obc': ['A', 'B', 'C', 'D'],
-        'general': ['EWS', 'Others']
+        'SC': ['SC'],
+        'ST': ['ST'],
+        'OBC': ['A', 'B', 'C', 'D'],
+        'GENERAL': ['GENERAL']
     };
 
     if (subCategories[category]) {
