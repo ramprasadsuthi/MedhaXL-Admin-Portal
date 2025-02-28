@@ -394,6 +394,7 @@
    	z-index: 9999;
    	align-items: center;
    	justify-content: center;
+   	font-size: small;
    }
 
    .modal-content {
@@ -435,6 +436,7 @@
    	padding: 10px;
    	text-align: center;
    	border: 1px solid #ccc;
+   	font-size: small;
    }
 
    th {
@@ -499,7 +501,7 @@
    	th,
    	td {
    		padding: 5px;
-   		font-size: 12px;
+   		font-size: 10px;
    	}
    }
 
@@ -507,54 +509,74 @@
 
 
    /* view the total courses pop up */
-  .viewcoursepopup {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.6);
-	z-index: 9999;
-	justify-content: center;
-	align-items: center;
-}
+   .viewcoursepopup {
+   	display: none;
+   	position: fixed;
+   	top: 0;
+   	left: 0;
+   	width: 100%;
+   	height: 100%;
+   	background: rgba(0, 0, 0, 0.6);
+   	z-index: 9999;
+   	justify-content: center;
+   	align-items: center;
+   }
 
-.view-course {
-	background: white;
-	width: 60%;
-	max-width: 700px;
-	padding: 20px;
-	border-radius: 12px;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-	position: relative;
-	animation: popup 0.3s ease-in-out;
-}
+   .view-course {
+   	background: white;
+   	width: 60%;
+   	max-width: 700px;
+   	padding: 20px;
+   	border-radius: 12px;
+   	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+   	position: relative;
+   	animation: popup 0.3s ease-in-out;
+   }
 
-.close {
-	position: absolute;
-	top: 10px;
-	right: 20px;
-	font-size: 25px;
-	cursor: pointer;
-	color: red;
-	transition: 0.3s ease;
-}
+   .view-course .close {
+   	position: absolute;
+   	top: 10px;
+   	right: 20px;
+   	font-size: 30px;
+   	color: red;
+   	cursor: pointer;
+   	font-weight: bold;
+   }
 
-.close:hover {
-	color: black;
-	transform: scale(1.2);
-}
+   .view-course .close:hover {
+   	color: black;
+   	transform: scale(1.2);
+   	transition: 0.3s;
+   }
 
-@keyframes popup {
-	from {
-		transform: scale(0.7);
-		opacity: 0;
-	}
-	to {
-		transform: scale(1);
-		opacity: 1;
-	}
-}
+   @keyframes popup {
+   	from {
+   		transform: scale(0.7);
+   		opacity: 0;
+   	}
+
+   	to {
+   		transform: scale(1);
+   		opacity: 1;
+   	}
+   }
+
+   @media (max-width: 768px) {
+   	.modal-content {
+   		width: 95%;
+   		padding: 10px;
+   	}
+
+   	th,
+   	td {
+   		padding: 5px;
+   		font-size: 10px;
+   	}
+
+   	.view-course {
+   		width: 90%;
+   		padding: 10px;
+   	}
+   }
 
    /*end the pop up of the total offered courses */

@@ -214,5 +214,20 @@ const studentController = {
         });
     },
 
+    updateStudent: (req, res) => {
+        const id = req.params.id;
+        const { FirstName, LastName, MobileNumber, EmailID, Course } = req.body;
+
+        const sql = `UPDATE student SET FirstName=?, LastName=?, MobileNumber=?, EmailID=?, Course=? WHERE StudentID=?`;
+        db.query(sql, [FirstName, LastName, MobileNumber, EmailID, Course, id], (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: "Update failed" });
+            } else {
+                res.json({ message: "Student updated successfully" });
+            }
+        });
+    },
+
 };
 module.exports = studentController;

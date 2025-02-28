@@ -67,6 +67,7 @@ app.get('/activecourses', batchControllers.getActiveCourses);
 app.get('/viewtotalcourses', coursecontrollers.getviewtotalcourses);
 //**fetch  the get studnets from the students table */
 app.get("/search", studentController.searchStudents);
+app.put("/update/:id", studentController.updateStudent);
 
 
 
