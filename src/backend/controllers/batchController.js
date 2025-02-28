@@ -25,5 +25,19 @@ const batchControllers = {
             }
         });
     },
+
+    addBatch: (req, res) => {
+        const { BatchID, CourseName, Duration, Trainer, Status } = req.body;
+        const query = `INSERT INTO batches (batchid, coursename, duration, trainer, status) VALUES (?, ?, ?, ?, ?)`;
+
+        db.query(query, [BatchID, CourseName, Duration, Trainer, Status], (err, result) => {
+            if (err) {
+                console.error("Database Error:", err);
+                res.status(500).json({ message: "Failed to Add Batch" });
+            } else {
+                res.status(200).json({ message: "Batch Added Successfully" });
+            }
+        });
+    },
 };
 module.exports = batchControllers;

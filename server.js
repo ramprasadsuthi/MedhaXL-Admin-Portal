@@ -67,9 +67,10 @@ app.get('/activecourses', batchControllers.getActiveCourses);
 app.get('/viewtotalcourses', coursecontrollers.getviewtotalcourses);
 //**fetch  the get studnets from the students table */
 app.get("/search", studentController.searchStudents);
+//**fetch the aoi to edit teh data of the students */
 app.put("/update/:id", studentController.updateStudent);
-
-
+//**fetch teh api to add the active batches */
+app.post("/addBatch", batchControllers.addBatch);
 
 
 // Batch routes

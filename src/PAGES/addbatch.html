@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Batch</title>
+    <link rel="stylesheet" href="../CSS/addbatch.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Add Batch</h1>
+        <form onsubmit="return addBatch()">
+            <label>Batch ID</label>
+            <input type="text" id="BatchID" required>
+
+            <label for="course">Course*</label>
+            <select id="course" name="course" required>
+                <option value="">Select Course</option>
+            </select>
+            <span class="error" id="courseError"></span>
+
+            <label>Duration</label>
+            <input type="number" id="Duration" required>
+
+            <label>Trainer</label>
+            <input type="text" id="Trainer" required>
+
+            <label>Status</label>
+            <select id="Status" required>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+
+            <button type="submit">Add Batch</button>
+        </form>
+    </div>
+    <script src="../backend/middleware/tokenvalidity.js"></script>
+    <script src="../JS/addbatch.js"></script>
+</body>
+
+</html>
