@@ -146,7 +146,6 @@ const studentController = {
                 { header: "Father / Mother Occupation", key: "GuardianOccupation", width: 25 },
                 { header: "Father / Mother Contact", key: "GuardianPhone", width: 25 },
                 { header: "Father / Mother Annual Income", key: "GuardianAnnualIncome", width: 25 },
-                { header: "Father / Mother Annual Income", key: "GuardianAnnualIncome", width: 25 },
                 { header: "DoorNo", key: "DoorNo", width: 25 },
                 { header: "Village / tOWN", key: "Town", width: 25 },
                 { header: "Mandal", key: "Mandal", width: 25 },
@@ -198,69 +197,22 @@ const studentController = {
     //** get the batch code and downloand ecxel code was interlinked end....... */
 
     // Search students by FirstName, LastName, or MobileNumber
-    getsearch: (req, res) => {
-        const searchQuery = req.query.query;
-        const sql = `
-        SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, EmailID 
-        FROM student
-        WHERE FirstName LIKE ? OR LastName LIKE ? OR MobileNumber LIKE ?
-        LIMIT 10
-    `;
-
-        const values = [`%${searchQuery}%`, `%${searchQuery}%`, `%${searchQuery}%`];
+    searchStudents: (req, res) => {
+        const { query } = req.query;
+        const sql = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, EmailID FROM student
+                     WHERE FirstName LIKE ? OR LastName LIKE ? OR MobileNumber LIKE ?`;
+        const values = [`%${query}%`, `%${query}%`, `%${query}%`];
 
         db.query(sql, values, (err, results) => {
+
             if (err) {
-                console.error("Error fetching students:", err);
-                res.status(500).json({ error: "Database error" });
+                console.error('Search Error:', err);
+                res.status(500).send('Server Error');
             } else {
                 res.json(results);
             }
         });
     },
-
-
-// Get student details by ID
-getStudentById : (req, res) => {
-    const studentID = req.query.id;
-    const sql = "SELECT * FROM studentdetails WHERE StudentID = ?";
-
-    db.query(sql, [studentID], (err, result) => {
-        if (err) {
-            console.error("Error fetching student:", err);
-            res.status(500).json({ error: "Database error" });
-        } else if (result.length === 0) {
-            res.status(404).json({ error: "Student not found" });
-        } else {
-            res.json(result[0]);
-        }
-    });
-},
-
-
-// Update student details
-updateStudent: (req, res) => {
-    const studentID = req.params.id;
-    const { FirstName, LastName, BatchCode, Course, MobileNumber, EmailID } = req.body;
-
-    const sql = `
-        UPDATE studentdetails 
-        SET FirstName = ?, LastName = ?, BatchCode = ?, Course = ?, MobileNumber = ?, EmailID = ?
-        WHERE StudentID = ?
-    `;
-
-    db.query(sql, [FirstName, LastName, BatchCode, Course, MobileNumber, EmailID, studentID], (err, result) => {
-        if (err) {
-            console.error("Error updating student:", err);
-            res.status(500).json({ error: "Database error" });
-        } else if (result.affectedRows === 0) {
-            res.status(404).json({ error: "Student not found" });
-        } else {
-            res.json({ message: "Student details updated successfully!" });
-        }
-    });
-},
-
 
 };
 module.exports = studentController;

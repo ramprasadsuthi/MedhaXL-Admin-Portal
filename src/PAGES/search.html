@@ -4,67 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Search</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/search.css">
+    <title>Search Students</title>
 </head>
 
 <body>
-    <div class="container">
-        <h2>Search Students</h2>
-        <form onsubmit="return redirectToSearch(event)">
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search by Name or Mobile..."
-                    onkeydown="handleKeyPress(event)">
-                <button type="submit">Search</button>
-            </div>
-        </form>
+    <div class="wrapper">
+        <div class="search-container">
+            <form onsubmit="return redirectToSearch()">
+                <div class="search-box">
+                    <span class="material-icons">search</span>
+                    <input type="text" id="searchInput" placeholder="Search..." onkeydown="handleKeyPress(event)">
+                    <button type="submit" class="search-btn">Search</button>
+                </div>
+            </form>
+        </div>
 
-        <table id="studentTable">
+        <table>
             <thead>
                 <tr>
-                    <th>Student ID</th>
-                    <th>Batch Code</th>
+                    <th>StudentID</th>
+                    <th>BatchCode</th>
                     <th>Course</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Mobile</th>
-                    <th>Email</th>
-                    <th>Action</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>MobileNumber</th>
+                    <th>EmailID</th>
                 </tr>
             </thead>
             <tbody id="studentTableBody">
-                <!-- Student data will be inserted here -->
             </tbody>
         </table>
-        <!-- Edit Student Modal -->
-        <div id="editModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h3>Edit Student</h3>
-                <form id="editForm">
-                    <input type="hidden" id="editStudentID">
 
-                    <label>First Name:</label>
-                    <input type="text" id="editFirstName" required>
-
-                    <label>Last Name:</label>
-                    <input type="text" id="editLastName" required>
-
-                    <label>Batch Code:</label>
-                    <input type="text" id="editBatchCode" required>
-
-                    <label>Course:</label>
-                    <input type="text" id="editCourse" required>
-
-                    <label>Mobile:</label>
-                    <input type="text" id="editMobile" required>
-
-                    <label>Email:</label>
-                    <input type="email" id="editEmail" required>
-
-                    <button type="button" onclick="saveChanges()">Save Changes</button>
-                </form>
-            </div>
+        <div class="pagination">
+            <button onclick="prevPage()" id="prevBtn" disabled>Previous</button>
+            <button class="return-home-btn" onclick="window.location.href = 'Dashboard.html'">Return Dashboard</button>
+            <button onclick="nextPage()" id="nextBtn">Next</button>
         </div>
     </div>
 

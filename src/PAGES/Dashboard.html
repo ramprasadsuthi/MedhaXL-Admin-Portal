@@ -8,7 +8,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="../CSS/Dashboard.css">
-	<script src="../backend/middleware/tokenvalidity.js"></script>
 
 </head>
 
@@ -37,8 +36,19 @@
 			<span class="material-icons toggle-icon students-toggle">expand_more</span>
 		</div>
 		<div class="submenu students-submenu">
-			<a href="#"><span class="material-icons">add</span> Add Student</a>
+			<a href="#"><span class="material-icons">group_add</span> Add Student</a>
 			<a href="#"><span class="material-icons">visibility</span> View Students</a>
+		</div>
+
+		<div class="dropdown-menu Batches-menu">
+			<a><span class="material-icons">group</span> Batches</a>
+			<span class="material-icons toggle-icon Batches-toggle">expand_more</span>
+		</div>
+		<div class="submenu Batches-submenu">
+			<a href="#"><span class="material-icons"><span class="material-symbols-outlined">
+						person_add
+					</span></span> Add Trainer</a>
+			<a href="#"><span class="material-icons">visibility</span> View Trainers</a>
 		</div>
 
 		<div class="dropdown-menu trainers-menu">
@@ -46,7 +56,9 @@
 			<span class="material-icons toggle-icon trainers-toggle">expand_more</span>
 		</div>
 		<div class="submenu trainers-submenu">
-			<a href="addtrainer.html"><span class="material-icons">add</span> Add Trainer</a>
+			<a href="addtrainer.html"><span class="material-icons"><span class="material-symbols-outlined">
+						person_add
+					</span></span> Add Trainer</a>
 			<a href="#"><span class="material-icons">visibility</span> View Trainers</a>
 		</div>
 
@@ -59,15 +71,14 @@
 	<main class="main-content">
 
 		<div class="wrapper">
-			<form onsubmit="return redirectToSearch()">
+			<form action="search.html" onsubmit="return redirectToSearch()">
 				<div class="search-bar">
-					<input type="text" id="searchInput" placeholder="Search..." onkeydown="handleKeyPress(event)">
+					<input type="text" id="searchInput" placeholder="Search Student..." name="search">
 					<span class="material-icons" onclick="redirectToSearch()">search</span>
 				</div>
 			</form>
 
 			<div class="container">
-
 				<ul class="btn-container">
 					<li>
 						<label for="batchCode">Select Batch:</label>
@@ -91,7 +102,7 @@
 
 		<div class="stats">
 			<div class="stat-card">
-				<span class="material-icons stat-icon">school</span>
+				<span class="material-symbols-outlined stat-icon">groups</span>
 				<div class="stat-content">
 					<h3>Total Students</h3>
 					<p id="totalStudents">Loading...</p>
@@ -101,7 +112,7 @@
 			</div>
 
 			<div class="stat-card">
-				<span class="material-symbols-outlined stat-icon">groups</span>
+				<span class="material-symbols-outlined stat-icon">diversity_3</span>
 				<div class="stat-content">
 					<h3>Total Enquiries</h3>
 					<p id="totalEnquiries">Loading...</p>
@@ -110,24 +121,22 @@
 				</div>
 			</div>
 
-
-			<div class="stat-card">
+			<div class="stat-card" onclick="viewTotalCourses()">
 				<span class="material-symbols-outlined stat-icon">auto_stories</span>
 				<div class="stat-content">
 					<h3>Total Courses</h3>
-					<p>Loading..</p> <!-- The value will be updated dynamically or Ensure default value  -->
+					<p id="totalcourses">Loading..</p>
 				</div>
 			</div>
 
 			<div class="stat-card">
-				<span class="material-symbols-outlined stat-icon">auto_stories</span>
+				<span class="material-symbols-outlined stat-icon">checkbook</span>
 				<div class="stat-content">
-					<h3>Total Courses</h3>
-					<p>Loading</p> <!-- The value will be updated dynamically or Ensure default value  -->
+					<h3>Running Courses</h3>
+					<p id="activecourses">Loading..</p>
+					<!-- The value will be updated dynamically or Ensure default value  -->
 				</div>
-
 			</div>
-
 
 
 			<div>
@@ -182,6 +191,8 @@
 			</div>
 	</main>
 
+	<!-- Popup Modal -->
+
 	<!-- Popup Modal for Viewing Students -->
 	<div id="studentModal" class="modal">
 		<div class="modal-content">
@@ -212,6 +223,30 @@
 			</div>
 		</div>
 	</div>
+
+
+
+	<!--pop fo the view courses-->
+	<div id="courseModal" class="viewcoursepopup">
+		<div class="view-course">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<h3>Total Courses</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Course ID</th>
+						<th>Course Name</th>
+						<th>Duration</th>
+					</tr>
+				</thead>
+				<tbody id="courseTableBody">
+					<!-- Course Data Will be Displayed Here -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Popup Modal -->
 
 	<!-- Modal Styling -->
 

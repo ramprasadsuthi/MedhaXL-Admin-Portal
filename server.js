@@ -57,12 +57,17 @@ app.get('/latest-enquiries', studentController.getLatestEnquiries);
 app.get('/get-batch-codes', studentController.getBatchCodes);
 //**fetch the /export-students api to dwnload the excel sheet */
 app.get('/export-students', studentController.exportStudents);
+//**fretch api to diplay the total courses frm the coourse table */
+app.get("/totalcourses", coursecontrollers.getTotalCourses);
 //**FETCH THE API TO VEW THE STUNDETS WITH SAME CODE */
 app.get('/getstudents', studentController.getstudents);
-app.get('/search', studentController.getsearch);
+//**FETCH THE API TO VEW THE count of teh running course */
+app.get('/activecourses', batchControllers.getActiveCourses);
+//**get the total courses view waht we offered */
+app.get('/viewtotalcourses', coursecontrollers.getviewtotalcourses);
+//**fetch  the get studnets from the students table */
+app.get("/search", studentController.searchStudents);
 
-app.get("/get-student", studentController.getStudentById);
-app.put("/update-student/:id", studentController.updateStudent);
 
 
 

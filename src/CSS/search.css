@@ -1,101 +1,143 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    background-color: #f4f7fc;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Wrapper to center the content */
+.wrapper {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Search container styles */
+.search-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-}
-
-h2 {
-    text-align: center;
-}
-
-.search-bar {
-    display: flex;
-    gap: 10px;
     margin-bottom: 20px;
 }
 
-.search-bar input {
-    flex: 1;
+/* Search box styles */
+.search-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    background-color: #f1f3f5;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
 }
 
-.search-bar button {
-    padding: 10px 15px;
-    background: #28a745;
+.search-box input {
+    border: none;
+    outline: none;
+    padding: 8px 15px;
+    margin-left: 10px;
+    width: 100%;
+    border-radius: 30px;
+    font-size: 14px;
+    background-color: #f1f3f5;
+    color: #333;
+}
+
+.search-box input::placeholder {
+    color: #999;
+}
+
+.search-box .material-icons {
+    font-size: 20px;
+    color: #888;
+}
+
+.search-btn {
+    background-color: #4CAF50;
     color: white;
     border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
     cursor: pointer;
-    border-radius: 5px;
+    margin-left: 10px;
 }
 
+.search-btn:hover {
+    background-color: #45a049;
+}
+
+/* Table styles */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 10px;
+table th,
+table td {
+    padding: 12px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-th {
-    background: #007bff;
-    color: white;
+table th {
+    background-color: #f4f7fc;
+    color: #555;
 }
 
-button.edit-btn {
-    background: #ffc107;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    color: white;
-    border-radius: 5px;
+table tr:hover {
+    background-color: #f9fafb;
 }
 
-/* Pop up */
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
 }
 
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 50%;
-    max-width: 500px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.close {
-    float: right;
-    font-size: 24px;
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
     cursor: pointer;
+    font-size: 14px;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+.pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.return-home-btn {
+    background-color: #f1f3f5;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.return-home-btn:hover {
+    background-color: #e0e4e8;
 }

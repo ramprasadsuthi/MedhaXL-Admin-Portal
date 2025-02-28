@@ -1,7 +1,8 @@
-// Sidebar Toggle
+// Sidebar Toggle sidebar
 document.querySelector('.menu-icon').addEventListener('click', function () {
 	document.querySelector('.sidebar').classList.toggle('show');
 });
+
 
 // Profile Dropdown Toggle
 document.querySelector('.profile-icon').addEventListener('click', function () {
@@ -19,25 +20,24 @@ function toggleDropdown(menuSelector, submenuSelector, iconSelector) {
 
 // Initialize dropdowns
 toggleDropdown('.students-menu', '.students-submenu', '.students-toggle');
+toggleDropdown('.Batches-menu', '.Batches-submenu', '.Batches-toggle');
 toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
 
 // Search to redirect the page
-function handleKeyPress(event) {
-    if (event.key === "Enter") {
-        event.preventDefault(); // Prevent form submission
-        redirectToSearch();
-    }
+function redirectToSearch() {
+	const searchInput = document.getElementById('searchInput').value;
+	if (searchInput) {
+		window.location.href = `search.html?query=${searchInput}`;
+	}
+	return false;
 }
 
-function redirectToSearch() {
-    const query = document.getElementById("searchInput").value.trim();
-    if (query) {
-        window.location.href = `search.html?q=${encodeURIComponent(query)}`;
-    } else {
-        alert("Please enter a search query.");
-    }
-    return false; // Prevent default form submission
+function handleKeyPress(event) {
+	if (event.key === 'Enter') {
+		redirectToSearch();
+	}
 }
+//search on click rediretch to the search page end
 
 //**Api's Starts here */
 
@@ -57,6 +57,71 @@ function fetchTotalStudents() {
 		.catch((error) => console.error("Error fetching total students:", error));
 }
 // total students end
+
+//fetch the total course count
+document.addEventListener("DOMContentLoaded", () => {
+	fetch("/totalcourses")
+		.then((response) => response.json())
+		.then((data) => {
+			document.getElementById("totalcourses").innerText = data.total;
+		})
+		.catch((error) => {
+			console.error("Error fetching total courses:", error);
+			document.getElementById("totalcourses").innerText = "Error";
+		});
+});
+// end the total course count  
+
+//pop up code to the total courses
+function viewTotalCourses() {
+	fetch("/viewtotalcourses")
+		.then(response => response.json())
+		.then(data => {
+			const tableBody = document.getElementById("courseTableBody");
+			tableBody.innerHTML = "";
+
+			data.forEach(course => {
+				const row = `
+					<tr>
+						<td>${course.CourseID}</td>
+						<td>${course.CourseName}</td>
+						<td>${course.Duration}</td>
+					</tr>
+				`;
+				tableBody.innerHTML += row;
+			});
+
+			document.getElementById("courseModal").style.display = "flex"; // Show Popup
+		})
+		.catch(err => console.error("Error Fetching Courses:", err));
+}
+
+function closeModal() {
+	document.getElementById("courseModal").style.display = "none";
+}
+
+window.onclick = function (event) {
+	const modal = document.getElementById("courseModal");
+	if (event.target === modal) {
+		modal.style.display = "none";
+	}
+};
+
+// end the pop up code of total courses offered
+
+// fetch the total active courses
+document.addEventListener("DOMContentLoaded", () => {
+	fetch("/activecourses")
+		.then((response) => response.json())
+		.then((data) => {
+			document.querySelector("#activecourses").innerText = data.activeCourses;
+		})
+		.catch((error) => {
+			console.error("Error fetching Active Courses:", error);
+			document.querySelector("#activecourses").innerText = "Error";
+		});
+});
+//end the total active courses
 
 // Function to fetch total enquiries
 function fetchTotalEnquiries() {
@@ -156,7 +221,7 @@ function downloadExcel() {
 
 // Load batch codes on page load
 window.onload = fetchBatchCodes;
-// end teh excel downloaded code
+// end the excel downloaded code
 
 // view content on screen pop up 
 let studentsData = []; // Store all students data
@@ -175,7 +240,6 @@ async function viewStudents() {
 		if (!response.ok) throw new Error("Failed to fetch students.");
 		studentsData = await response.json();
 
-		// Display student count
 		document.getElementById("studentCount").innerText = `Total Students: ${studentsData.length}`;
 
 		if (studentsData.length === 0) {
@@ -185,14 +249,13 @@ async function viewStudents() {
 
 		currentPage = 0;
 		displayStudents();
-		document.getElementById("studentModal").style.display = "block";
+		document.getElementById("studentModal").style.display = "flex"; // Fixed Display to Flex
 	} catch (error) {
 		console.error("Error:", error);
 		alert("Error fetching students.");
 	}
 }
 
-// Function to display students (pagination)
 function displayStudents() {
 	const tableBody = document.getElementById("studentTableBody");
 	tableBody.innerHTML = "";
@@ -213,12 +276,14 @@ function displayStudents() {
 		tableBody.innerHTML += row;
 	});
 
-	// Update pagination buttons
+	// Pagination Buttons
 	document.getElementById("prevBtn").disabled = currentPage === 0;
 	document.getElementById("nextBtn").disabled = end >= studentsData.length;
+
+	// Update Page Info
+	document.getElementById("pageInfo").innerText = `Page ${currentPage + 1} of ${Math.ceil(studentsData.length / pageSize)}`;
 }
 
-// Pagination Controls
 function nextPage() {
 	if ((currentPage + 1) * pageSize < studentsData.length) {
 		currentPage++;
@@ -233,8 +298,15 @@ function prevPage() {
 	}
 }
 
-// Close Modal
 function closeModal() {
 	document.getElementById("studentModal").style.display = "none";
 }
-// end the view content on screen pop up 
+
+window.onclick = function (event) {
+	const modal = document.getElementById("studentModal");
+	if (event.target === modal) {
+		closeModal(); // Call Close Function Here
+	}
+};
+
+// end the view content on screen pop up

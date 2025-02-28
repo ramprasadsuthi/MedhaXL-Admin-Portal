@@ -1,97 +1,75 @@
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("searchInput").focus();
-});
+let currentPage = 1;
+const studentsPerPage = 10;
+let students = [];
 
-function redirectToSearch(event) {
-    event.preventDefault(); // Prevent form submission
+window.onload = async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query');
 
-    const searchValue = document.getElementById("searchInput").value.trim();
-    if (!searchValue) {
-        alert("Please enter a name or mobile number.");
-        return;
+    if (query) {
+        document.getElementById('searchInput').value = query;
+
+        try {
+            const response = await fetch(`/search?query=${query}`);
+            students = await response.json();
+            if (students.length === 0) {
+                alert('No data found');
+            }
+            displayStudents();
+        } catch (error) {
+            console.error('Failed to fetch students:', error);
+        }
     }
+};
 
-    fetch(`/search?query=${searchValue}`)
-        .then(response => response.json())
-        .then(data => displayResults(data))
-        .catch(error => console.error("Error fetching students:", error));
-}
+function displayStudents() {
+    const tableBody = document.getElementById('studentTableBody');
+    tableBody.innerHTML = '';
 
-function displayResults(students) {
-    const tableBody = document.getElementById("studentTableBody");
-    tableBody.innerHTML = ""; // Clear previous results
+    const startIndex = (currentPage - 1) * studentsPerPage;
+    const endIndex = startIndex + studentsPerPage;
+    const paginatedStudents = students.slice(startIndex, endIndex);
 
-    if (students.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="8" style="text-align:center;">No students found</td></tr>`;
-        return;
-    }
-
-    students.forEach(student => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${student.StudentID}</td>
-            <td>${student.BatchCode}</td>
-            <td>${student.Course}</td>
-            <td>${student.FirstName}</td>
-            <td>${student.LastName}</td>
-            <td>${student.MobileNumber}</td>
-            <td>${student.EmailID}</td>
-            <td><button class="edit-btn" onclick="editStudent(${student.StudentID})">Edit</button></td>
+    paginatedStudents.forEach(student => {
+        const row = `
+            <tr>
+                <td>${student.StudentID}</td>
+                <td>${student.BatchCode}</td>
+                <td>${student.Course}</td>
+                <td>${student.FirstName}</td>
+                <td>${student.LastName}</td>
+                <td>${student.MobileNumber}</td>
+                <td>${student.EmailID}</td>
+            </tr>
         `;
-        tableBody.appendChild(row);
+        tableBody.innerHTML += row;
     });
+
+    document.getElementById('prevBtn').disabled = currentPage === 1;
+    document.getElementById('nextBtn').disabled = endIndex >= students.length;
 }
 
-function editStudent(studentID) {
-    window.location.href = `/edit-student.html?id=${studentID}`;
+function nextPage() {
+    currentPage++;
+    displayStudents();
 }
 
-
-// edit  and load student data
-function editStudent(studentID) {
-    fetch(`/api/students/get-student?id=${studentID}`)
-        .then(response => response.json())
-        .then(student => {
-            document.getElementById("editStudentID").value = student.StudentID;
-            document.getElementById("editFirstName").value = student.FirstName;
-            document.getElementById("editLastName").value = student.LastName;
-            document.getElementById("editBatchCode").value = student.BatchCode;
-            document.getElementById("editCourse").value = student.Course;
-            document.getElementById("editMobile").value = student.MobileNumber;
-            document.getElementById("editEmail").value = student.EmailID;
-
-            document.getElementById("editModal").style.display = "flex";
-        })
-        .catch(error => console.error("Error fetching student details:", error));
+function prevPage() {
+    currentPage--;
+    displayStudents();
 }
 
-// Save updated student details
-function saveChanges() {
-    const studentID = document.getElementById("editStudentID").value;
-    const updatedData = {
-        FirstName: document.getElementById("editFirstName").value,
-        LastName: document.getElementById("editLastName").value,
-        BatchCode: document.getElementById("editBatchCode").value,
-        Course: document.getElementById("editCourse").value,
-        MobileNumber: document.getElementById("editMobile").value,
-        EmailID: document.getElementById("editEmail").value
-    };
-
-    fetch(`/api/students/update-student/${studentID}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        closeModal();
-        location.reload(); // Refresh the page to show updated data
-    })
-    .catch(error => console.error("Error updating student:", error));
+function redirectToSearch() {
+    const query = document.getElementById('searchInput').value.trim();
+    if (query) {
+        window.location.href = `search.html?query=${query}`;
+    }
+    return false;
 }
 
-// Close modal function
-function closeModal() {
-    document.getElementById("editModal").style.display = "none";
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        redirectToSearch();
+    }
 }

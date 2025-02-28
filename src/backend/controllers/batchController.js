@@ -12,6 +12,18 @@ const batchControllers = {
                 res.json(result);
             }
         });
-    }
+    },
+
+    getActiveCourses: (req, res) => {
+        const query = "SELECT COUNT(*) AS activeCourses FROM batches WHERE status = 'Active'";
+        db.query(query, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ message: "Database Error" });
+            } else {
+                res.json(result[0]);
+            }
+        });
+    },
 };
 module.exports = batchControllers;

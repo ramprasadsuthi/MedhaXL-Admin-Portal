@@ -14,7 +14,7 @@
         <div class="logo-container">
             <img src="../img/Medhalogo.png" alt="MedhaXL Logo" class="logo">
         </div>
- 
+
         <div class="form-container">
             <div class="form-header">
                 <h1>Student Registration</h1>
@@ -87,9 +87,9 @@
                             <label for="gender">Gender *</label>
                             <select id="gender" name="gender" required>
                                 <option value="">Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                <option value="male">MALE</option>
+                                <option value="female">FEMALE</option>
+                                <option value="other">OTHERS</option>
                             </select>
                             <span class="error" id="genderError"></span>
                         </div>
@@ -108,13 +108,13 @@
                             <label for="religion">Religion *</label>
                             <select id="religion" name="religion" required>
                                 <option value="">Select Religion</option>
-                                <option value="hindu">Hindu</option>
-                                <option value="muslim">Muslim</option>
-                                <option value="christian">Christian</option>
-                                <option value="sikh">Sikh</option>
-                                <option value="buddhist">Buddhist</option>
-                                <option value="jain">Jain</option>
-                                <option value="other">Other</option>
+                                <option value="hindu">HINDU</option>
+                                <option value="muslim">MUSLIM</option>
+                                <option value="christian">CHRISTIAN</option>
+                                <option value="sikh">SIKH</option>
+                                <option value="buddhist">BUDDHIST</option>
+                                <option value="jain">JAIN</option>
+                                <option value="other">OTHERS</option>
                             </select>
                             <span class="error" id="religionError"></span>
                         </div>
@@ -122,11 +122,11 @@
                             <label for="category">Category *</label>
                             <select id="category" name="category" required onchange="updateSubCategory()">
                                 <option value="">Select Category</option>
-                                <option value="general">General</option>
+                                <option value="general">GENERAL</option>
                                 <option value="sc">SC</option>
                                 <option value="st">ST</option>
                                 <option value="obc">OBC</option>
-                                <option value="other">Other</option>
+                                <option value="other">OTHERS</option>
                             </select>
                             <span class="error" id="categoryError"></span>
                         </div>
@@ -146,10 +146,10 @@
                             <label for="maritalStatus">Marital Status *</label>
                             <select id="maritalStatus" name="maritalStatus" required>
                                 <option value="">Select Marital Status</option>
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-                                <option value="divorced">Divorced</option>
-                                <option value="widowed">Widowed</option>
+                                <option value="single">UN-MARRIED</option>
+                                <option value="married">MARRIED</option>
+                                <option value="divorced">DIVORCED</option>
+                                <option value="widowed">WIDOWED</option>
                             </select>
                             <span class="error" id="maritalStatusError"></span>
                         </div>
@@ -185,10 +185,12 @@
                             <label for="minQualification">Minimum Qualification *</label>
                             <select id="minQualification" name="minQualification" required>
                                 <option value="">Select Qualification</option>
-                                <option value="10th">10th</option>
-                                <option value="12th">10+2</option>
-                                <option value="diploma">Diploma</option>
+                                <option value="10th">10TH</option>
+                                <option value="12th">INTERMEDIATE</option>
+                                <option value="diploma">DIPLOMA</option>
                                 <option value="iti">I.T.I</option>
+                                <option value="degree">DEGREE</option>
+                                <option value="btech">B.TECH</option>
                             </select>
                             <span class="error" id="minQualificationError"></span>
                         </div>
@@ -202,9 +204,12 @@
                             <label for="highestQualification">Highest Qualification *</label>
                             <select id="highestQualification" name="highestQualification" required>
                                 <option value="">Select Qualification</option>
-                                <option value="degree">Degree</option>
-                                <option value="btech">B.Tech</option>
-                                <option value="phd">PhD</option>
+                                <option value="diploma">DIPLOMA</option>
+                                <option value="degree">DEGREE</option>
+                                <option value="btech">B.TECH</option>
+                                <option value="phd">PHD</option>
+                                <option value="mba">MBA</option>
+                                <option value="mca">MCA</option>
                             </select>
                             <span class="error" id="highestQualificationError"></span>
                         </div>
@@ -212,8 +217,8 @@
                             <label for="physicallyHandicapped">Physically Handicapped *</label>
                             <select id="physicallyHandicapped" name="physicallyHandicapped" required>
                                 <option value="">Select</option>
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
+                                <option value="no">NO</option>
+                                <option value="yes">YES</option>
                             </select>
                             <span class="error" id="physicallyHandicappedError"></span>
                         </div>
