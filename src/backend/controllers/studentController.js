@@ -199,18 +199,23 @@ const studentController = {
     // Search students by FirstName, LastName, or MobileNumber
     searchStudents: (req, res) => {
         const { query } = req.query;
-        const sql = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, EmailID FROM student
+
+        if (!query) {
+            return res.status(400).json({ message: "Query is required" });
+        }
+
+        const sql = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, EmailID 
+                     FROM student
                      WHERE FirstName LIKE ? OR LastName LIKE ? OR MobileNumber LIKE ?`;
         const values = [`%${query}%`, `%${query}%`, `%${query}%`];
 
         db.query(sql, values, (err, results) => {
-
             if (err) {
-                console.error('Search Error:', err);
-                res.status(500).send('Server Error');
-            } else {
-                res.json(results);
+                console.error("Search Error:", err);
+                return res.status(500).json({ message: "Database Error" });
             }
+
+            res.status(200).json(results);
         });
     },
 

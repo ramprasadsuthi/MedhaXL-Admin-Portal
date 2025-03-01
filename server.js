@@ -28,7 +28,7 @@ console.log('Connected to MySQL Database.');
 app.post('/EnquiryForm', enquiryController.submitEnquiry);
 app.get('/total-enquiries', enquiryController.getTotalEnquiries);
 app.get('/latest-enquiries', enquiryController.getLatestEnquiries);
-// Course routes
+// Course routes dor add batch also 
 app.get('/courses', coursecontrollers.getCourses);
 // Trainer routes
 app.post('/trainers', trainerController.addTrainer);
@@ -62,7 +62,8 @@ app.get("/totalcourses", coursecontrollers.getTotalCourses);
 //**FETCH THE API TO VEW THE STUNDETS WITH SAME CODE */
 app.get('/getstudents', studentController.getstudents);
 //**FETCH THE API TO VEW THE count of teh running course */
-app.get('/activecourses', batchControllers.getActiveCourses);
+app.get('/batchcount', batchControllers.Activecount);
+app.get('/active-courses', batchControllers.getActiveCourses);
 //**get the total courses view waht we offered */
 app.get('/viewtotalcourses', coursecontrollers.getviewtotalcourses);
 //**fetch  the get studnets from the students table */

@@ -14,7 +14,7 @@ window.onload = async function () {
 			students = await response.json();
 
 			if (students.length === 0) {
-				alert("No data found");
+				alert("No Data Found");
 			}
 			displayStudents();
 		} catch (error) {
@@ -23,12 +23,13 @@ window.onload = async function () {
 	}
 };
 
+//**edit the student data */
 function displayStudents() {
 	const tableBody = document.getElementById("studentTableBody");
 	tableBody.innerHTML = "";
 
 	const startIndex = (currentPage - 1) * studentsPerPage;
-	const endIndex = startIndex + studentsPerPage;
+	const endIndex = Math.min(startIndex + studentsPerPage, students.length);
 	const paginatedStudents = students.slice(startIndex, endIndex);
 
 	paginatedStudents.forEach((student) => {
@@ -43,7 +44,7 @@ function displayStudents() {
             <td contenteditable="false">${student.EmailID}</td>
             <td>
                 <button onclick="editRow(this)">Edit</button>
-                <button onclick="saveRow(this, ${student.StudentID})" style="display:none;">Done</button>
+                <button onclick="saveRow(this, ${student.StudentID})" style="display:none;">Submit</button>
             </td>
         </tr>`;
 		tableBody.innerHTML += row;
@@ -54,7 +55,7 @@ function displayStudents() {
 }
 
 function editRow(button) {
-	const row = button.parentNode.parentNode;
+	const row = button.closest("tr");
 	const cells = row.querySelectorAll("td[contenteditable]");
 
 	cells.forEach((cell) => {
@@ -63,31 +64,41 @@ function editRow(button) {
 	});
 
 	button.style.display = "none";
-	row.querySelector("button:nth-child(2)").style.display = "inline";
+	row.querySelector("button:nth-of-type(2)").style.display = "inline";
 }
 
 async function saveRow(button, id) {
-	const row = button.parentNode.parentNode;
+	const row = button.closest("tr");
 	const cells = row.querySelectorAll("td[contenteditable]");
 	const updatedData = {
-		Course: cells[0].innerText,
-		FirstName: cells[1].innerText,
-		LastName: cells[2].innerText,
-		MobileNumber: cells[3].innerText,
-		EmailID: cells[4].innerText,
+		Course: cells[0].innerText.trim(),
+		FirstName: cells[1].innerText.trim(),
+		LastName: cells[2].innerText.trim(),
+		MobileNumber: cells[3].innerText.trim(),
+		EmailID: cells[4].innerText.trim(),
 	};
 
-	const response = await fetch(`/update/${id}`, {
-		method: "PUT",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(updatedData),
-	});
+	try {
+		const response = await fetch(`/update/${id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(updatedData),
+		});
 
-	if (response.ok) {
-		alert("Changes Done Successfully!");
-	} else {
-		alert("Failed to update!");
+		if (response.ok) {
+			alert("Changes Done Successfully!");
+			cells.forEach((cell) => {
+				cell.contentEditable = "false";
+				cell.style.backgroundColor = "";
+			});
+			button.style.display = "none";
+			row.querySelector("button:nth-of-type(1)").style.display = "inline";
+		} else {
+			alert("Failed to update!");
+		}
+	} catch (error) {
+		console.error("Failed to update:", error);
+		alert("An error occurred!");
 	}
-
-	displayStudents();
 }
+//**!edit the sudent data */

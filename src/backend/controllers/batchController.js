@@ -13,8 +13,8 @@ const batchControllers = {
             }
         });
     },
-
-    getActiveCourses: (req, res) => {
+//**active courses count */
+    Activecount: (req, res) => {
         const query = "SELECT COUNT(*) AS activeCourses FROM batches WHERE status = 'Active'";
         db.query(query, (err, result) => {
             if (err) {
@@ -26,6 +26,7 @@ const batchControllers = {
         });
     },
 
+    //**add teh batch */
     addBatch: (req, res) => {
         const { BatchID, CourseName, Duration, Trainer, Status } = req.body;
         const query = `INSERT INTO batches (batchid, coursename, duration, trainer, status) VALUES (?, ?, ?, ?, ?)`;
@@ -36,6 +37,20 @@ const batchControllers = {
                 res.status(500).json({ message: "Failed to Add Batch" });
             } else {
                 res.status(200).json({ message: "Batch Added Successfully" });
+            }
+        });
+    },
+    
+    //** get the active courses pop up */
+    getActiveCourses: (req, res) => {
+        const sql = `SELECT batchid, coursename, duration, trainer, status FROM batches WHERE status = 'Active'`;
+
+        db.query(sql, (err, results) => {
+            if (err) {
+                console.error("Fetching Active Courses Error:", err);
+                res.status(500).json({ message: "Database Error" });
+            } else {
+                res.status(200).json(results);
             }
         });
     },

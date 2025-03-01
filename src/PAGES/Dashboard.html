@@ -47,7 +47,7 @@
 		</div>
 		<div class="submenu Batches-submenu">
 			<a href="addbatch.html"><span class="material-icons"><span class="material-symbols-outlined">
-						person_add
+						how_to_reg
 					</span></span> Add Batches</a>
 			<a href="#"><span class="material-icons">visibility</span> View Batches</a>
 		</div>
@@ -127,15 +127,18 @@
 				<div class="stat-content">
 					<h3>Total Courses</h3>
 					<p id="totalcourses">Loading..</p>
+					<!-- The value will be updated dynamically or Ensure default value  -->
+
 				</div>
 			</div>
 
-			<div class="stat-card">
+			<div class="stat-card" onclick="showActiveCoursesPopup()">
 				<span class="material-symbols-outlined stat-icon">checkbook</span>
 				<div class="stat-content">
 					<h3>Running Courses</h3>
 					<p id="activecourses">Loading..</p>
 					<!-- The value will be updated dynamically or Ensure default value  -->
+
 				</div>
 			</div>
 
@@ -197,7 +200,7 @@
 	<!-- Popup Modal for Viewing Students -->
 	<div id="studentModal" class="modal">
 		<div class="modal-content">
-			<span class="close" onclick="closeModal()">&times;</span>
+			<span class="close" onclick="closeModal('studentModal')">&times;</span>
 			<h2>Student List</h2>
 			<table border="1">
 				<thead>
@@ -230,7 +233,7 @@
 	<!--pop fo the view courses-->
 	<div id="courseModal" class="viewcoursepopup">
 		<div class="view-course">
-			<span class="close" onclick="closeModal()">&times;</span>
+			<span class="close" onclick="closeModal('courseModal')">&times;</span>
 			<h3>Total Courses</h3>
 			<table>
 				<thead>
@@ -242,6 +245,26 @@
 				</thead>
 				<tbody id="courseTableBody">
 					<!-- Course Data Will be Displayed Here -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div id="batchactive" class="batch-active">
+		<div class="batch-active-content">
+			<span class="close-btn" onclick="closePopup('batchactive')">&times;</span>
+			<h3>Active Courses List</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Batch ID</th>
+						<th>Course Name</th>
+						<th>Duration</th>
+						<th>Trainer</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody id="activeCoursesList">
 				</tbody>
 			</table>
 		</div>

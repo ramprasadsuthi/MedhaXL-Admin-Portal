@@ -2,42 +2,107 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Batch</title>
-    <link rel="stylesheet" href="../CSS/addbatch.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="../CSS/addbatch.css">
+	<script src="../backend/middleware/tokenvalidity.js"></script>
+
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>Add Batch</h1>
-        <form onsubmit="return addBatch()">
-            <label>Batch ID</label>
-            <input type="text" id="BatchID" required>
 
-            <label for="course">Course*</label>
-            <select id="course" name="course" required>
-                <option value="">Select Course</option>
-            </select>
-            <span class="error" id="courseError"></span>
+	<!-- Header -->
+	<header class="header">
+		<img src="../img/Medhalogo.png" alt="Medhalogo" width="175">
+		<span class="menu-icon material-icons">menu</span>
+		<div class="profile-icon">
+			<span class="material-icons">account_circle</span>
+			<div class="profile-dropdown">
+				<a href="#"><span class="material-icons">account_circle</span> Profile</a>
+				<a href="#"><span class="material-icons">settings</span> Settings</a>
+				<a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
+			</div>
+		</div>
+	</header>
 
-            <label>Duration</label>
-            <input type="number" id="Duration" required>
+	<!-- Sidebar Navigation -->
+	<nav class="sidebar">
+		<a href="Dashboard.html"><span class="material-icons">dashboard</span> Home</a>
 
-            <label>Trainer</label>
-            <input type="text" id="Trainer" required>
+		<div class="dropdown-menu students-menu">
+			<a><span class="material-icons">person</span> Students</a>
+			<span class="material-icons toggle-icon students-toggle">expand_more</span>
+		</div>
+		<div class="submenu students-submenu">
+			<a href="studentform.html"><span class="material-icons">group_add</span> Add Student</a>
+			<a href="#"><span class="material-icons">visibility</span> View Students</a>
+		</div>
 
-            <label>Status</label>
-            <select id="Status" required>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-            </select>
+		<div class="dropdown-menu Batches-menu">
+			<a><span class="material-icons">group</span> Batches</a>
+			<span class="material-icons toggle-icon Batches-toggle">expand_more</span>
+		</div>
+		<div class="submenu Batches-submenu">
+			<a href="addbatch.html"><span class="material-icons"><span class="material-symbols-outlined">
+						person_add
+					</span></span> Add Batches</a>
+			<a href="#"><span class="material-icons">visibility</span> View Batches</a>
+		</div>
 
-            <button type="submit">Add Batch</button>
-        </form>
-    </div>
-    <script src="../backend/middleware/tokenvalidity.js"></script>
-    <script src="../JS/addbatch.js"></script>
+		<div class="dropdown-menu trainers-menu">
+			<a><span class="material-icons">group</span> Trainers</a>
+			<span class="material-icons toggle-icon trainers-toggle">expand_more</span>
+		</div>
+		<div class="submenu trainers-submenu">
+			<a href="addtrainer.html"><span class="material-icons"><span class="material-symbols-outlined">
+						person_add
+					</span></span> Add Trainer</a>
+			<a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+		</div>
+
+		<a href="#"><span class="material-icons">analytics</span> Analytics</a>
+		<a href="#"><span class="material-icons">notifications</span> Notifications</a>
+		<a href="#"><span class="material-icons">settings</span> Settings</a>
+	</nav>
+
+	<!-- Main Content -->
+	<main class="main-content">
+
+        <div class="wrapper">
+            <h1>Add Batch</h1>
+            <form onsubmit="return addBatch()">
+                <label>Batch ID</label>
+                <input type="text" id="BatchID" required>
+    
+                <label for="course">Course*</label>
+                <select id="course" name="course" required>
+                    <option value="">Select Course</option>
+                </select>
+                <span class="error" id="courseError"></span>
+    
+                <label>Duration</label>
+                <input type="number" id="Duration" required>
+    
+                <label>Trainer</label>
+                <input type="text" id="Trainer" required>
+    
+                <label>Status</label>
+                <select id="Status" required>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+    
+                <button type="submit">Add Batch</button>
+            </form>
+        </div>
+	</main>
+
+
+	<script src="../JS/addbatch.js"></script>
+
 </body>
 
 </html>

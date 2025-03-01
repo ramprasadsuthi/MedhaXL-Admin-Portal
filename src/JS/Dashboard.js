@@ -96,22 +96,11 @@ function viewTotalCourses() {
 		.catch(err => console.error("Error Fetching Courses:", err));
 }
 
-function closeModal() {
-	document.getElementById("courseModal").style.display = "none";
-}
-
-window.onclick = function (event) {
-	const modal = document.getElementById("courseModal");
-	if (event.target === modal) {
-		modal.style.display = "none";
-	}
-};
-
 // end the pop up code of total courses offered
 
 // fetch the total active courses
 document.addEventListener("DOMContentLoaded", () => {
-	fetch("/activecourses")
+	fetch("/batchcount")
 		.then((response) => response.json())
 		.then((data) => {
 			document.querySelector("#activecourses").innerText = data.activeCourses;
@@ -298,14 +287,63 @@ function prevPage() {
 	}
 }
 
-function closeModal() {
-	document.getElementById("studentModal").style.display = "none";
+//**batches active list pop up */
+async function showActiveCoursesPopup() {
+	try {
+		const response = await fetch("/active-courses");
+		const courses = await response.json();
+
+		const tableBody = document.getElementById("activeCoursesList");
+		tableBody.innerHTML = "";
+
+		if (courses.length > 0) {
+			courses.forEach((course) => {
+				const row = `
+				<tr>
+					<td>${course.batchid}</td>
+					<td>${course.coursename}</td>
+					<td>${course.duration}</td>
+					<td>${course.trainer}</td>
+					<td>${course.status}</td>
+				</tr>`;
+				tableBody.innerHTML += row;
+			});
+		} else {
+			tableBody.innerHTML = `<tr><td colspan="5">No Active Courses Available</td></tr>`;
+		}
+
+		document.getElementById("batchactive").style.display = "block";
+	} catch (error) {
+		console.error("Error fetching active courses:", error);
+		alert("Failed to fetch active courses!");
+	}
+}
+function closePopup() {
+	document.getElementById("batchactive").style.display = "none";
+}
+
+
+//**! batches active list pop up */
+
+//**closse modal of pop up */
+function closeModal(modalID) {
+	const modal = document.getElementById(modalID);
+	modal.style.display = "none";
 }
 
 window.onclick = function (event) {
-	const modal = document.getElementById("studentModal");
-	if (event.target === modal) {
-		closeModal(); // Call Close Function Here
+	const smodal = document.getElementById("studentModal");
+	if
+		(event.target == smodal) {
+		closeModal('studentModal');
+	}
+	const cmodal = document.getElementById("courseModal");
+	if (event.target == cmodal) {
+		closeModal('courseModal');
+	}
+	const bactive = document.getElementById("batchactive");
+	if (event.target == bactive) {
+		closeModal('batchactive');
 	}
 };
 
