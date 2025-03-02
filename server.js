@@ -30,6 +30,7 @@ app.get('/total-enquiries', enquiryController.getTotalEnquiries);
 app.get('/latest-enquiries', enquiryController.getLatestEnquiries);
 // Course routes dor add batch also 
 app.get('/courses', coursecontrollers.getCourses);
+
 // Trainer routes
 app.post('/trainers', trainerController.addTrainer);
 
@@ -72,8 +73,6 @@ app.get("/search", studentController.searchStudents);
 app.put("/update/:id", studentController.updateStudent);
 //**fetch teh api to add the active batches */
 app.post("/addBatch", batchControllers.addBatch);
-
-
 // Batch routes
 app.get('/batches', batchControllers.getbatches);
 

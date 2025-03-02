@@ -13,7 +13,7 @@ const batchControllers = {
             }
         });
     },
-//**active courses count */
+    //**active courses count */
     Activecount: (req, res) => {
         const query = "SELECT COUNT(*) AS activeCourses FROM batches WHERE status = 'Active'";
         db.query(query, (err, result) => {
@@ -40,7 +40,7 @@ const batchControllers = {
             }
         });
     },
-    
+
     //** get the active courses pop up */
     getActiveCourses: (req, res) => {
         const sql = `SELECT batchid, coursename, duration, trainer, status FROM batches WHERE status = 'Active'`;

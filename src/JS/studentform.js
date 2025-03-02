@@ -183,7 +183,8 @@ function previewForm() {
         'Educational Details': ['minQualification', 'yearPassing', 'highestQualification', 'physicallyHandicapped'],
         'Guardian Details': ['guardianName', 'guardianOccupation', 'guardianContact', 'guardianIncome'],
         'Address Details': ['doorNo', 'village', 'mandal', 'pincode', 'district', 'state'],
-        'Identity Details': ['aadhar']
+        'Identity Details': ['aadhar'],
+        'Fee': ['totalfee', 'discount']
     };
 
     // Generate preview HTML
@@ -306,7 +307,9 @@ function handleSubmit(event) {
         pincode: document.getElementById('pincode').value,
         district: document.getElementById('district').value,
         state: document.getElementById('state').value,
-        aadhar: document.getElementById('aadhar').value
+        aadhar: document.getElementById('aadhar').value,
+        totalfee: document.getElementById('totalfee').value,
+        discount: document.getElementById('discount').value
     };
 
     // Send POST request to the server
