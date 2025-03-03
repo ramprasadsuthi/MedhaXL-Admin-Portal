@@ -54,5 +54,14 @@ const batchControllers = {
             }
         });
     },
+
+    getBatchesdata: (req, res) => {
+        db.query("SELECT BatchID, CourseName, Status FROM batches", (err, result) => {
+            if (err) throw err;
+            res.json(result);
+        });
+    },
+
+    
 };
 module.exports = batchControllers;

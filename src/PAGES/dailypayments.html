@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/dailypayments.css">
+    <script src="../JS/dailypayments.js"></script>
+    <title>Daily Payments</title>
+</head>
+<body>
+    <div class="daily-payments">
+        <h2>Daily Payments</h2>
+        <div class="batch-selection">
+          <label for="batch">Select Batch:</label>
+          <select id="batch" onchange="getDetails()">
+            <option value="">Select Batch</option>
+          </select>
+          <button onclick="getDetails()">Get Details</button>
+        </div>
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Batch Code</th>
+              <th>Course</th>
+              <th>Name</th>
+              <th>Mobile Number</th>
+              <th>Course Fee</th>
+              <th>Discount Applied</th>
+              <th>Total Fee</th>
+              <th>Total Due</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="studentTableBody"></tbody>
+        </table>
+      </div>
+</body>
+</html>

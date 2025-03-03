@@ -316,18 +316,29 @@
                     </div>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="totalfee">Total Fee*</label>
-                            <input type="text" id="totalfee" name="totalfee" placeholder="Enter TOTAL FEE AMOUNT"
+                            <label for="CourseFee">Course Fee*</label>
+                            <input type="text" id="CourseFee" name="CourseFee" placeholder="Enter TOTAL FEE AMOUNT"
                                 required>
-                            <span class="error" id="totalfeeError"></span>
+                            <span class="error" id="CourseFeeError"></span>
                         </div>
-                    </div>
-                    <div class="form-grid">
+
                         <div class="form-group">
                             <label for="discount">Discount*</label>
                             <input type="text" id="discount" name="discount"
                                 placeholder="Enter TOTAL FEE DISCOUNT APPLIED" required>
                             <span class="error" id="discountError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="totalfee">Total Fee*</label>
+                            <input type="text" id="totalfee" name="totalfee" placeholder="Total Fee">
+                            <span class="error" id="totalfeeError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="totaldue">Total Due*</label>
+                            <input type="text" id="totaldue" name="totaldue" placeholder="Total Due" readonly>
+                            <span class="error" id="totaldueError"></span>
                         </div>
                     </div>
                 </div>

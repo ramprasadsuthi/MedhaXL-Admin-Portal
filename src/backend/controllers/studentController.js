@@ -8,13 +8,12 @@ const studentController = {
         const {
             campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory,
             mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped,
-            guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, totalfee, discount
-        } = req.body;
+            guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, CourseFee, discount, totalfee, totaldue } = req.body;
 
-        const sql = `INSERT INTO student (Campus, TrainingPartner, Course, BatchCode, FirstName, LastName, Gender, DateOfBirth, Age, Religion, Category, SubCategory, MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName, GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, TotalAmount, DiscountAppiled) 
-                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        const sql = `INSERT INTO student (Campus, TrainingPartner, Course, BatchCode, FirstName, LastName, Gender, DateOfBirth, Age, Religion, Category, SubCategory, MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName, GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-        db.query(sql, [campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory, mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped, guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, totalfee, discount], (err, result) => {
+        db.query(sql, [campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory, mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped, guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, CourseFee, discount, totalfee, totaldue], (err, result) => {
             if (err) {
                 console.error('Error storing data:', err);
                 return res.status(500).json({ success: false, message: 'Error storing data: ' + err.message });
@@ -214,7 +213,6 @@ const studentController = {
                 console.error("Search Error:", err);
                 return res.status(500).json({ message: "Database Error" });
             }
-
             res.status(200).json(results);
         });
     },
@@ -234,5 +232,20 @@ const studentController = {
         });
     },
 
+    Studentspayment: (req, res) => {
+        const { batchID } = req.query;
+        db.query("SELECT * FROM student WHERE BatchCode = ?", [batchID], (err, result) => {
+            if (err) throw err;
+            res.json(result);
+        });
+    },
+
+    savePayment: (req, res) => {
+        const { studentID, totalFee } = req.body;
+        db.query("UPDATE student SET TotalFee = ?, TotalDue = CourseFee - DiscountAppiled - ? WHERE StudentID = ?", [totalFee, totalFee, studentID], (err) => {
+            if (err) throw err;
+            res.json({ success: true });
+        });
+    },
 };
 module.exports = studentController;

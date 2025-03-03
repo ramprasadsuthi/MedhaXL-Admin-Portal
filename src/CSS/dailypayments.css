@@ -1,0 +1,42 @@
+.daily-payments {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  .batch-selection {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #45a049;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  input[type="text"] {
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    table {
+      font-size: 12px;
+    }
+  }

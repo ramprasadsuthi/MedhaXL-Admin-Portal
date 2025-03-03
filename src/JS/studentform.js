@@ -184,7 +184,7 @@ function previewForm() {
         'Guardian Details': ['guardianName', 'guardianOccupation', 'guardianContact', 'guardianIncome'],
         'Address Details': ['doorNo', 'village', 'mandal', 'pincode', 'district', 'state'],
         'Identity Details': ['aadhar'],
-        'Fee': ['totalfee', 'discount']
+        'Fee': ['CourseFee', 'discount', 'totalfee', 'totaldue']
     };
 
     // Generate preview HTML
@@ -308,8 +308,10 @@ function handleSubmit(event) {
         district: document.getElementById('district').value,
         state: document.getElementById('state').value,
         aadhar: document.getElementById('aadhar').value,
+        CourseFee: document.getElementById('CourseFee').value,
+        discount: document.getElementById('discount').value,
         totalfee: document.getElementById('totalfee').value,
-        discount: document.getElementById('discount').value
+        totaldue: document.getElementById('totaldue').value
     };
 
     // Send POST request to the server
@@ -397,3 +399,37 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Error fetching batches:", error));
 });
+
+//**cal of the Fee Section */
+
+document.getElementById('CourseFee').addEventListener('input', calculateFee);
+document.getElementById('discount').addEventListener('input', calculateFee);
+document.getElementById('totalfee').addEventListener('input', updateDue);
+
+function calculateFee() {
+    let courseFee = parseFloat(document.getElementById('CourseFee').value) || 0;
+    let discount = parseFloat(document.getElementById('discount').value) || 0;
+
+    if (discount > courseFee) {
+        document.getElementById('discountError').innerText = "Discount cannot be greater than Course Fee";
+        document.getElementById('totalfee').value = "";
+        document.getElementById('totaldue').value = "";
+        return;
+    } else {
+        document.getElementById('discountError').innerText = "";
+    }
+
+    let totalFee = courseFee - discount;
+    document.getElementById('totalfee').value = totalFee;
+    document.getElementById('totaldue').value = totalFee;
+}
+
+function updateDue() {
+    let totalFee = parseFloat(document.getElementById('totalfee').value) || 0;
+    let courseFee = parseFloat(document.getElementById('CourseFee').value) || 0;
+    let discount = parseFloat(document.getElementById('discount').value) || 0;
+    let totalDue = (courseFee - discount) - totalFee;
+    document.getElementById('totaldue').value = totalDue;
+}
+
+//**!Cal of the Fee Section */

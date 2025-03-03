@@ -76,6 +76,15 @@ app.post("/addBatch", batchControllers.addBatch);
 // Batch routes
 app.get('/batches', batchControllers.getbatches);
 
+
+
+
+app.get("/getBatches", batchControllers.getBatchesdata);
+app.get("/getStudentsdata", studentController.Studentspayment);
+app.post("/savePayment", studentController.savePayment);
+
+
+
 // Static file serving
 app.use(express.static(path.join(__dirname, 'src/')));
 app.use(express.static(path.join(__dirname, 'src/PAGES')));
