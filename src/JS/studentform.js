@@ -24,6 +24,7 @@ toggleDropdown('.Batches-menu', '.Batches-submenu', '.Batches-toggle');
 toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
 toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');
 //**endn the side bat and navbar actions */
+
 // text to upper case
 document.getElementById("registrationForm").addEventListener("submit", function () {
     const inputs = document.querySelectorAll("input[type='text']");

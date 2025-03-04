@@ -7,7 +7,7 @@
 	<title>Admin Dashboard</title>
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="../CSS/addbatch.css">
+	<link rel="stylesheet" href="../CSS/viewstudent.css">
 	<script src="../backend/middleware/tokenvalidity.js"></script>
 
 </head>
@@ -38,7 +38,7 @@
 		</div>
 		<div class="submenu students-submenu">
 			<a href="studentform.html"><span class="material-icons">group_add</span> Add Student</a>
-			<a href="viewstudent.html"><span class="material-icons">visibility</span> View Students</a>
+			<a href="#"><span class="material-icons">visibility</span> View Students</a>
 		</div>
 
 		<div class="dropdown-menu Batches-menu">
@@ -60,7 +60,7 @@
 			<a href="addtrainer.html"><span class="material-icons"><span class="material-symbols-outlined">
 						person_add
 					</span></span> Add Trainer</a>
-			<a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+			<a href="viewstudent.html"><span class="material-icons">visibility</span> View Trainers</a>
 		</div>
 
 		<div class="dropdown-menu FInance-menu">
@@ -82,38 +82,36 @@
 	<!-- Main Content -->
 	<main class="main-content">
 		<div class="wrapper">
-			<h1>Add Batch</h1>
-			<form onsubmit="return addBatch()">
-				<label>Batch ID</label>
-				<input type="text" id="BatchID" required>
+			<h1>Search Batch</h1>
 
-				<label for="course">Course*</label>
-				<select id="course" name="course" required>
-					<option value="">Select Course</option>
-				</select>
-				<span class="error" id="courseError"></span>
+			<label>Select Batch Code:</label>
+			<select id="BatchCode" onchange="getStudents()">
+				<option value="">Select Batch</option>
+			</select>
 
-				<label>Duration</label>
-				<input type="number" id="Duration" required>
-
-				<label>Trainer</label>
-				<input type="text" id="Trainer" required>
-
-				<label>Status</label>
-				<select id="Status" required>
-					<option value="">Select Status</option>
-					<option value="Active">Active</option>
-					<option value="Inactive">Inactive</option>
-				</select>
-
-				<button type="submit">Add Batch</button>
-			</form>
+			<table>
+				<thead>
+					<tr>
+						<th>StudentID</th>
+						<th>BatchCode</th>
+						<th>Course</th>
+						<th>Name</th>
+						<th>Mobile Number</th>
+						<th>Course Fee</th>
+						<th>Discount</th>
+						<th>Total Fee</th>
+						<th>Total Due</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="studentTableBody"></tbody>
+			</table>
 		</div>
 	</main>
 
 	<!-- Modal Styling -->
 
-	<script src="../JS/addbatch.js"></script>
+	<script src="../JS/viewstudent.js"></script>
 
 </body>
 

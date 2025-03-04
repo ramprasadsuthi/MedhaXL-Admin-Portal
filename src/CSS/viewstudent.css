@@ -1,0 +1,342 @@
+   /* General Styles */
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: Arial, sans-serif;
+   }
+
+   body {
+       background-color: #f0f0f0;
+   }
+
+   /* Header */
+   .header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding: 1rem;
+       background-color: #ffffff;
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       position: relative;
+   }
+
+   .logo {
+       font-size: 1.5rem;
+       font-weight: bold;
+   }
+
+   .menu-icon {
+       display: none;
+       font-size: 1.8rem;
+       cursor: pointer;
+   }
+
+   .profile-icon {
+       position: relative;
+       cursor: pointer;
+   }
+
+   .profile-dropdown {
+       display: none;
+       position: absolute;
+       right: 0;
+       top: 100%;
+       background-color: #ffffff;
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       border-radius: 4px;
+       z-index: 10;
+   }
+
+   .profile-dropdown.show {
+       display: block;
+   }
+
+   .profile-dropdown a {
+       display: flex;
+       align-items: center;
+       padding: 0.5rem 1rem;
+       text-decoration: none;
+       color: #333;
+   }
+
+   .profile-dropdown a:hover {
+       background-color: #f0f0f0;
+   }
+
+   /* Sidebar */
+   .sidebar {
+       width: 250px;
+       background-color: #333;
+       height: 100vh;
+       position: fixed;
+       top: 0;
+       left: 0;
+       padding-top: 70px;
+       transition: 0.3s;
+       overflow: auto;
+   }
+
+   .sidebar a {
+       display: flex;
+       align-items: center;
+       color: white;
+       text-decoration: none;
+       padding: 1rem;
+       transition: 0.3s;
+   }
+
+   .sidebar a:hover {
+       background-color: #444;
+   }
+
+   .sidebar .material-icons {
+       margin-right: 10px;
+   }
+
+   /* Dropdown Menus */
+   .dropdown-menu {
+       cursor: pointer;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       color: white;
+   }
+
+   .submenu {
+       display: none;
+       background-color: #444;
+   }
+
+   .submenu a {
+       padding-left: 2.5rem;
+   }
+
+   .submenu.show {
+       display: block;
+   }
+
+   /* Dashboard Content */
+   .main-content {
+       margin-left: 250px;
+       padding: 1rem;
+   }
+
+   /* Responsive Styles */
+   @media (max-width: 768px) {
+       .menu-icon {
+           display: block;
+       }
+
+       .sidebar {
+           width: 0;
+           overflow: hidden;
+       }
+
+       .sidebar.show {
+           width: 250px;
+       }
+
+       .main-content {
+           margin-left: 0;
+       }
+   }
+
+
+   /*Main content css starts*/
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+   .wrapper {
+       background: rgba(25, 25, 112, 0.8);
+       padding: 40px;
+       border-radius: 20px;
+       box-shadow: 0 0 25px rgba(25, 25, 112, 0.9);
+       text-align: center;
+       width: 95%;
+       max-width: 1300px;
+       height: 90%;
+       backdrop-filter: blur(15px);
+       overflow: auto;
+       animation: slideUp 1.2s ease-in-out;
+       border: 2px solid rgba(70, 130, 180, 0.5);
+   }
+
+   h1 {
+       font-size: 2.8em;
+       letter-spacing: 2px;
+       text-transform: uppercase;
+       margin-bottom: 30px;
+       color: #46c7f4;
+       text-shadow: 0 0 15px rgba(70, 130, 180, 0.9);
+       animation: glowText 2s infinite alternate;
+   }
+
+   .batch-selection {
+       margin-bottom: 20px;
+   }
+
+   label {
+       display: block;
+       font-size: 1.4em;
+       margin-bottom: 10px;
+       text-transform: uppercase;
+       color: #46c7f4;
+       letter-spacing: 1px;
+   }
+
+   select {
+       padding: 12px;
+       width: 60%;
+       border: none;
+       border-radius: 10px;
+       background: #46c7f4;
+       color: #000;
+       text-align: center;
+       outline: none;
+       font-weight: bold;
+       letter-spacing: 1px;
+       transition: 0.4s ease;
+       box-shadow: 0 0 10px rgba(70, 130, 180, 0.6);
+   }
+
+   select:hover {
+       background: #87ceeb;
+       cursor: pointer;
+       transform: scale(1.05);
+       box-shadow: 0 0 20px rgba(70, 130, 180, 0.9);
+   }
+
+   .table-container {
+       overflow-x: auto;
+       height: 65%;
+   }
+
+   table {
+       width: 100%;
+       border-collapse: collapse;
+       margin-top: 20px;
+       background: rgba(25, 25, 112, 0.9);
+       overflow: hidden;
+       border-radius: 15px;
+       box-shadow: 0 0 25px rgba(25, 25, 112, 0.8);
+       animation: fadeIn 1.2s ease;
+       color: #ffffff;
+   }
+
+   thead {
+       background: linear-gradient(135deg, #46c7f4, #87ceeb);
+       color: #000;
+       text-transform: uppercase;
+       letter-spacing: 1.5px;
+       font-weight: bold;
+       box-shadow: 0 0 10px rgba(70, 130, 180, 0.7);
+   }
+
+   th,
+   td {
+       padding: 12px;
+       font-size: 12px;
+       text-align: center;
+       border-bottom: 1px solid #444;
+       transition: background 0.4s ease;
+   }
+
+   tr:hover {
+       background: rgba(70, 130, 180, 0.2);
+       transform: scale(1.02);
+       transition: 0.3s;
+   }
+
+   button {
+       padding: 8px 20px;
+       margin: 5px;
+       border: none;
+       border-radius: 10px;
+       background: #46c7f4;
+       color: #000;
+       cursor: pointer;
+       transition: all 0.4s ease;
+       font-weight: 600;
+       letter-spacing: 1px;
+       text-transform: uppercase;
+   }
+
+   button:hover {
+       background: #87ceeb;
+       transform: scale(1.1);
+       box-shadow: 0 0 15px rgba(70, 130, 180, 0.9);
+   }
+
+   @keyframes fadeIn {
+       from {
+           opacity: 0;
+           transform: translateY(-20px);
+       }
+
+       to {
+           opacity: 1;
+           transform: translateY(0);
+       }
+   }
+
+   @keyframes slideUp {
+       from {
+           transform: translateY(50px);
+           opacity: 0;
+       }
+
+       to {
+           transform: translateY(0);
+           opacity: 1;
+       }
+   }
+
+   @keyframes glowText {
+       from {
+           text-shadow: 0 0 10px #46c7f4, 0 0 20px #46c7f4;
+       }
+
+       to {
+           text-shadow: 0 0 20px #87ceeb, 0 0 30px #87ceeb;
+       }
+   }
+
+   @media (max-width: 768px) {
+       select {
+           width: 90%;
+       }
+
+       table {
+           font-size: 10px;
+       }
+
+       th,
+       td {
+           padding: 8px;
+       }
+   }
+
+   @media (max-width: 480px) {
+       h1 {
+           font-size: 2em;
+       }
+
+       label {
+           font-size: 1.2em;
+       }
+
+       select {
+           width: 100%;
+       }
+
+       button {
+           padding: 6px 15px;
+           font-size: 0.8em;
+       }
+
+       th,
+       td {
+           padding: 6px;
+           font-size: 9px;
+       }
+   }

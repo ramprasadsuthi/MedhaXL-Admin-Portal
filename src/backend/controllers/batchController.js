@@ -29,6 +29,7 @@ const batchControllers = {
     //**add teh batch */
     addBatch: (req, res) => {
         const { BatchID, CourseName, Duration, Trainer, Status } = req.body;
+
         const query = `INSERT INTO batches (batchid, coursename, duration, trainer, status) VALUES (?, ?, ?, ?, ?)`;
 
         db.query(query, [BatchID, CourseName, Duration, Trainer, Status], (err, result) => {
@@ -40,6 +41,7 @@ const batchControllers = {
             }
         });
     },
+
 
     //** get the active courses pop up */
     getActiveCourses: (req, res) => {
@@ -62,6 +64,6 @@ const batchControllers = {
         });
     },
 
-    
+
 };
 module.exports = batchControllers;

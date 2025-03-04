@@ -50,7 +50,13 @@ async function addBatch() {
     const trainer = document.getElementById("Trainer").value;
     const status = document.getElementById("Status").value;
 
-    const batch = { BatchID: batchID, CourseName: courseName, Duration: duration, Trainer: trainer, Status: status };
+    const batch = {
+        BatchID: batchID,
+        CourseName: courseName,
+        Duration: duration,
+        Trainer: trainer,
+        Status: status
+    };
 
     try {
         const response = await fetch("/addBatch", {
@@ -72,4 +78,5 @@ async function addBatch() {
     }
     return false;
 }
+
 //**!add batche */

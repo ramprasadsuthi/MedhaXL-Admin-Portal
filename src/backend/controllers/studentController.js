@@ -232,6 +232,7 @@ const studentController = {
         });
     },
 
+    //**view the data for teh payments by the batchcode */
     Studentspayment: (req, res) => {
         const { batchID } = req.query;
         db.query("SELECT * FROM student WHERE BatchCode = ?", [batchID], (err, result) => {
@@ -240,6 +241,7 @@ const studentController = {
         });
     },
 
+    //**update only the total fee in the batch payments */
     savePayment: (req, res) => {
         const { studentID, totalFee } = req.body;
         db.query("UPDATE student SET TotalFee = ?, TotalDue = CourseFee - DiscountAppiled - ? WHERE StudentID = ?", [totalFee, totalFee, studentID], (err) => {
@@ -247,5 +249,21 @@ const studentController = {
             res.json({ success: true });
         });
     },
+
+
+    getStudentsByBatch: (req, res) => {
+        const { batchCode } = req.params;
+        const query = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue FROM student WHERE BatchCode = ?`;
+
+        db.query(query, [batchCode], (err, result) => {
+            if (err) {
+                console.error("Database Error:", err);
+                res.status(500).json({ message: "Failed to Fetch Students" });
+            } else {
+                res.json(result);
+            }
+        });
+    },
+
 };
 module.exports = studentController;

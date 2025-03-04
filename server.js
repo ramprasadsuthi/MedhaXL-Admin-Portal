@@ -73,12 +73,11 @@ app.get("/search", studentController.searchStudents);
 app.put("/update/:id", studentController.updateStudent);
 //**fetch teh api to add the active batches */
 app.post("/addBatch", batchControllers.addBatch);
-// Batch routes
+// Batch routes disply only teh batches if from the batches table
 app.get('/batches', batchControllers.getbatches);
-
-
-
-
+//**disly the datata to view the fee pending */
+app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
+//**can up date the total bfee thoor this api */
 app.get("/getBatches", batchControllers.getBatchesdata);
 app.get("/getStudentsdata", studentController.Studentspayment);
 app.post("/savePayment", studentController.savePayment);
