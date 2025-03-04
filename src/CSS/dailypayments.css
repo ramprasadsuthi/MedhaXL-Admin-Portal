@@ -1,42 +1,189 @@
+   /* General Styles */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.profile-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #333;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 70px;
+    transition: 0.3s;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #444;
+}
+
+.sidebar .material-icons {
+    margin-right: 10px;
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.submenu {
+    display: none;
+    background-color: #444;
+}
+
+.submenu a {
+    padding-left: 2.5rem;
+}
+
+.submenu.show {
+    display: block;
+}
+
+/* Dashboard Content */
+.main-content {
+    margin-left: 250px;
+    padding: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+    }
+
+    .sidebar.show {
+        width: 250px;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+
+/*Main content css starts*/
+
 .daily-payments {
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
-  }
-  
-  .batch-selection {
+}
+
+.batch-selection {
     margin-bottom: 20px;
     display: flex;
     gap: 10px;
-  }
-  
-  button {
+}
+
+button {
     padding: 10px 15px;
     background: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background: #45a049;
-  }
-  
-  th, td {
+}
+
+th,
+td {
     padding: 10px;
     text-align: center;
     border: 1px solid #ccc;
-  }
-  
-  input[type="text"] {
+}
+
+input[type="text"] {
     width: 100px;
     padding: 5px;
     text-align: center;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     table {
-      font-size: 12px;
+        font-size: 12px;
     }
-  }
+}

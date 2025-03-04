@@ -1,40 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/dailypayments.css">
-    <script src="../JS/dailypayments.js"></script>
-    <title>Daily Payments</title>
+
+
 </head>
+
 <body>
-    <div class="daily-payments">
-        <h2>Daily Payments</h2>
-        <div class="batch-selection">
-          <label for="batch">Select Batch:</label>
-          <select id="batch" onchange="getDetails()">
-            <option value="">Select Batch</option>
-          </select>
-          <button onclick="getDetails()">Get Details</button>
+
+    <!-- Header -->
+    <header class="header">
+        <img src="../img/Medhalogo.png" alt="Medhalogo" width="175">
+        <span class="menu-icon material-icons">menu</span>
+        <div class="profile-icon">
+            <span class="material-icons">account_circle</span>
+            <div class="profile-dropdown">
+                <a href="#"><span class="material-icons">account_circle</span> Profile</a>
+                <a href="#"><span class="material-icons">settings</span> Settings</a>
+                <a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
+            </div>
         </div>
-      
-        <table>
-          <thead>
-            <tr>
-              <th>Student ID</th>
-              <th>Batch Code</th>
-              <th>Course</th>
-              <th>Name</th>
-              <th>Mobile Number</th>
-              <th>Course Fee</th>
-              <th>Discount Applied</th>
-              <th>Total Fee</th>
-              <th>Total Due</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="studentTableBody"></tbody>
-        </table>
-      </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <a href="Dashboard.html"><span class="material-icons">dashboard</span> Home</a>
+
+        <div class="dropdown-menu students-menu">
+            <a><span class="material-icons">person</span> Students</a>
+            <span class="material-icons toggle-icon students-toggle">expand_more</span>
+        </div>
+        <div class="submenu students-submenu">
+            <a href="studentform.html"><span class="material-icons">group_add</span> Add Student</a>
+            <a href="#"><span class="material-icons">visibility</span> View Students</a>
+        </div>
+
+        <div class="dropdown-menu Batches-menu">
+            <a><span class="material-icons">group</span> Batches</a>
+            <span class="material-icons toggle-icon Batches-toggle">expand_more</span>
+        </div>
+        <div class="submenu Batches-submenu">
+            <a href="addbatch.html"><span class="material-icons"><span class="material-symbols-outlined">
+                        how_to_reg
+                    </span></span> Add Batches</a>
+            <a href="#"><span class="material-icons">visibility</span> View Batches</a>
+        </div>
+
+        <div class="dropdown-menu trainers-menu">
+            <a><span class="material-icons">group</span> Trainers</a>
+            <span class="material-icons toggle-icon trainers-toggle">expand_more</span>
+        </div>
+        <div class="submenu trainers-submenu">
+            <a href="addtrainer.html"><span class="material-icons"><span class="material-symbols-outlined">
+                        person_add
+                    </span></span> Add Trainer</a>
+            <a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+        </div>
+
+        <div class="dropdown-menu FInance-menu">
+            <a><span class="material-icons">stacked_line_chart</span> FInance</a>
+            <span class="material-icons toggle-icon FInance-toggle">expand_more</span>
+        </div>
+        <div class="submenu FInance-submenu">
+            <a href="dailypayments.html"><span class="material-icons"><span class="material-symbols-outlined">
+                        payments
+                    </span></span> Batch Payments</a>
+            <a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+        </div>
+
+        <a href="#"><span class="material-icons">analytics</span> Analytics</a>
+        <a href="#"><span class="material-icons">notifications</span> Notifications</a>
+        <a href="#"><span class="material-icons">settings</span> Settings</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="daily-payments">
+            <h2>Daily Payments</h2>
+            <div class="batch-selection">
+                <label for="batch">Select Batch:</label>
+                <select id="batch" onchange="getDetails()">
+                    <option value="">Select Batch</option>
+                </select>
+                <button onclick="getDetails()">Get Details</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Batch Code</th>
+                        <th>Course</th>
+                        <th>Name</th>
+                        <th>Mobile Number</th>
+                        <th>Course Fee</th>
+                        <th>Discount Applied</th>
+                        <th>Total Fee</th>
+                        <th>Total Due</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Styling -->
+
+    <script src="../JS/dailypayments.js"></script>
+
 </body>
+
 </html>

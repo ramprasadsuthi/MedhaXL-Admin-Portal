@@ -22,6 +22,8 @@ function toggleDropdown(menuSelector, submenuSelector, iconSelector) {
 toggleDropdown('.students-menu', '.students-submenu', '.students-toggle');
 toggleDropdown('.Batches-menu', '.Batches-submenu', '.Batches-toggle');
 toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
+toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');
+
 
 // Search to redirect the page
 function redirectToSearch() {
