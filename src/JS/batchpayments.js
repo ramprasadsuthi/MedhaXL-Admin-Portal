@@ -65,32 +65,38 @@ async function getDetails() {
           <td>${student.MobileNumber}</td>
           <td>${student.CourseFee}</td>
           <td>${student.DiscountAppiled}</td>
-          <td><input type="text" value="${student.TotalFee}" onchange="updateTotalDue(this, ${student.CourseFee}, ${student.DiscountApplied}, ${student.StudentID})"></td>
+          <td id="totalFee-${student.StudentID}">${student.TotalFee}</td>
+          <td><input type="text" id="pay-${student.StudentID}" placeholder="Enter Amount"></td>
           <td id="due-${student.StudentID}">${student.TotalDue}</td>
-          <td><button onclick="savePayment(${student.StudentID})">Update</button></td>
-        </tr>
-      `;
+          <td><button onclick="openPopup(${student.StudentID})">Pay</button></td>
+        </tr>`;
         tableBody.innerHTML += row;
     });
 }
 
-function updateTotalDue(input, courseFee, discount, studentID) {
-    const totalFee = parseFloat(input.value);
-    const totalDue = courseFee - discount - totalFee;
-    document.getElementById(`due-${studentID}`).textContent = totalDue;
+function openPopup(studentID) {
+    const amount = document.getElementById(`pay-${studentID}`).value;
+    if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+        alert("Please enter a valid amount");
+        return;
+    }
+    const term = prompt("Enter Term:");
+    if (term) {
+        savePayment(studentID, parseFloat(amount), term);
+    }
 }
 
-async function savePayment(studentID) {
-    const totalFee = document.querySelector(`input[onchange*='${studentID}']`).value;
+async function savePayment(studentID, amount, term) {
     const response = await fetch("/savePayment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ studentID, totalFee })
+        body: JSON.stringify({ studentID, payAmount: amount, term })
     });
     const result = await response.json();
     if (result.success) {
         alert("Payment Saved Successfully!");
         getDetails();
+    } else {
+        alert(result.message);
     }
 }
-

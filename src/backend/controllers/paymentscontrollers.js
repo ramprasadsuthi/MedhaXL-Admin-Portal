@@ -34,7 +34,7 @@ const paymentscontrollers = {
 
     //**update only the total fee in the batch payments */
     savePayment: (req, res) => {
-        const { studentID, totalFee } = req.body;
+        const { studentID, payAmount, term } = req.body;
         const getTermQuery = `SELECT IFNULL(MAX(Term), 0) AS LastTerm FROM dailytransactions WHERE StudentID = ?`;
 
         db.query(getTermQuery, [studentID], (err, termResult) => {
@@ -43,11 +43,10 @@ const paymentscontrollers = {
                 return res.status(500).json({ message: "Failed to fetch term" });
             }
             const lastTerm = termResult[0].LastTerm;
-            console.log("Last Term:", lastTerm); // Debugging log
-            const newTerm = lastTerm + 1; // Increment term correctly
+            const newTerm = term; // Selected term from popup
 
-            const updateQuery = `UPDATE student SET TotalFee = ?, TotalDue = CourseFee - DiscountAppiled - ? WHERE StudentID = ?`;
-            db.query(updateQuery, [totalFee, totalFee, studentID], (updateErr) => {
+            const updateQuery = `UPDATE student SET TotalFee = TotalFee + ?, TotalDue = CourseFee - DiscountAppiled - (TotalFee + ?) WHERE StudentID = ?`;
+            db.query(updateQuery, [payAmount, payAmount, studentID], (updateErr) => {
                 if (updateErr) {
                     console.error("Error updating student:", updateErr);
                     return res.status(500).json({ message: "Failed to update payment" });
@@ -57,7 +56,7 @@ const paymentscontrollers = {
                                                SELECT StudentID, BatchCode, Course, CONCAT(FirstName, ' ', LastName), MobileNumber, ?, ?, CURDATE() 
                                                FROM student WHERE StudentID = ?`;
 
-                db.query(insertTransactionQuery, [totalFee, newTerm, studentID], (insertErr) => {
+                db.query(insertTransactionQuery, [payAmount, newTerm, studentID], (insertErr) => {
                     if (insertErr) {
                         console.error("Error inserting transaction:", insertErr);
                         return res.status(500).json({ message: "Failed to store transaction" });
@@ -66,7 +65,9 @@ const paymentscontrollers = {
                 });
             });
         });
-    },
+    }
+
+
 
 };
 
