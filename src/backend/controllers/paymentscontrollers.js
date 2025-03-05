@@ -23,6 +23,22 @@ const paymentscontrollers = {
     },
 
 
+    //**pop oof the view the term amoutn and date */
+    getTerms: (req, res) => {
+        const { studentID } = req.query;
+        const getTermsQuery = `SELECT Term, AmountPaid, PaidDate FROM dailytransactions WHERE StudentID = ? ORDER BY Term`;
+    
+        db.query(getTermsQuery, [studentID], (err, result) => {
+            if (err) {
+                console.error("Error fetching terms:", err);
+                return res.status(500).json({ message: "Failed to fetch terms" });
+            }
+            res.json(result);
+        });
+    },
+    
+
+
     //**view the data for teh payments by the batchcode */
     Studentspayment: (req, res) => {
         const { batchID } = req.query;
@@ -68,7 +84,8 @@ const paymentscontrollers = {
             });
         });
     },
-    
+
+    //**throw error same term num */
     checkTermExists: (req, res) => {
         const { studentID, term } = req.query;
         const query = `SELECT * FROM dailytransactions WHERE StudentID = ? AND Term = ?`;

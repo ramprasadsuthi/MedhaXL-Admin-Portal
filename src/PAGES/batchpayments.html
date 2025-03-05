@@ -105,6 +105,7 @@
                         <th>Pay</th>
                         <th>Total Due</th>
                         <th>Action</th>
+                        <th>Get Terms</th>
                     </tr>
                 </thead>
                 <tbody id="studentTableBody"></tbody>
@@ -113,7 +114,23 @@
     </main>
 
     <!-- Modal Styling -->
-
+    <!-- Modal to Display Transaction Data -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Transaction Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>Amount Paid</th>
+                        <th>Paid Date</th>
+                    </tr>
+                </thead>
+                <tbody id="termsTableBody"></tbody>
+            </table>
+        </div>
+    </div>
     <script src="../JS/batchpayments.js"></script>
 
 </body>

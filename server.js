@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-
 // Import controllers
 const authController = require('./src/backend/controllers/authController');
 const studentController = require('./src/backend/controllers/studentController');
@@ -11,7 +10,6 @@ const coursecontrollers = require("./src/backend/controllers/coursecontrollers")
 const batchControllers = require("./src/backend/controllers/batchController");
 const trainerController = require("./src/backend/controllers/trainerController");
 const paymentscontrollers = require("./src/backend/controllers/paymentscontrollers");
-
 // Import auth middleware
 const { verifyToken } = require('./src/backend/middleware/authMiddleware');
 const { get } = require('http');
@@ -25,23 +23,18 @@ app.use(bodyParser.json());
 
 console.log('Connected to MySQL Database.');
 
+
+
 // Enquiry routes
 app.post('/EnquiryForm', enquiryController.submitEnquiry);
 app.get('/total-enquiries', enquiryController.getTotalEnquiries);
 app.get('/latest-enquiries', enquiryController.getLatestEnquiries);
 // Course routes dor add batch also 
 app.get('/courses', coursecontrollers.getCourses);
-
 // Trainer routes
 app.post('/trainers', trainerController.addTrainer);
-
 // Auth routes
 app.post('/loginpage', authController.login);
-
-// Protected route
-app.get('/protected', verifyToken, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'Dashboard.html'));
-});
 // Student routes
 app.post('/register', studentController.registerStudent);
 app.get('/students', studentController.getStudents);
@@ -80,14 +73,27 @@ app.get('/batches', batchControllers.getbatches);
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
 //**can up date the total batch fee to this api */
 app.get("/getBatches", batchControllers.getBatchesdata);
+//**disply teh data */
 app.get("/getStudentsdata", paymentscontrollers.Studentspayment);
+//**to done successfully teh payment */
 app.post("/savePayment", paymentscontrollers.savePayment);
-
-
 //**get the /dailytransactions to view the data enetry */
 app.get("/dailytransactions", paymentscontrollers.getDailyTransactions);
+//**error check */
 app.get("/checkTermExists", paymentscontrollers.checkTermExists);
+//**get the pop up of the term date and amout */
+app.get("/getTerms", paymentscontrollers.getTerms);
 
+
+
+
+
+
+
+// Protected route
+app.get('/protected', verifyToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'Dashboard.html'));
+});
 // Static file serving
 app.use(express.static(path.join(__dirname, 'src/')));
 app.use(express.static(path.join(__dirname, 'src/PAGES')));

@@ -25,6 +25,9 @@ toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
 toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');
 //**endn the side bat and navbar actions */
 
+//**apis starts */
+
+//**get the batch code */
 document.addEventListener("DOMContentLoaded", () => {
     fetchBatches();
 });
@@ -40,7 +43,7 @@ async function fetchBatches() {
         select.appendChild(option);
     });
 }
-
+//**html actions */
 async function getDetails() {
     const batchID = document.getElementById("batch").value;
     if (!batchID) return;
@@ -69,11 +72,52 @@ async function getDetails() {
           <td><input type="text" id="pay-${student.StudentID}" placeholder="Enter Amount"></td>
           <td id="due-${student.StudentID}">${student.TotalDue}</td>
           <td><button onclick="openPopup(${student.StudentID})">Pay</button></td>
+           <td>
+            <button onclick="getTerms(${student.StudentID})">View</button>
+          </td>
         </tr>`;
         tableBody.innerHTML += row;
     });
 }
 
+//**pop the student termm data */
+async function getTerms(studentID) {
+    const response = await fetch(`/getTerms?studentID=${studentID}`);
+    const terms = await response.json();
+    const modalBody = document.getElementById("termsTableBody");
+    modalBody.innerHTML = "";
+
+    if (terms.length === 0) {
+        alert("No transactions found for this student.");
+        return;
+    }
+
+    terms.forEach(term => {
+        const row = `
+        <tr>
+          <td>${term.Term}</td>
+          <td>${term.AmountPaid}</td>
+          <td>${term.PaidDate}</td>
+        </tr>`;
+        modalBody.innerHTML += row;
+    });
+
+    document.getElementById("termsModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("termsModal").style.display = "none";
+}
+// Close Modal by Clicking Outside
+window.onclick = function (event) {
+    const vmodal = document.getElementById("termsModal");
+    if (event.target == vmodal) {
+        vmodal.style.display = "none";
+    }
+}
+
+
+//**pop for enter term */
 function openPopup(studentID) {
     const amount = document.getElementById(`pay-${studentID}`).value;
     if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
@@ -85,6 +129,7 @@ function openPopup(studentID) {
         savePayment(studentID, parseFloat(amount), term);
     }
 }
+//**throw errooe for the alredy extist term */
 async function checkTermExists(studentID, term, amount) {
     const response = await fetch(`/checkTermExists?studentID=${studentID}&term=${term}`);
     const result = await response.json();
@@ -94,7 +139,7 @@ async function checkTermExists(studentID, term, amount) {
         savePayment(studentID, parseFloat(amount), term);
     }
 }
-
+//**payment done successfully */
 async function savePayment(studentID, amount, term) {
     const response = await fetch("/savePayment", {
         method: "POST",
