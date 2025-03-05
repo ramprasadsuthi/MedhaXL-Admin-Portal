@@ -93,3 +93,4 @@ async function savePayment(studentID) {
         getDetails();
     }
 }
+

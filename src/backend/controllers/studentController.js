@@ -19,7 +19,24 @@ const studentController = {
                 return res.status(500).json({ success: false, message: 'Error storing data: ' + err.message });
             }
             console.log('Data inserted successfully:', result);
-            res.json({ success: true, message: 'Student Registration successful!' });
+
+            const studentID = result.insertId;
+            const paidDate = new Date();
+            const term = 1;
+            const amountPaid = totalfee;
+            const name = `${candidateName} ${surname}`;
+
+            const dailySql = `INSERT INTO dailytransactions (StudentID, BatchCode, Course, Name, MobileNumber, AmountPaid, Term, PaidDate) 
+                              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+            db.query(dailySql, [studentID, batchCode, course, name, mobile, amountPaid, term, paidDate], (dailyErr, dailyResult) => {
+                if (dailyErr) {
+                    console.error('Error inserting into dailytransactions:', dailyErr);
+                    return res.status(500).json({ success: false, message: 'Error storing daily transaction: ' + dailyErr.message });
+                }
+                console.log('Daily transaction inserted successfully:', dailyResult);
+                res.json({ success: true, message: 'Student Registration successful!' });
+            });
         });
     },
 
@@ -232,23 +249,7 @@ const studentController = {
         });
     },
 
-    //**view the data for teh payments by the batchcode */
-    Studentspayment: (req, res) => {
-        const { batchID } = req.query;
-        db.query("SELECT * FROM student WHERE BatchCode = ?", [batchID], (err, result) => {
-            if (err) throw err;
-            res.json(result);
-        });
-    },
-
-    //**update only the total fee in the batch payments */
-    savePayment: (req, res) => {
-        const { studentID, totalFee } = req.body;
-        db.query("UPDATE student SET TotalFee = ?, TotalDue = CourseFee - DiscountAppiled - ? WHERE StudentID = ?", [totalFee, totalFee, studentID], (err) => {
-            if (err) throw err;
-            res.json({ success: true });
-        });
-    },
+    
 
 
     getStudentsByBatch: (req, res) => {
@@ -264,6 +265,10 @@ const studentController = {
             }
         });
     },
+
+
+
+
 
 };
 module.exports = studentController;

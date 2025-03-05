@@ -7,7 +7,7 @@
     <title>Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/addtrainer.css">
+    <link rel="stylesheet" href="../CSS/dailytransactions.css">
     <script src="../backend/middleware/tokenvalidity.js"></script>
 
 </head>
@@ -16,7 +16,7 @@
 
     <!-- Header -->
     <header class="header">
-        <div class="logo">Admin Dashboard</div>
+        <img src="../img/Medhalogo.png" alt="Medhalogo" width="175">
         <span class="menu-icon material-icons">menu</span>
         <div class="profile-icon">
             <span class="material-icons">account_circle</span>
@@ -37,7 +37,7 @@
             <span class="material-icons toggle-icon students-toggle">expand_more</span>
         </div>
         <div class="submenu students-submenu">
-            <a href="studentform.html"><span class="material-icons">add</span> Add Student</a>
+            <a href="studentform.html"><span class="material-icons">group_add</span> Add Student</a>
             <a href="viewstudent.html"><span class="material-icons">visibility</span> View Students</a>
         </div>
 
@@ -47,7 +47,7 @@
         </div>
         <div class="submenu Batches-submenu">
             <a href="addbatch.html"><span class="material-icons"><span class="material-symbols-outlined">
-                        person_add
+                        how_to_reg
                     </span></span> Add Batches</a>
             <a href="#"><span class="material-icons">visibility</span> View Batches</a>
         </div>
@@ -57,7 +57,9 @@
             <span class="material-icons toggle-icon trainers-toggle">expand_more</span>
         </div>
         <div class="submenu trainers-submenu">
-            <a href="addtrainer.html"><span class="material-icons">add</span> Add Trainer</a>
+            <a href="addtrainer.html"><span class="material-icons"><span class="material-symbols-outlined">
+                        person_add
+                    </span></span> Add Trainer</a>
             <a href="#"><span class="material-icons">visibility</span> View Trainers</a>
         </div>
 
@@ -79,51 +81,35 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="container">
-            <h1>Add Trainer</h1>
-            <form id="trainerForm">
-                <div class="form-group">
-                    <label for="trainerId">Trainer ID</label>
-                    <input type="text" id="trainerId" name="trainerId" placeholder="Enter Trainer ID (e.g., T001)"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="trainerName">Trainer Name</label>
-                    <input type="text" id="trainerName" name="trainerName" placeholder="Enter Trainer Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" maxlength="10" placeholder="Enter Phone Number" required>
-                </div>
-                <div class="form-group">
-                    <label for="skill1">Primary Skill</label>
-                    <input type="text" id="skill1" name="skill1" placeholder="Enter Primary Skill" required>
-                </div>
-                <div class="form-group">
-                    <label for="skill2">Secondary Skill (Optional)</label>
-                    <input type="text" id="skill2" name="skill2" placeholder="Enter Secondary Skill">
-                </div>
-                <div class="form-group">
-                    <label for="skill3">Additional Skill (Optional)</label>
-                    <input type="text" id="skill3" name="skill3" placeholder="Enter Additional Skill">
-                </div>
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select id="status" name="status" required>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
-                </div>
-                <div class="button-group">
-                    <button type="submit">Add Trainer</button>
-                    <button type="reset">Cancel</button>
-                </div>
-            </form>
+        <h1>Daily Transactions</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>TRANSACTION ID</th>
+                    <th>STUDENT ID</th>
+                    <th>BATCH ID</th>
+                    <th>COURSSE</th>
+                    <th>FULL NAME</th>
+                    <th>PHONE</th>
+                    <th>AMOUNT PAID</th>
+                    <th>TERM</th>
+                    <th>DATE(PAID)</th>
+                </tr>
+            </thead>
+            <tbody id="transactionTable">
+            </tbody>
+        </table>
+        <div class="btn">
+            <button onclick="fetchTransactions('prev')">Previous</button>
+            <button onclick="fetchTransactions('next')">Next</button>
+
         </div>
+
     </main>
 
+    <!-- Modal Styling -->
 
-    <script src="../JS/addtrainer.js"></script>
+    <script src="../JS/dailytransactions.js"></script>
 
 </body>
 

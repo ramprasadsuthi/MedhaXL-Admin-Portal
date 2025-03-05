@@ -10,6 +10,7 @@ const enquiryController = require('./src/backend/controllers/enquiryController')
 const coursecontrollers = require("./src/backend/controllers/coursecontrollers");
 const batchControllers = require("./src/backend/controllers/batchController");
 const trainerController = require("./src/backend/controllers/trainerController");
+const paymentscontrollers = require("./src/backend/controllers/paymentscontrollers");
 
 // Import auth middleware
 const { verifyToken } = require('./src/backend/middleware/authMiddleware');
@@ -77,11 +78,14 @@ app.post("/addBatch", batchControllers.addBatch);
 app.get('/batches', batchControllers.getbatches);
 //**disly the datata to view the fee pending */
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
-//**can up date the total bfee thoor this api */
+//**can up date the total batch fee to this api */
 app.get("/getBatches", batchControllers.getBatchesdata);
-app.get("/getStudentsdata", studentController.Studentspayment);
-app.post("/savePayment", studentController.savePayment);
+app.get("/getStudentsdata", paymentscontrollers.Studentspayment);
+app.post("/savePayment", paymentscontrollers.savePayment);
 
+
+//**get the /dailytransactions to view the data enetry */
+app.get("/dailytransactions", paymentscontrollers.getDailyTransactions);
 
 
 // Static file serving
