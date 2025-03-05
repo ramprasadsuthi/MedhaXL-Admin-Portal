@@ -85,6 +85,15 @@ function openPopup(studentID) {
         savePayment(studentID, parseFloat(amount), term);
     }
 }
+async function checkTermExists(studentID, term, amount) {
+    const response = await fetch(`/checkTermExists?studentID=${studentID}&term=${term}`);
+    const result = await response.json();
+    if (result.exists) {
+        alert("Term already exists for this student!");
+    } else {
+        savePayment(studentID, parseFloat(amount), term);
+    }
+}
 
 async function savePayment(studentID, amount, term) {
     const response = await fetch("/savePayment", {

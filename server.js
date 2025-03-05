@@ -86,7 +86,7 @@ app.post("/savePayment", paymentscontrollers.savePayment);
 
 //**get the /dailytransactions to view the data enetry */
 app.get("/dailytransactions", paymentscontrollers.getDailyTransactions);
-
+app.get("/checkTermExists", paymentscontrollers.checkTermExists);
 
 // Static file serving
 app.use(express.static(path.join(__dirname, 'src/')));

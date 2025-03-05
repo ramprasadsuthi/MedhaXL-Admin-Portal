@@ -35,28 +35,30 @@ const paymentscontrollers = {
     //**update only the total fee in the batch payments */
     savePayment: (req, res) => {
         const { studentID, payAmount, term } = req.body;
-        const getTermQuery = `SELECT IFNULL(MAX(Term), 0) AS LastTerm FROM dailytransactions WHERE StudentID = ?`;
-
-        db.query(getTermQuery, [studentID], (err, termResult) => {
-            if (err) {
-                console.error("Error fetching last term:", err);
-                return res.status(500).json({ message: "Failed to fetch term" });
+        const checkTermQuery = `SELECT * FROM dailytransactions WHERE StudentID = ? AND Term = ?`;
+    
+        db.query(checkTermQuery, [studentID, term], (termErr, termResult) => {
+            if (termErr) {
+                console.error("Error checking term existence:", termErr);
+                return res.status(500).json({ message: "Failed to check term existence" });
             }
-            const lastTerm = termResult[0].LastTerm;
-            const newTerm = term; // Selected term from popup
-
-            const updateQuery = `UPDATE student SET TotalFee = TotalFee + ?, TotalDue = CourseFee - DiscountAppiled - (TotalFee + ?) WHERE StudentID = ?`;
-            db.query(updateQuery, [payAmount, payAmount, studentID], (updateErr) => {
+    
+            if (termResult.length > 0) {
+                return res.status(400).json({ message: "Term already exists for this student" });
+            }
+    
+            const updateQuery = `UPDATE student SET TotalFee = TotalFee + ?, TotalDue = CourseFee - DiscountAppiled - TotalFee WHERE StudentID = ?`;
+            db.query(updateQuery, [payAmount, studentID], (updateErr) => {
                 if (updateErr) {
                     console.error("Error updating student:", updateErr);
                     return res.status(500).json({ message: "Failed to update payment" });
                 }
-
+    
                 const insertTransactionQuery = `INSERT INTO dailytransactions (StudentID, BatchCode, Course, Name, MobileNumber, AmountPaid, Term, PaidDate) 
                                                SELECT StudentID, BatchCode, Course, CONCAT(FirstName, ' ', LastName), MobileNumber, ?, ?, CURDATE() 
                                                FROM student WHERE StudentID = ?`;
-
-                db.query(insertTransactionQuery, [payAmount, newTerm, studentID], (insertErr) => {
+    
+                db.query(insertTransactionQuery, [payAmount, term, studentID], (insertErr) => {
                     if (insertErr) {
                         console.error("Error inserting transaction:", insertErr);
                         return res.status(500).json({ message: "Failed to store transaction" });
@@ -65,8 +67,25 @@ const paymentscontrollers = {
                 });
             });
         });
-    }
-
+    },
+    
+    checkTermExists: (req, res) => {
+        const { studentID, term } = req.query;
+        const query = `SELECT * FROM dailytransactions WHERE StudentID = ? AND Term = ?`;
+    
+        db.query(query, [studentID, term], (err, result) => {
+            if (err) {
+                console.error("Error checking term existence:", err);
+                return res.status(500).json({ message: "Failed to check term existence" });
+            }
+            if (result.length > 0) {
+                res.json({ exists: true });
+            } else {
+                res.json({ exists: false });
+            }
+        });
+    },
+    
 
 
 };
