@@ -124,11 +124,15 @@ function openPopup(studentID) {
         alert("Please enter a valid amount");
         return;
     }
-    const term = prompt("Enter Term:");
-    if (term) {
+    const term = prompt("Enter Term (Allowed: 2, 3, 4, 5):");
+
+    if (term && (term == 2 || term == 3 || term == 4 || term == 5)) {
         savePayment(studentID, parseFloat(amount), term);
+    } else {
+        alert("Invalid Term! Only 2, 3, 4, 5 are allowed");
     }
 }
+
 //**throw errooe for the alredy extist term */
 async function checkTermExists(studentID, term, amount) {
     const response = await fetch(`/checkTermExists?studentID=${studentID}&term=${term}`);

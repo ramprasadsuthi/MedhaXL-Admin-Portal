@@ -73,6 +73,8 @@ app.get('/batches', batchControllers.getbatches);
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
 //**can up date the total batch fee to this api */
 app.get("/getBatches", batchControllers.getBatchesdata);
+//**set inactive batch status */
+app.post("/updateBatchStatus", batchControllers.updateBatchStatus);
 //**disply teh data */
 app.get("/getStudentsdata", paymentscontrollers.Studentspayment);
 //**to done successfully teh payment */

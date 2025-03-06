@@ -42,6 +42,23 @@ const batchControllers = {
         });
     },
 
+    //**update the status of teh batch */
+    updateBatchStatus: (req, res) => {
+        const { BatchID, Status } = req.body;
+
+        const query = `UPDATE batches SET status = ? WHERE batchid = ?`;
+
+        db.query(query, [Status, BatchID], (err, result) => {
+            if (err) {
+                console.error("Database Error:", err);
+                res.status(500).json({ message: "Failed to Update Batch Status" });
+            } else {
+                res.status(200).json({ message: "Batch Status Updated Successfully" });
+            }
+        });
+    },
+
+
 
     //** get the active courses pop up */
     getActiveCourses: (req, res) => {

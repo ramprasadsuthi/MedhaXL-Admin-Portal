@@ -45,10 +45,17 @@ document.addEventListener("DOMContentLoaded", function () {
 //**add batches */
 async function addBatch() {
     const batchID = document.getElementById("BatchID").value;
-    const courseName = document.getElementById("courseDropdown").value;
+    const courseName = document.getElementById("course").value;
     const duration = document.getElementById("Duration").value;
     const trainer = document.getElementById("Trainer").value;
     const status = document.getElementById("Status").value;
+
+    if (!courseName) {
+        document.getElementById("courseError").innerText = "Please select a course";
+        return false;
+    } else {
+        document.getElementById("courseError").innerText = "";
+    }
 
     const batch = {
         BatchID: batchID,
@@ -75,6 +82,7 @@ async function addBatch() {
         }
     } catch (error) {
         console.error("Error adding batch:", error);
+        alert("Something went wrong!");
     }
     return false;
 }

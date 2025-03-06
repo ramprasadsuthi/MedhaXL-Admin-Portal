@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/updateBatchStatus.css">
+    <script src="../JS/updateBatchStatus.js"></script>
+    <title>updateBatchStatus</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Update Batch Status</h1>
+        <form onsubmit="return updateBatchStatus()">
+            <label for="batchCode">Select Batch Code*</label>
+            <select id="batchCode" name="batchCode" required>
+                <option value="">Select Batch</option>
+            </select>
+            <span class="error" id="batchCodeError"></span>
+
+            <label>Status</label>
+            <select id="Status" required>
+                <option value="">Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+
+            <button type="submit">Update Status</button>
+        </form>
+    </div>
+</body>
+
+</html>
