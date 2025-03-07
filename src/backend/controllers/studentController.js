@@ -249,8 +249,6 @@ const studentController = {
         });
     },
 
-
-
     getStudentsByBatch: (req, res) => {
         const { batchCode } = req.params;
         const query = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue FROM student WHERE BatchCode = ?`;
@@ -264,10 +262,6 @@ const studentController = {
             }
         });
     },
-
-
-
-
 
 };
 module.exports = studentController;

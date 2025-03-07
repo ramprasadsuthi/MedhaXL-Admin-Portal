@@ -102,7 +102,7 @@ async function saveRow(button, Id) {
 		});
 
 		if (response.ok) {
-			alert("Changes Done Successfully!");
+			alert("Updates Done Successfully!");
 			cells.forEach((cell) => {
 				cell.contentEditable = "false";
 				cell.style.backgroundColor = "";

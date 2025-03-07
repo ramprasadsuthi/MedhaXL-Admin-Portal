@@ -60,11 +60,22 @@ async function updateBatchStatus() {
     return false;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    fetch("/batches") // API call to backend
+function loadBatches() {
+    const isActive = document.getElementById("activeStatus").checked;
+    const isInactive = document.getElementById("inactiveStatus").checked;
+    let endpoint = "/batches";
+
+    if (isActive && !isInactive) {
+        endpoint = "/batches?status=Active";
+    } else if (isInactive && !isActive) {
+        endpoint = "/batches?status=Inactive";
+    }
+
+    fetch(endpoint)
         .then(response => response.json())
         .then(data => {
             const batchDropdown = document.getElementById("batchCode");
+            batchDropdown.innerHTML = '<option value="">Select Batch</option>';
             data.forEach(batch => {
                 let option = document.createElement("option");
                 option.value = batch.batchid;
@@ -73,4 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => console.error("Error fetching batches:", error));
-});
+}
+
+document.addEventListener("DOMContentLoaded", loadBatches);

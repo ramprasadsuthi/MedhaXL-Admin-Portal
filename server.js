@@ -71,6 +71,7 @@ app.put("/update/:id", studentController.updateStudent);
 app.post("/addBatch", batchControllers.addBatch);
 // Batch routes disply only teh batches if from the batches table
 app.get('/batches', batchControllers.getbatches);
+app.get("/batchecode", batchControllers.Batcheactive);
 //**disly the datata to view the fee pending */
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
 //**can up date the total batch fee to this api */
@@ -90,6 +91,8 @@ app.get("/getTerms", paymentscontrollers.getTerms);
 
 app.post("/upload", certificateController.uploadCertificate); // Route for uploading certificates
 app.get("/certificate/:id", certificateController.getCertificate); // Route for retrieving certificates by Student ID
+
+
 
 
 

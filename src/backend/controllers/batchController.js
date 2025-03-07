@@ -3,7 +3,23 @@ const db = require('../config/database');
 
 const batchControllers = {
     getbatches: (req, res) => {
-        const sql = "SELECT batchid FROM batches";
+        const status = req.query.status;
+        let sql = "SELECT batchid FROM batches";
+        if (status) {
+            sql += " WHERE status = ?";
+        }
+        db.query(sql, status ? [status] : [], (err, result) => {
+            if (err) {
+                console.error("Error fetching batches:", err);
+                res.status(500).json({ error: "Database error" });
+            } else {
+                res.json(result);
+            }
+        });
+    },
+
+    Batcheactive: (req, res) => {
+        const sql = "SELECT batchid FROM batches WHERE Status = 'Active'";
         db.query(sql, (err, result) => {
             if (err) {
                 console.error("Error fetching batches:", err);
@@ -13,6 +29,8 @@ const batchControllers = {
             }
         });
     },
+
+
     //**active courses count */
     Activecount: (req, res) => {
         const query = "SELECT COUNT(*) AS activeCourses FROM batches WHERE status = 'Active'";

@@ -413,10 +413,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // get the batch id = batch code which is the diplay from the batches table
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("/batches") // API call to backend
+    fetch("/batchecode?status=Active") // Fetch only Active batches from backend
         .then(response => response.json())
         .then(data => {
             const batchDropdown = document.getElementById("batchCode");
+            batchDropdown.innerHTML = '<option value="">Select Batch</option>'; // Default Option
+
             data.forEach(batch => {
                 let option = document.createElement("option");
                 option.value = batch.batchid;
@@ -426,6 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Error fetching batches:", error));
 });
+
 
 //**cal of the Fee Section */
 
