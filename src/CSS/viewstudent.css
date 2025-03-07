@@ -74,7 +74,7 @@
        left: 0;
        padding-top: 70px;
        transition: 0.3s;
-       overflow: auto;
+       overflow-y: scroll;
    }
 
    .sidebar a {

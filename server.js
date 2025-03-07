@@ -10,6 +10,8 @@ const coursecontrollers = require("./src/backend/controllers/coursecontrollers")
 const batchControllers = require("./src/backend/controllers/batchController");
 const trainerController = require("./src/backend/controllers/trainerController");
 const paymentscontrollers = require("./src/backend/controllers/paymentscontrollers");
+const certificateController = require("./src/backend/controllers/certificateController");
+
 // Import auth middleware
 const { verifyToken } = require('./src/backend/middleware/authMiddleware');
 const { get } = require('http');
@@ -85,6 +87,8 @@ app.get("/dailytransactions", paymentscontrollers.getDailyTransactions);
 app.get("/checkTermExists", paymentscontrollers.checkTermExists);
 //**get the pop up of the term date and amout */
 app.get("/getTerms", paymentscontrollers.getTerms);
+
+app.post("/upload", certificateController.uploadCertificate);
 
 
 

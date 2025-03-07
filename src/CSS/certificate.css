@@ -1,0 +1,89 @@
+/* certificate.css */
+
+
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input[type="text"],
+input[type="file"] {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: #f0f0f0;
+    transition: background 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="file"]:hover {
+    background: #e0e0e0;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    background: #2980b9;
+    color: white;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(41, 128, 185, 0.4);
+}
+
+button:hover {
+    background: #1b6fa8;
+    box-shadow: 0 10px 20px rgba(41, 128, 185, 0.6);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        width: 90%;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    button {
+        padding: 10px;
+    }
+}
