@@ -1,67 +1,78 @@
-/* certificate.css */
-
-
-
-.container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 500px;
-    transition: transform 0.3s ease-in-out;
-    animation: fadeIn 1s ease-in-out;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container:hover {
-    transform: scale(1.02);
+html,
+body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+}
+
+.container {
+    width: 400px;
+    padding: 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+    color: #fff;
 }
 
 h1 {
+    font-size: 28px;
     margin-bottom: 20px;
-    color: #333;
-    font-size: 2rem;
-    text-transform: uppercase;
     letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #ffffff;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-input[type="text"],
-input[type="file"] {
-    padding: 12px;
+form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
     border: none;
-    border-radius: 8px;
     outline: none;
-    background: #f0f0f0;
-    transition: background 0.3s;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transition: background 0.3s ease-in-out;
 }
 
-input[type="text"]:focus,
-input[type="file"]:hover {
-    background: #e0e0e0;
+form input::placeholder {
+    color: #e0e0e0;
+}
+
+form input:hover,
+form input:focus {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 button {
+    width: 100%;
     padding: 12px;
     border: none;
-    background: #2980b9;
-    color: white;
     border-radius: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    background: #4ca1af;
+    color: #ffffff;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    box-shadow: 0 5px 15px rgba(41, 128, 185, 0.4);
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    transition: background 0.3s ease;
 }
 
 button:hover {
-    background: #1b6fa8;
-    box-shadow: 0 10px 20px rgba(41, 128, 185, 0.6);
+    background: #2c3e50;
 }
 
 @keyframes fadeIn {
@@ -69,21 +80,16 @@ button:hover {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container {
-        padding: 20px;
         width: 90%;
-    }
-    h1 {
-        font-size: 1.5rem;
-    }
-    button {
-        padding: 10px;
+        padding: 20px;
     }
 }
