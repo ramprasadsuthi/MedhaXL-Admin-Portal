@@ -88,7 +88,9 @@ app.get("/checkTermExists", paymentscontrollers.checkTermExists);
 //**get the pop up of the term date and amout */
 app.get("/getTerms", paymentscontrollers.getTerms);
 
-app.post("/upload", certificateController.uploadCertificate);
+app.post("/upload", certificateController.uploadCertificate); // Route for uploading certificates
+app.get("/certificate/:id", certificateController.getCertificate); // Route for retrieving certificates by Student ID
+
 
 
 
@@ -101,8 +103,8 @@ app.get('/protected', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'Dashboard.html'));
 });
 // Static file serving
-app.use(express.static(path.join(__dirname, 'src/')));
-app.use(express.static(path.join(__dirname, 'src/PAGES')));
+app.use(express.static(path.join(__dirname, 'src'))); // Serve all static files from the src directory
+
 
 // Start server
 app.listen(PORT, () => {
