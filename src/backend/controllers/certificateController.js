@@ -22,12 +22,14 @@ const certificateController = {
                         console.log("Database Error:", err);
                         res.status(500).send("Failed to Upload Certificate");
                     } else {
+                        console.log("Certificate Uploaded Successfully");
                         res.status(200).send("Certificate Uploaded Successfully");
                     }
                 });
             }
         });
-    }
+    },
+
 };
 
 module.exports = certificateController;
