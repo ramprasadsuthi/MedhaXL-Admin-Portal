@@ -94,10 +94,6 @@ app.get("/certificate/:id", certificateController.getCertificate); // Route for 
 
 
 
-
-
-
-
 // Protected route
 app.get('/protected', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'Dashboard.html'));

@@ -222,8 +222,8 @@ const studentController = {
 
         const sql = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, EmailID 
                      FROM student
-                     WHERE FirstName LIKE ? OR LastName LIKE ? OR MobileNumber LIKE ?`;
-        const values = [`%${query}%`, `%${query}%`, `%${query}%`];
+                     WHERE BatchCode LIKE ? OR FirstName LIKE ? OR LastName LIKE ? OR MobileNumber LIKE ?`;
+        const values = [`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`];
 
         db.query(sql, values, (err, results) => {
             if (err) {
@@ -236,10 +236,10 @@ const studentController = {
 
     updateStudent: (req, res) => {
         const id = req.params.id;
-        const { FirstName, LastName, MobileNumber, EmailID, Course } = req.body;
+        const { StudentID, BatchCode, FirstName, LastName, MobileNumber, EmailID, Course } = req.body;
 
-        const sql = `UPDATE student SET FirstName=?, LastName=?, MobileNumber=?, EmailID=?, Course=? WHERE StudentID=?`;
-        db.query(sql, [FirstName, LastName, MobileNumber, EmailID, Course, id], (err) => {
+        const sql = `UPDATE student SET StudentID=?, BatchCode=?, FirstName=?, LastName=?, MobileNumber=?, EmailID=?, Course=? WHERE StudentID=?`;
+        db.query(sql, [StudentID, BatchCode, FirstName, LastName, MobileNumber, EmailID, Course, id], (err) => {
             if (err) {
                 console.error(err);
                 res.status(500).json({ error: "Update failed" });
@@ -249,7 +249,6 @@ const studentController = {
         });
     },
 
-    
 
 
     getStudentsByBatch: (req, res) => {

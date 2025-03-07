@@ -23,7 +23,6 @@ window.onload = async function () {
 	}
 };
 
-//**edit the student data */
 function displayStudents() {
 	const tableBody = document.getElementById("studentTableBody");
 	tableBody.innerHTML = "";
@@ -34,24 +33,39 @@ function displayStudents() {
 
 	paginatedStudents.forEach((student) => {
 		const row = `
-        <tr>
-            <td>${student.StudentID}</td>
-            <td>${student.BatchCode}</td>
-            <td contenteditable="false">${student.Course}</td>
-            <td contenteditable="false">${student.FirstName}</td>
-            <td contenteditable="false">${student.LastName}</td>
-            <td contenteditable="false">${student.MobileNumber}</td>
-            <td contenteditable="false">${student.EmailID}</td>
-            <td>
-                <button onclick="editRow(this)">Edit</button>
-                <button onclick="saveRow(this, ${student.StudentID})" style="display:none;">Submit</button>
-            </td>
-        </tr>`;
-		tableBody.innerHTML += row;
+            <tr>
+                <td contenteditable="false">${student.StudentID}</td>
+                <td contenteditable="false">${student.BatchCode}</td>
+                <td contenteditable="false">${student.Course}</td>
+                <td contenteditable="false">${student.FirstName}</td>
+                <td contenteditable="false">${student.LastName}</td>
+                <td contenteditable="false">${student.MobileNumber}</td>
+                <td contenteditable="false">${student.EmailID}</td>
+                <td>
+                    <button onclick="editRow(this)">Edit</button>
+                    <button onclick="saveRow(this, ${student.StudentID})" style="display:none;">Update</button>
+                </td>
+            </tr>`;
+
+		tableBody.insertAdjacentHTML("beforeend", row);
 	});
 
 	document.getElementById("prevBtn").disabled = currentPage === 1;
 	document.getElementById("nextBtn").disabled = endIndex >= students.length;
+}
+
+function prevPage() {
+	if (currentPage > 1) {
+		currentPage--;
+		displayStudents();
+	}
+}
+
+function nextPage() {
+	if (currentPage * studentsPerPage < students.length) {
+		currentPage++;
+		displayStudents();
+	}
 }
 
 function editRow(button) {
@@ -67,19 +81,21 @@ function editRow(button) {
 	row.querySelector("button:nth-of-type(2)").style.display = "inline";
 }
 
-async function saveRow(button, id) {
+async function saveRow(button, Id) {
 	const row = button.closest("tr");
 	const cells = row.querySelectorAll("td[contenteditable]");
 	const updatedData = {
-		Course: cells[0].innerText.trim(),
-		FirstName: cells[1].innerText.trim(),
-		LastName: cells[2].innerText.trim(),
-		MobileNumber: cells[3].innerText.trim(),
-		EmailID: cells[4].innerText.trim(),
+		StudentID: cells[0].innerText.trim(), // New StudentID
+		BatchCode: cells[1].innerText.trim(),
+		Course: cells[2].innerText.trim(),
+		FirstName: cells[3].innerText.trim(),
+		LastName: cells[4].innerText.trim(),
+		MobileNumber: cells[5].innerText.trim(),
+		EmailID: cells[6].innerText.trim(),
 	};
 
 	try {
-		const response = await fetch(`/update/${id}`, {
+		const response = await fetch(`/update/${Id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(updatedData),
@@ -101,4 +117,3 @@ async function saveRow(button, id) {
 		alert("An error occurred!");
 	}
 }
-//**!edit the sudent data */
