@@ -23,6 +23,7 @@ toggleDropdown('.students-menu', '.students-submenu', '.students-toggle');
 toggleDropdown('.Batches-menu', '.Batches-submenu', '.Batches-toggle');
 toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
 toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');
+toggleDropdown('.certificate-menu', '.certificate-submenu', '.certificate-toggle');
 //**endn the side bat and navbar actions */
 
 // text to upper case
