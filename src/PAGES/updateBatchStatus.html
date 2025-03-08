@@ -91,35 +91,33 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="wrapper">
-            <h1>Update Batch Status</h1>
-            <label>
-                <input type="checkbox" id="activeStatus" checked onclick="loadBatches()"> Active
-            </label>
-            &nbsp;
-            <label>
-                <input type="checkbox" id="inactiveStatus" onclick="loadBatches()"> Inactive
-            </label>
+        <div class="container">
+            <h1>Batch Management</h1>
 
-            <form onsubmit="return updateBatchStatus()">
-                <label for="batchCode">Select Batch Code*</label>
-                <select id="batchCode" name="batchCode" required>
-                    <option value="">Select Batch</option>
-                </select>
-                <span class="error" id="batchCodeError"></span>
+            <label for="statusFilter">Filter Batches:</label>
+            <select id="statusFilter">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="All">All</option>
+            </select>
 
-                <label>Status</label>
-                <select id="Status" required>
-                    <option value="">Select Status</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                </select>
-
-
-
-                <button type="submit">Update Status</button>
-            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Batch ID</th>
+                        <th>Course Name</th>
+                        <th>Duration</th>
+                        <th>Trainer</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="batchTableBody">
+                    <!-- Batch data will be inserted here -->
+                </tbody>
+            </table>
         </div>
+
     </main>
 
     <!-- Modal Styling -->

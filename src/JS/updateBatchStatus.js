@@ -26,65 +26,60 @@ toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');
 toggleDropdown('.certificate-menu', '.certificate-submenu', '.certificate-toggle');
 //**endn the side bat and navbar actions */
 
-async function updateBatchStatus() {
-    const batchID = document.getElementById("batchCode").value;
-    const status = document.getElementById("Status").value;
+document.addEventListener("DOMContentLoaded", function () {
+    const statusFilter = document.getElementById("statusFilter");
+    const batchTableBody = document.getElementById("batchTableBody");
 
-    if (!batchID || !status) {
-        alert("Please fill out all fields");
-        return false;
+    function fetchBatches(status) {
+        fetch(`/batches?status=${status}`)
+            .then(response => response.json())
+            .then(data => {
+                batchTableBody.innerHTML = ""; // Clear table
+                data.forEach(batch => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${batch.batchid}</td>
+                        <td>${batch.coursename}</td>
+                        <td>${batch.duration}</td>
+                        <td>${batch.trainer}</td>
+                        <td>${batch.status}</td>
+                        <td>
+                            <select class="status-dropdown" data-id="${batch.batchid}">
+                                <option value="Active" ${batch.status === "Active" ? "selected" : ""}>Active</option>
+                                <option value="Inactive" ${batch.status === "Inactive" ? "selected" : ""}>Inactive</option>
+                            </select>
+                        </td>
+                    `;
+                    batchTableBody.appendChild(row);
+                });
+
+                document.querySelectorAll(".status-dropdown").forEach(select => {
+                    select.addEventListener("change", function () {
+                        updateBatchStatus(this.dataset.id, this.value);
+                    });
+                });
+            })
+            .catch(error => console.error("Error fetching batches:", error));
     }
 
-    const batch = {
-        BatchID: batchID,
-        Status: status
-    };
-
-    try {
-        const response = await fetch("/updateBatchStatus", {
+    function updateBatchStatus(batchID, newStatus) {
+        fetch("/updateBatchStatus", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(batch)
-        });
-
-        if (response.ok) {
-            alert("Batch Status Updated Successfully!");
-            window.location.reload();
-        } else {
-            alert("Failed to Update Batch Status");
-        }
-    } catch (error) {
-        console.error("Error updating batch status:", error);
-    }
-    return false;
-}
-
-function loadBatches() {
-    const isActive = document.getElementById("activeStatus").checked;
-    const isInactive = document.getElementById("inactiveStatus").checked;
-    let endpoint = "/batches";
-
-    if (isActive && !isInactive) {
-        endpoint = "/batches?status=Active";
-    } else if (isInactive && !isActive) {
-        endpoint = "/batches?status=Inactive";
-    }
-
-    fetch(endpoint)
-        .then(response => response.json())
-        .then(data => {
-            const batchDropdown = document.getElementById("batchCode");
-            batchDropdown.innerHTML = '<option value="">Select Batch</option>';
-            data.forEach(batch => {
-                let option = document.createElement("option");
-                option.value = batch.batchid;
-                option.textContent = batch.batchid;
-                batchDropdown.appendChild(option);
-            });
+            body: JSON.stringify({ batchID, status: newStatus })
         })
-        .catch(error => console.error("Error fetching batches:", error));
-}
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchBatches(statusFilter.value);
+            })
+            .catch(error => console.error("Error updating status:", error));
+    }
 
-document.addEventListener("DOMContentLoaded", loadBatches);
+    statusFilter.addEventListener("change", () => fetchBatches(statusFilter.value));
+
+    fetchBatches("Active"); // Load active batches by default
+});
+

@@ -70,7 +70,7 @@ app.put("/update/:id", studentController.updateStudent);
 //**fetch teh api to add the active batches */
 app.post("/addBatch", batchControllers.addBatch);
 // Batch routes disply only teh batches if from the batches table
-app.get('/batches', batchControllers.getbatches);
+app.get('/batches', batchControllers.getBatches);
 app.get("/batchecode", batchControllers.Batcheactive);
 //**disly the datata to view the fee pending */
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);

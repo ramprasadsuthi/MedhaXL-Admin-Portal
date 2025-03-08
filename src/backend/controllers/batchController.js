@@ -2,22 +2,37 @@ const db = require('../config/database');
 
 
 const batchControllers = {
-    getbatches: (req, res) => {
+    getBatches: (req, res) => {
         const status = req.query.status;
-        let sql = "SELECT batchid FROM batches";
-        if (status) {
+        let sql = "SELECT batchid, coursename, duration, trainer, status FROM batches";
+
+        if (status !== "All") {
             sql += " WHERE status = ?";
         }
-        db.query(sql, status ? [status] : [], (err, result) => {
+
+        db.query(sql, status !== "All" ? [status] : [], (err, result) => {
             if (err) {
                 console.error("Error fetching batches:", err);
-                res.status(500).json({ error: "Database error" });
-            } else {
-                res.json(result);
+                return res.status(500).json({ error: "Database error" });
             }
+            res.json(result);
         });
     },
 
+    updateBatchStatus: (req, res) => {
+        const { batchID, status } = req.body;
+        const sql = "UPDATE batches SET status = ? WHERE batchid = ?";
+
+        db.query(sql, [status, batchID], (err, result) => {
+            if (err) {
+                console.error("Error updating batch status:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+            res.json({ message: "Batch status updated successfully!" });
+        });
+    },
+
+    //**for student from */
     Batcheactive: (req, res) => {
         const sql = "SELECT batchid FROM batches WHERE Status = 'Active'";
         db.query(sql, (err, result) => {
@@ -59,24 +74,6 @@ const batchControllers = {
             }
         });
     },
-
-    //**update the status of teh batch */
-    updateBatchStatus: (req, res) => {
-        const { BatchID, Status } = req.body;
-
-        const query = `UPDATE batches SET status = ? WHERE batchid = ?`;
-
-        db.query(query, [Status, BatchID], (err, result) => {
-            if (err) {
-                console.error("Database Error:", err);
-                res.status(500).json({ message: "Failed to Update Batch Status" });
-            } else {
-                res.status(200).json({ message: "Batch Status Updated Successfully" });
-            }
-        });
-    },
-
-
 
     //** get the active courses pop up */
     getActiveCourses: (req, res) => {
