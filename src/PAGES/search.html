@@ -15,8 +15,9 @@
         <div class="search-container">
             <form onsubmit="return redirectToSearch()">
                 <div class="search-box">
-                    <span class="material-icons">search</span>
-                    <input type="text" id="searchInput" placeholder="Search..." onkeydown="handleKeyPress(event)">
+                    <span class="material-icons" onclick="">search</span>
+                    <input type="text" id="searchInput" placeholder="Search..." name="query"
+                        onkeydown="handleKeyPress(event)">
                     <button type="submit" class="search-btn">Search</button>
                 </div>
             </form>

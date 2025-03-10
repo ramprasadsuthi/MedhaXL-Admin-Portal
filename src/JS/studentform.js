@@ -94,7 +94,7 @@ function updateSubCategory() {
     const subCategories = {
         'SC': ['SC'],
         'ST': ['ST'],
-        'OBC': ['A', 'B', 'C', 'D'],
+        'OBC': ['A', 'B', 'C', 'D', 'E'],
         'GENERAL': ['GENERAL']
     };
 

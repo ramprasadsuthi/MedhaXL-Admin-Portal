@@ -144,199 +144,146 @@
 
 
    /*Main content css starts*/
-   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+/* General Wrapper */
+.wrapper {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 95%;
+    max-width: 1100px;
+    margin: auto;
+    height: auto;
+    overflow: auto;
+    border: 1px solid #ddd;
+}
 
-   .wrapper {
-       background: rgba(25, 25, 112, 0.8);
-       padding: 40px;
-       border-radius: 20px;
-       box-shadow: 0 0 25px rgba(25, 25, 112, 0.9);
-       text-align: center;
-       width: 95%;
-       max-width: 1300px;
-       height: 90%;
-       backdrop-filter: blur(15px);
-       overflow: auto;
-       animation: slideUp 1.2s ease-in-out;
-       border: 2px solid rgba(70, 130, 180, 0.5);
-   }
+/* Title */
+h1 {
+    font-size: 2.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #000000;
+}
 
-   h1 {
-       font-size: 2.8em;
-       letter-spacing: 2px;
-       text-transform: uppercase;
-       margin-bottom: 30px;
-       color: #46c7f4;
-       text-shadow: 0 0 15px rgba(70, 130, 180, 0.9);
-       animation: glowText 2s infinite alternate;
-   }
+/* Batch Selection */
+.batch-selection {
+    margin-bottom: 15px;
+}
 
-   .batch-selection {
-       margin-bottom: 20px;
-   }
+label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 5px;
+    display: block;
+}
 
-   label {
-       display: block;
-       font-size: 1.4em;
-       margin-bottom: 10px;
-       text-transform: uppercase;
-       color: #46c7f4;
-       letter-spacing: 1px;
-   }
+/* Select Dropdown */
+select {
+    padding: 10px;
+    width: 50%;
+    border: 1px solid #0b6e84;
+    border-radius: 5px;
+    background: #f0f8fa;
+    color: #0b6e84;
+    text-align: center;
+    font-size: 1em;
+    transition: 0.3s;
+}
 
-   select {
-       padding: 12px;
-       width: 60%;
-       border: none;
-       border-radius: 10px;
-       background: #46c7f4;
-       color: #000;
-       text-align: center;
-       outline: none;
-       font-weight: bold;
-       letter-spacing: 1px;
-       transition: 0.4s ease;
-       box-shadow: 0 0 10px rgba(70, 130, 180, 0.6);
-   }
+select:hover {
+    background: #dbeff4;
+    cursor: pointer;
+}
 
-   select:hover {
-       background: #87ceeb;
-       cursor: pointer;
-       transform: scale(1.05);
-       box-shadow: 0 0 20px rgba(70, 130, 180, 0.9);
-   }
+/* Table Styling */
+.table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
 
-   .table-container {
-       overflow-x: auto;
-       height: 65%;
-   }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #ffffff;
+    border: 1px solid #0b6e84;
+}
 
-   table {
-       width: 100%;
-       border-collapse: collapse;
-       margin-top: 20px;
-       background: rgba(25, 25, 112, 0.9);
-       overflow: hidden;
-       border-radius: 15px;
-       box-shadow: 0 0 25px rgba(25, 25, 112, 0.8);
-       animation: fadeIn 1.2s ease;
-       color: #ffffff;
-   }
+thead {
+    background: #0b6e84;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 
-   thead {
-       background: linear-gradient(135deg, #46c7f4, #87ceeb);
-       color: #000;
-       text-transform: uppercase;
-       letter-spacing: 1.5px;
-       font-weight: bold;
-       box-shadow: 0 0 10px rgba(70, 130, 180, 0.7);
-   }
+th, td {
+    padding: 12px;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
 
-   th,
-   td {
-       padding: 12px;
-       font-size: 12px;
-       text-align: center;
-       border-bottom: 1px solid #444;
-       transition: background 0.4s ease;
-   }
+/* Hover effect for rows */
+tbody tr:hover {
+    background: #e3f6f9;
+    transition: background 0.3s ease-in-out;
+}
 
-   tr:hover {
-       background: rgba(70, 130, 180, 0.2);
-       transform: scale(1.02);
-       transition: 0.3s;
-   }
+/* Button Styling */
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #0b6e84;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+}
 
-   button {
-       padding: 8px 20px;
-       margin: 5px;
-       border: none;
-       border-radius: 10px;
-       background: #46c7f4;
-       color: #000;
-       cursor: pointer;
-       transition: all 0.4s ease;
-       font-weight: 600;
-       letter-spacing: 1px;
-       text-transform: uppercase;
-   }
+button:hover {
+    background: #095463;
+}
 
-   button:hover {
-       background: #87ceeb;
-       transform: scale(1.1);
-       box-shadow: 0 0 15px rgba(70, 130, 180, 0.9);
-   }
+/* Responsive Design */
+@media (max-width: 768px) {
+    select {
+        width: 90%;
+    }
 
-   @keyframes fadeIn {
-       from {
-           opacity: 0;
-           transform: translateY(-20px);
-       }
+    table {
+        font-size: 12px;
+    }
 
-       to {
-           opacity: 1;
-           transform: translateY(0);
-       }
-   }
+    th, td {
+        padding: 8px;
+    }
+}
 
-   @keyframes slideUp {
-       from {
-           transform: translateY(50px);
-           opacity: 0;
-       }
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
 
-       to {
-           transform: translateY(0);
-           opacity: 1;
-       }
-   }
+    label {
+        font-size: 1em;
+    }
 
-   @keyframes glowText {
-       from {
-           text-shadow: 0 0 10px #46c7f4, 0 0 20px #46c7f4;
-       }
+    select {
+        width: 100%;
+    }
 
-       to {
-           text-shadow: 0 0 20px #87ceeb, 0 0 30px #87ceeb;
-       }
-   }
+    button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
 
-   @media (max-width: 768px) {
-       select {
-           width: 90%;
-       }
-
-       table {
-           font-size: 10px;
-       }
-
-       th,
-       td {
-           padding: 8px;
-       }
-   }
-
-   @media (max-width: 480px) {
-       h1 {
-           font-size: 2em;
-       }
-
-       label {
-           font-size: 1.2em;
-       }
-
-       select {
-           width: 100%;
-       }
-
-       button {
-           padding: 6px 15px;
-           font-size: 0.8em;
-       }
-
-       th,
-       td {
-           padding: 6px;
-           font-size: 9px;
-       }
-   }
+    th, td {
+        padding: 6px;
+        font-size: 10px;
+    }
+}

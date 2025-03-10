@@ -1,9 +1,9 @@
- // Check for the JWT token in localStorage and verify its validity  
- function checkToken() {
+// Check for the JWT token in localStorage and verify its validity  
+function checkToken() {
     const token = localStorage.getItem('authToken');
     if (!token) {
         // No token found, redirect to login
-        window.location.href = '/loginpage.html';
+        window.location.href = '/PAGES/loginpage.html';
         return;
     }
 
@@ -15,7 +15,7 @@
         // Token expired, redirect to login
         alert('Session expired. Please log in again.');
         localStorage.removeItem('authToken');
-        window.location.href = '/loginpage.html';
+        window.location.href = '/PAGES/loginpage.html';
     }
 }
 
