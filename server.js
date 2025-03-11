@@ -94,6 +94,10 @@ app.get("/certificate/:id", certificateController.getCertificate); // Route for 
 
 
 
+app.post("/addcourse", coursecontrollers.addCourse);
+app.get('/getAllcourses', coursecontrollers.getAllCourses);
+app.delete("/deletecourse/:courseid", coursecontrollers.deleteCourse);
+
 
 
 
