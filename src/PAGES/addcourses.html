@@ -4,49 +4,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Course</title>
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/addcourses.css">
+
+
 </head>
 
 <body>
-    <div class="container">
-        <h2>Add New Course</h2>
-        <form id="courseForm">
-            <label for="courseid">Course ID:</label>
-            <input type="text" id="courseid" name="courseid" required>
 
-            <label for="coursename">Course Name:</label>
-            <input type="text" id="coursename" name="coursename" required>
+    <!-- Header -->
+    <header class="header">
+        <img src="../img/Medhalogo.png" alt="Medhalogo" width="175">
+        <span class="menu-icon material-icons">menu</span>
+        <div class="profile-icon">
+            <span class="material-icons">account_circle</span>
+            <div class="profile-dropdown">
+                <a href="#"><span class="material-icons">account_circle</span> Profile</a>
+                <a href="#"><span class="material-icons">settings</span> Settings</a>
+                <a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
+            </div>
+        </div>
+    </header>
 
-            <label for="duration">Duration (in days):</label>
-            <input type="number" id="duration" name="duration" required>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <a href="Dashboard.html"><span class="material-icons">dashboard</span> Home</a>
 
-            <button type="submit">Add Course</button>
-        </form>
-        <p id="message"></p>
-    </div>
+        <div class="dropdown-menu students-menu">
+            <a><span class="material-icons">person</span> Students</a>
+            <span class="material-icons toggle-icon students-toggle">expand_more</span>
+        </div>
+        <div class="submenu students-submenu">
+            <a href="studentform.html"><span class="material-icons">group_add</span> Add Student</a>
+            <a href="viewstudent.html"><span class="material-icons">visibility</span> View Students</a>
+        </div>
 
-    <div class="course-list">
-        <h2>Course List</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Course ID</th>
-                    <th>Course Name</th>
-                    <th>Duration (days)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="courseTableBody">
-                <!-- Data will be inserted here dynamically -->
-            </tbody>
-        </table>
-    </div>
-    </div>
+        <div class="dropdown-menu courses-menu">
+            <a><span class="material-icons">menu_book</span> Courses</a>
+            <span class="material-icons toggle-icon courses-toggle">expand_more</span>
+        </div>
+        <div class="submenu courses-submenu">
+            <a href="addcourses.html">
+                <span class="material-icons">playlist_add</span> Courses Add & View
+            </a>
+        </div>
 
+        <div class="dropdown-menu Batches-menu">
+            <a href="#"><span class="material-icons">library_books</span> Batches</a>
+            <span class="material-icons toggle-icon Batches-toggle">expand_more</span>
+        </div>
+        <div class="submenu Batches-submenu">
+            <a href="addbatch.html"><span class="material-icons"><span class="material-symbols-outlined">
+                        how_to_reg
+                    </span></span> Add Batches</a>
+            <a href="updateBatchStatus.html"><span class="material-icons">visibility</span> View Batches</a>
+        </div>
 
+        <div class="dropdown-menu trainers-menu">
+            <a><span class="material-icons">group</span> Trainers</a>
+            <span class="material-icons toggle-icon trainers-toggle">expand_more</span>
+        </div>
+        <div class="submenu trainers-submenu">
+            <a href="addtrainer.html"><span class="material-icons"><span class="material-symbols-outlined">
+                        person_add
+                    </span></span> Add Trainer</a>
+            <a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+        </div>
+
+        <div class="dropdown-menu certificate-menu">
+            <a><span class="material-icons">workspace_premium</span> Certifications</a>
+            <span class="material-icons toggle-icon certificate-toggle">expand_more</span>
+        </div>
+        <div class="submenu certificate-submenu">
+            <a href="certificate.html">
+                <span class="material-icons">military_tech</span> Certificate Add & View
+            </a>
+        </div>
+
+        <div class="dropdown-menu FInance-menu">
+            <a><span class="material-icons">stacked_line_chart</span> FInance</a>
+            <span class="material-icons toggle-icon FInance-toggle">expand_more</span>
+        </div>
+        <div class="submenu FInance-submenu">
+            <a href="batchpayments.html"><span class="material-icons"><span class="material-symbols-outlined">
+                        payments
+                    </span></span> Batch Payments</a>
+            <a href="dailytransactions.html"><span class="material-icons">visibility</span> Daily Payments</a>
+        </div>
+
+        <a href="#"><span class="material-icons">analytics</span> Analytics</a>
+        <a href="#"><span class="material-icons">notifications</span> Notifications</a>
+        <a href="#"><span class="material-icons">settings</span> Settings</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="wrapper">
+            <h2>Add New Course</h2>
+            <form id="courseForm">
+                <div class="form-group">
+                    <label for="courseid">Course ID:</label>
+                    <input type="text" id="courseid" name="courseid" required>
+                </div>
+                <div class="form-group">
+                    <label for="coursename">Course Name:</label>
+                    <input type="text" id="coursename" name="coursename" required>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration (in days):</label>
+                    <input type="number" id="duration" name="duration" required>
+                </div>
+                <button type="submit">Add Course</button>
+            </form>
+            <p id="message"></p>
+        </div>
+
+        <div class="course-list">
+            <h2>Course List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Duration (days)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="courseTableBody" style="font-size: 12px;">
+                    <!-- Data will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </main>
+
+    <!-- Modal Styling -->
 
     <script src="../JS/addcourses.js"></script>
+
 </body>
 
 </html>

@@ -20,6 +20,7 @@ function toggleDropdown(menuSelector, submenuSelector, iconSelector) {
 
 // Initialize dropdowns
 toggleDropdown('.students-menu', '.students-submenu', '.students-toggle');
+toggleDropdown('.courses-menu', '.courses-submenu', '.courses-toggle');
 toggleDropdown('.Batches-menu', '.Batches-submenu', '.Batches-toggle');
 toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
 toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');

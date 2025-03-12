@@ -1,3 +1,41 @@
+// Sidebar Toggle sidebar
+document.querySelector('.menu-icon').addEventListener('click', function () {
+    document.querySelector('.sidebar').classList.toggle('show');
+});
+
+
+// Profile Dropdown Toggle
+document.querySelector('.profile-icon').addEventListener('click', function () {
+    document.querySelector('.profile-dropdown').classList.toggle('show');
+});
+
+// Dropdown Toggle Function
+function toggleDropdown(menuSelector, submenuSelector, iconSelector) {
+    document.querySelector(menuSelector).addEventListener('click', function () {
+        document.querySelector(submenuSelector).classList.toggle('show');
+        document.querySelector(iconSelector).textContent =
+            document.querySelector(submenuSelector).classList.contains('show') ? 'expand_less' : 'expand_more';
+    });
+}
+
+// Initialize dropdowns
+toggleDropdown('.students-menu', '.students-submenu', '.students-toggle');
+toggleDropdown('.courses-menu', '.courses-submenu', '.courses-toggle');
+toggleDropdown('.Batches-menu', '.Batches-submenu', '.Batches-toggle');
+toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
+toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');
+toggleDropdown('.certificate-menu', '.certificate-submenu', '.certificate-toggle');
+
+
+
+
+
+
+
+
+
+
+
 document.getElementById("courseForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 

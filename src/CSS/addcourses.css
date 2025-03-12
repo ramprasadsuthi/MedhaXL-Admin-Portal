@@ -1,70 +1,370 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: #f5f5f5;
-}
+   /* General Styles */
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: Arial, sans-serif;
+   }
 
-.container {
-    background: white;
-    padding: 20px;
-    max-width: 400px;
-    margin: auto;
-    box-shadow: 0px 0px 10px gray;
-    border-radius: 5px;
-}
+   body {
+       background-color: #f0f0f0;
+   }
 
-input, button {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    display: block;
-}
+   /* Header */
+   .header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding: 1rem;
+       background-color: #ffffff;
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       position: relative;
+   }
 
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+   .logo {
+       font-size: 1.5rem;
+       font-weight: bold;
+   }
 
-button:hover {
-    background-color: #218838;
-}
+   .menu-icon {
+       display: none;
+       font-size: 1.8rem;
+       cursor: pointer;
+   }
 
-.course-list {
-    margin: 30px auto;
-    max-width: 600px;
-    background: white;
-    padding: 20px;
-    box-shadow: 0px 0px 10px gray;
-    border-radius: 5px;
-}
+   .profile-icon {
+       position: relative;
+       cursor: pointer;
+   }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
+   .profile-dropdown {
+       display: none;
+       position: absolute;
+       right: 0;
+       top: 100%;
+       background-color: #ffffff;
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       border-radius: 4px;
+       z-index: 10;
+   }
 
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-}
+   .profile-dropdown.show {
+       display: block;
+   }
 
-th {
-    background-color: #007bff;
-    color: white;
-}
+   .profile-dropdown a {
+       display: flex;
+       align-items: center;
+       padding: 0.5rem 1rem;
+       text-decoration: none;
+       color: #333;
+   }
 
-.delete-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
+   .profile-dropdown a:hover {
+       background-color: #f0f0f0;
+   }
 
-.delete-btn:hover {
-    background-color: darkred;
-}
+   /* Sidebar */
+   .sidebar {
+       width: 250px;
+       background-color: #333;
+       height: 100vh;
+       position: fixed;
+       top: 0;
+       left: 0;
+       padding-top: 70px;
+       transition: 0.3s;
+       overflow-y: scroll;
+   }
+
+   .sidebar a {
+       display: flex;
+       align-items: center;
+       color: white;
+       text-decoration: none;
+       padding: 1rem;
+       transition: 0.3s;
+   }
+
+   .sidebar a:hover {
+       background-color: #444;
+   }
+
+   .sidebar .material-icons {
+       margin-right: 10px;
+   }
+
+   /* Dropdown Menus */
+   .dropdown-menu {
+       cursor: pointer;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       color: white;
+   }
+
+   .submenu {
+       display: none;
+       background-color: #444;
+   }
+
+   .submenu a {
+       padding-left: 2.5rem;
+   }
+
+   .submenu.show {
+       display: block;
+   }
+
+   /* Dashboard Content */
+   .main-content {
+       margin-left: 250px;
+       padding: 1rem;
+   }
+
+   /* Responsive Styles */
+   @media (max-width: 768px) {
+       .menu-icon {
+           display: block;
+       }
+
+       .sidebar {
+           width: 0;
+           overflow: hidden;
+       }
+
+       .sidebar.show {
+           width: 250px;
+       }
+
+       .main-content {
+           margin-left: 0;
+       }
+   }
+
+
+   /*Main content css starts*/
+
+
+   .wrapper {
+       width: 90%;
+       max-width: 1400px;
+       background: white;
+       padding: 40px;
+       border-radius: 12px;
+       box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+       text-align: center;
+   }
+
+   /* Form Styling */
+   form {
+       display: flex;
+       align-items: flex-end;
+       justify-content: space-between;
+       flex-wrap: wrap;
+       gap: 15px;
+       width: 100%;
+       margin-bottom: 20px;
+       margin-top: 30px;
+   }
+
+   /* Form Groups (Proper Spacing for Labels and Inputs) */
+   .form-group {
+       display: flex;
+       flex-direction: column;
+       align-items: flex-start;
+       text-align: left;
+       flex: 1;
+       min-width: 220px;
+       margin-bottom: 10px;
+       /* Added spacing to prevent overlap */
+   }
+
+   /* Labels */
+   .form-group label {
+       font-weight: bold;
+       font-size: 16px;
+       margin-bottom: 8px;
+       /* Increased spacing between label and input */
+       color: #000000;
+   }
+
+   /* Inputs */
+   .form-group input {
+       padding: 10px;
+       border: 2px solid #0e8faf;
+       border-radius: 6px;
+       font-size: 16px;
+       transition: 0.3s ease-in-out;
+       width: 100%;
+       min-width: 100%;
+       /* Ensuring input takes full width of form-group */
+       box-sizing: border-box;
+       /* Prevents overflow */
+   }
+
+   /* File Input */
+   .form-group input[type="file"] {
+       width: 100%;
+   }
+
+   /* Submit Button (Aligned with Inputs) */
+   .submit-btn {
+       align-self: flex-start;
+       /* Align with input fields */
+       height: 42px;
+       width: 160px;
+       justify-content: center;
+       margin-top: 20px;
+   }
+
+   /* Button Styling */
+   button {
+       background-color: #0e8faf;
+       color: white;
+       border: none;
+       cursor: pointer;
+       font-weight: bold;
+       padding: 12px 20px;
+       /* Increased padding for better button size */
+       border-radius: 8px;
+       /* Adjusted border radius for a smoother look */
+       transition: all 0.3s ease;
+       font-size: 16px;
+       height: 44px;
+       /* Slightly increased height for better alignment */
+   }
+
+   button:hover {
+       background-color: #0b6e84;
+   }
+
+   /* Message Text */
+   #message {
+       font-size: 14px;
+       color: green;
+       margin-top: 10px;
+   }
+
+   /* Responsive Fixes */
+   @media (max-width: 768px) {
+       form {
+           flex-direction: column;
+       }
+
+       .form-group {
+           width: 100%;
+       }
+   }
+
+   /* Course List Container */
+   .course-list {
+       width: 90%;
+       max-width: 900px;
+
+       padding: 25px;
+       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+       border-radius: 12px;
+       margin: 30px auto;
+       text-align: center;
+       color: rgb(0, 0, 0);
+       transition: all 0.3s ease-in-out;
+   }
+
+   /* Course List Heading */
+   .course-list h2 {
+       font-size: 24px;
+       margin-bottom: 15px;
+       text-transform: uppercase;
+       font-weight: bold;
+       letter-spacing: 1px;
+   }
+
+   /* Table Styling */
+   table {
+       width: 100%;
+       border-collapse: collapse;
+       background: white;
+       border-radius: 10px;
+       overflow: hidden;
+   }
+
+   /* Table Headers */
+   th {
+       background: #044c5a;
+       color: white;
+       padding: 12px;
+       font-size: 12px;
+       text-transform: uppercase;
+       border-right: 1px solid rgba(255, 255, 255, 0.2);
+   }
+
+   /* Last Column Border Removal */
+   th:last-child {
+       border-right: none;
+   }
+
+   /* Table Rows */
+   td {
+       padding: 10px;
+       border-bottom: 1px solid #ddd;
+       text-align: center;
+       font-size: 14px;
+       color: #333;
+       transition: background 0.3s ease-in-out;
+   }
+
+   /* Alternate Row Background */
+   tbody tr:nth-child(even) {
+       background-color: #f1f9fc;
+   }
+
+   /* Hover Effect on Rows */
+   tbody tr:hover {
+       background-color: rgba(14, 143, 175, 0.2);
+       transform: scale(1.02);
+       transition: all 0.3s ease-in-out;
+   }
+
+   /* Delete Button Styling */
+   .delete-btn {
+       background: linear-gradient(135deg, #d00000, #a00000);
+       color: white;
+       border: none;
+       padding: 6px 12px;
+       font-size: 12px;
+       font-weight: bold;
+       border-radius: 6px;
+       cursor: pointer;
+       transition: transform 0.2s ease-in-out;
+       box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.3);
+   }
+
+   /* Delete Button Hover Effect */
+   .delete-btn:hover {
+       background: linear-gradient(135deg, #ff0000, #c00000);
+       transform: scale(1.1);
+       box-shadow: 0px 6px 12px rgba(255, 0, 0, 0.5);
+   }
+
+   /* Responsive Design */
+   @media (max-width: 768px) {
+       .course-list {
+           width: 100%;
+           padding: 20px;
+       }
+
+       table {
+           font-size: 12px;
+       }
+
+       th,
+       td {
+           padding: 10px;
+       }
+
+       .delete-btn {
+           padding: 5px 10px;
+           font-size: 10px;
+       }
+   }
