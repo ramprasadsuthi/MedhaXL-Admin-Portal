@@ -31,8 +31,5 @@
     "nodemailer": "^6.10.0",
     "pdfkit": "^0.16.0"
   },
-  "description": "",
-  "engines": {
-    "node": "18.x"
-  }
+  "description": ""
 }
