@@ -98,6 +98,7 @@ async function getTerms(studentID) {
         const row = `
         <tr>
           <td>${term.Term}</td>
+          <td>${term.Name}</td>
           <td>${term.AmountPaid}</td>
           <td>${term.PaidDate}</td>
         </tr>`;

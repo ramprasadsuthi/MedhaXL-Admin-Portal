@@ -26,7 +26,7 @@ const paymentscontrollers = {
     //**pop oof the view the term amoutn and date */
     getTerms: (req, res) => {
         const { studentID } = req.query;
-        const getTermsQuery = `SELECT Term, AmountPaid, PaidDate FROM dailytransactions WHERE StudentID = ? ORDER BY Term`;
+        const getTermsQuery = `SELECT Term, Name, AmountPaid, PaidDate FROM dailytransactions WHERE StudentID = ? ORDER BY Term`;
     
         db.query(getTermsQuery, [studentID], (err, result) => {
             if (err) {
