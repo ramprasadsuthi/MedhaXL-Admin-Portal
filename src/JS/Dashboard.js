@@ -315,7 +315,7 @@ async function showActiveCoursesPopup() {
 			tableBody.innerHTML = `<tr><td colspan="5">No Active Courses Available</td></tr>`;
 		}
 
-		document.getElementById("batchactive").style.display = "block";
+		document.getElementById("batchactive").style.display = "flex";
 	} catch (error) {
 		console.error("Error fetching active courses:", error);
 		alert("Failed to fetch active courses!");

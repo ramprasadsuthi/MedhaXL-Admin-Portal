@@ -218,8 +218,9 @@
    	text-decoration: none;
    	font-size: 14px;
    }
-   .btn-new-registration:hover{
-	background: #088525;
+
+   .btn-new-registration:hover {
+   	background: #088525;
    }
 
    /* Responsive Design */
