@@ -1,12 +1,12 @@
 // Sidebar Toggle sidebar
 document.querySelector('.menu-icon').addEventListener('click', function () {
-	document.querySelector('.sidebar').classList.toggle('show');
-	// Toggle between 'menu' and 'cancel' icon
-	if (this.textContent === "menu") {
-		this.textContent = "cancel";
-	} else {
-		this.textContent = "menu";
-	}
+    document.querySelector('.sidebar').classList.toggle('show');
+    // Toggle between 'menu' and 'cancel' icon
+    if (this.textContent === "menu") {
+        this.textContent = "cancel";
+    } else {
+        this.textContent = "menu";
+    }
 });
 
 
@@ -18,31 +18,31 @@ const profileDropdown = document.querySelector('.profile-dropdown');
 
 // Toggle notification dropdown
 notificationIcon.addEventListener('click', function (event) {
-	notificationDropdown.classList.toggle('show');
-	profileDropdown.classList.remove('show'); // Close profile if open
-	event.stopPropagation();
+    notificationDropdown.classList.toggle('show');
+    profileDropdown.classList.remove('show'); // Close profile if open
+    event.stopPropagation();
 });
 
 // Toggle profile dropdown
 profileIcon.addEventListener('click', function (event) {
-	profileDropdown.classList.toggle('show');
-	notificationDropdown.classList.remove('show'); // Close notifications if open
-	event.stopPropagation();
+    profileDropdown.classList.toggle('show');
+    notificationDropdown.classList.remove('show'); // Close notifications if open
+    event.stopPropagation();
 });
 
 // Close dropdowns when clicking outside
 window.addEventListener('click', function () {
-	notificationDropdown.classList.remove('show');
-	profileDropdown.classList.remove('show');
+    notificationDropdown.classList.remove('show');
+    profileDropdown.classList.remove('show');
 });
 
 // Prevent closing when clicking inside the dropdowns
 notificationDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 profileDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 //**end profile and notification */
@@ -108,7 +108,7 @@ async function searchCertificate() {
             certificateView.style.display = "block";
 
             whatsappBtn.onclick = () => {
-                const message = `Your Certificate Download Link: http://localhost:3000/certificate/${studentID}`;
+                const message = `Your Certificate Download Link: /certificate/${studentID}`;
                 window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
             };
         } else {

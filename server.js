@@ -95,7 +95,6 @@ app.post("/upload", certificateController.uploadCertificate); // Route for uploa
 app.get("/certificate/:id", certificateController.getCertificate); // Route for retrieving certificates by Student ID
 
 
-
 app.post("/addcourse", coursecontrollers.addCourse);
 app.get('/getAllcourses', coursecontrollers.getAllCourses);
 app.delete("/deletecourse/:courseid", coursecontrollers.deleteCourse);

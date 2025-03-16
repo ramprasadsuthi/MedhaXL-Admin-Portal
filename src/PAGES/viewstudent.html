@@ -140,10 +140,25 @@
 						<th>Total Fee</th>
 						<th>Total Due</th>
 						<th>Actions</th>
+						<th>Certificate</th>
 					</tr>
 				</thead>
 				<tbody id="studentTableBody" style="font-size: 12px;"></tbody>
 			</table>
+
+			<!-- Modal -->
+			<div id="certificateModal"
+				style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 800px; background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); z-index: 1000;">
+
+				<div id="modalContent" style="margin-bottom: 15px; text-align: center;"></div>
+
+				<div style="text-align: center;">
+					<button onclick="closeModal()"
+						style="background: #007BFF; color: #fff; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+				</div>
+			</div>
+
+
 		</div>
 	</main>
 

@@ -53,7 +53,8 @@ const certificateController = {
                 return res.status(404).send("No Certificate Found");
             }
         });
-    },
+    }
+
 };
 
 module.exports = certificateController;

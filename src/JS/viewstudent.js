@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+//get the student data
 async function getStudents() {
     const batchCode = document.getElementById("BatchCode").value;
 
@@ -113,6 +114,9 @@ async function getStudents() {
                     <td>
                         <button onclick="getDetails('${student.StudentID}')">Get Details</button>
                     </td>
+                     <td>
+                        <button onclick="checkCertificate('${student.StudentID}')">Certificate</button>
+                    </td>
                 </tr>
             `;
             tbody.innerHTML += row;
@@ -124,4 +128,52 @@ async function getStudents() {
 
 function getDetails(studentID) {
     window.location.href = `getpdf.html?studentID=${studentID}`;
+}
+
+//** get the certificate of the student where stun=dent idd matches */
+async function checkCertificate(studentID) {
+    const modal = document.getElementById("certificateModal");
+    const content = document.getElementById("modalContent");
+
+    try {
+        const response = await fetch(`/certificate/${studentID}`);
+
+        if (response.status === 404) {
+            content.innerHTML = `<p>No Certificate Found for Student ID: ${studentID}</p>`;
+            modal.style.display = 'block';
+            return;
+        }
+
+        const contentType = response.headers.get("content-type");
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        if (contentType.includes('pdf')) {
+            content.innerHTML = `
+                <p>Certificate for Student ID: ${studentID}</p>
+                <embed src="${url}" type="application/pdf" width="100%" height="500px" />
+            `;
+        } else if (contentType.includes('image')) {
+            content.innerHTML = `
+                <p>Certificate for Student ID: ${studentID}</p>
+                <img src="${url}" alt="Certificate" style="width:100%; height:auto;" />
+            `;
+        } else {
+            content.innerHTML = `
+                <p>Certificate Found. <a href="${url}" target="_blank">Download/View</a></p>
+            `;
+        }
+
+        modal.style.display = 'block';
+
+    } catch (err) {
+        console.error("Error fetching certificate:", err);
+        content.innerHTML = `<p>Error fetching certificate. Please try again.</p>`;
+        modal.style.display = 'block';
+    }
+}
+
+function closeModal() {
+    document.getElementById("certificateModal").style.display = "none";
 }
