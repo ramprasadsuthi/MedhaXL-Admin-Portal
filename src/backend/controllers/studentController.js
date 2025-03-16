@@ -62,6 +62,22 @@ const studentController = {
         });
     },
 
+    //**get the pdf where student id */
+    getStudentById: (req, res) => {
+        const { id } = req.params;
+        const sql = 'SELECT * FROM student WHERE StudentID = ?';
+        db.query(sql, [id], (err, results) => {
+            if (err) {
+                console.error("Error fetching student data:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ message: "Student not found" });
+            }
+            res.json(results[0]);
+        });
+    },
+
 
     // API to fetch the latest 10 student registrations
     getLatestStudents: (req, res) => {

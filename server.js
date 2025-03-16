@@ -42,6 +42,8 @@ app.post('/register', studentController.registerStudent);
 app.get('/students', studentController.getStudents);
 // fech api to the pdf /latest-student
 app.get('/latest-student', studentController.getLatestStudent);
+// GET THE PDF the studentid = student data
+app.get('/student/:id', studentController.getStudentById);
 //fech api to the /latest-students latest 10 student registrations
 app.get('/latest-students', studentController.getLatestStudents);
 // fech api to the /total-students total count of registrations
