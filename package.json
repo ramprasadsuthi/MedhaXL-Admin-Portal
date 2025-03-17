@@ -33,6 +33,7 @@
     "nodemailer": "^6.10.0",
     "pdfkit": "^0.16.0",
     "qs": "^6.11.2",
+    "other-your-packages": "...",
     "readable-stream": "^4.7.0",
     "socket.io": "^4.8.1"
   },
