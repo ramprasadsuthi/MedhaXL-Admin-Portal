@@ -104,7 +104,6 @@ const paymentscontrollers = {
     },
     
 
-
 };
 
 module.exports = paymentscontrollers;
