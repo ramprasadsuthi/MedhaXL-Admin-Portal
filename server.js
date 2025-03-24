@@ -82,6 +82,9 @@ app.get("/search", studentController.searchStudents);
 app.put("/update/:id", studentController.updateStudent);
 //**disly the datata to view the fee pending */
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
+app.get("/getBatchesByStatus/:status", studentController.getBatchesByStatus);
+app.post("/updateStudentStatus", studentController.updateStudentStatus);
+app.get("/getStudentBatches", studentController.getStudentBatches);
 
 // << BATCH ROUTES >>
 //**FETCH THE API TO VEW THE count of teh running course */

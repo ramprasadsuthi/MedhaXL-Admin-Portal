@@ -267,7 +267,7 @@ const studentController = {
 
     getStudentsByBatch: (req, res) => {
         const { batchCode } = req.params;
-        const query = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue FROM student WHERE BatchCode = ?`;
+        const query = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue, Status FROM student WHERE BatchCode = ?`;
 
         db.query(query, [batchCode], (err, result) => {
             if (err) {
@@ -278,6 +278,67 @@ const studentController = {
             }
         });
     },
+
+    // Get distinct statuses from DB
+    getStudentBatches: (req, res) => {
+        const query = `SELECT DISTINCT Status FROM student WHERE Status IS NOT NULL`;
+
+        db.query(query, (err, results) => {
+            if (err) {
+                console.error("DB Error (Get Statuses):", err);
+                return res.status(500).json({ message: "Failed to fetch statuses" });
+            }
+            res.json(results);
+        });
+    },
+
+
+
+    // Get Batch Codes by Status
+    getBatchesByStatus: (req, res) => {
+        const { status } = req.params;
+        const query = `SELECT DISTINCT BatchCode FROM student WHERE Status = ?`;
+
+        db.query(query, [status], (err, result) => {
+            if (err) {
+                console.error("DB Error:", err);
+                res.status(500).json({ message: "Failed to fetch batches" });
+            } else {
+                res.json(result);
+            }
+        });
+    },
+
+    // Update Status for entire batch
+    updateStudentStatus: (req, res) => {
+        const { studentID, status } = req.body;
+
+        // Step 1: Get the BatchCode of the student
+        const getBatchQuery = `SELECT BatchCode FROM student WHERE StudentID = ?`;
+
+        db.query(getBatchQuery, [studentID], (err, result) => {
+            if (err || result.length === 0) {
+                console.error("DB Error (Fetch BatchCode):", err);
+                return res.status(500).json({ success: false, message: "Failed to fetch batch code" });
+            }
+
+            const batchCode = result[0].BatchCode;
+
+            // Step 2: Update all students with that BatchCode
+            const updateBatchQuery = `UPDATE student SET Status = ? WHERE BatchCode = ?`;
+
+            db.query(updateBatchQuery, [status, batchCode], (err2) => {
+                if (err2) {
+                    console.error("DB Error (Update Batch):", err2);
+                    return res.status(500).json({ success: false, message: "Failed to update batch status" });
+                }
+
+                res.json({ success: true, batchCode });
+            });
+        });
+    }
+
+
 
 };
 module.exports = studentController;

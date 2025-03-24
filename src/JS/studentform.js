@@ -76,27 +76,61 @@ document.getElementById("registrationForm").addEventListener("submit", function 
 
 
 // Function to populate year of passing dropdown
-function populateYearDropdown() {
-    const yearSelect = document.getElementById('yearPassing');
-    const currentYear = new Date().getFullYear();
-    for (let year = currentYear; year >= 1970; year--) {
-        const option = document.createElement('option');
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option);
-    }
-}
-
-// Function to validate DOB format and calculate age
 function calculateAge() {
     const dobInput = document.getElementById('dob');
     const ageInput = document.getElementById('age');
     const dobError = document.getElementById('dobError');
 
-    // Regular expression for DD-MM-YYYY format
+    let rawDob = dobInput.value.trim();
+
+    // Normalize common formats into DD-MM-YYYY
+    rawDob = rawDob.replace(/\//g, '-').replace(/\./g, '-');
+
+    let parts = rawDob.split('-');
+
+    if (parts.length !== 3) {
+        dobError.textContent = "Invalid date format. Please enter a valid date.";
+        ageInput.value = "";
+        return;
+    }
+
+    let day, month, year;
+
+    // Auto-detect and normalize formats
+    if (parts[0].length === 4) {
+        // YYYY-MM-DD -> DD-MM-YYYY
+        year = parts[0];
+        month = parts[1];
+        day = parts[2];
+    } else if (parts[2].length === 4) {
+        // DD-MM-YYYY or MM-DD-YYYY (guess based on values)
+        if (parseInt(parts[0]) > 12) {
+            // Assuming DD-MM-YYYY
+            day = parts[0];
+            month = parts[1];
+        } else {
+            // Assuming MM-DD-YYYY (swap day & month)
+            month = parts[0];
+            day = parts[1];
+        }
+        year = parts[2];
+    } else {
+        dobError.textContent = "Invalid date format. Please enter a valid date.";
+        ageInput.value = "";
+        return;
+    }
+
+    // Validate numbers
+    day = String(day).padStart(2, '0');
+    month = String(month).padStart(2, '0');
+    year = String(year);
+
+    const formattedDob = `${day}-${month}-${year}`;
+    dobInput.value = formattedDob;
+
     const dobRegex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/;
 
-    if (!dobRegex.test(dobInput.value)) {
+    if (!dobRegex.test(formattedDob)) {
         dobError.textContent = "Please enter DOB in DD-MM-YYYY format.";
         ageInput.value = "";
         return;
@@ -105,7 +139,6 @@ function calculateAge() {
     }
 
     // Convert DD-MM-YYYY to Date object
-    const [day, month, year] = dobInput.value.split('-').map(Number);
     const dob = new Date(year, month - 1, day);
     const today = new Date();
 
@@ -118,7 +151,6 @@ function calculateAge() {
 
     ageInput.value = age;
 }
-
 
 // Update sub-category based on selected category
 function updateSubCategory() {

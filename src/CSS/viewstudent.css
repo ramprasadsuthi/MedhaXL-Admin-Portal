@@ -183,8 +183,8 @@
        border-radius: 10px;
        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
        text-align: center;
-       width: 95%;
-       max-width: 1100px;
+       width: 100%;
+       max-width: 1350px;
        margin: auto;
        height: auto;
        overflow: auto;
@@ -214,22 +214,38 @@
    }
 
    /* Select Dropdown */
-   select {
-       padding: 10px;
-       width: 50%;
-       border: 1px solid #0b6e84;
-       border-radius: 5px;
-       background: #f0f8fa;
-       color: #0b6e84;
-       text-align: center;
-       font-size: 1em;
-       transition: 0.3s;
+   .form-container {
+       display: flex;
+       gap: 20px;
+       align-items: center;
+       margin-bottom: 20px;
+       justify-content: center;
    }
 
-   select:hover {
-       background: #dbeff4;
-       cursor: pointer;
+   .form-container label {
+       display: block;
+       margin-bottom: 5px;
+       color: #000000;
+       font-weight: bold;
+       
    }
+
+   .form-container select {
+       padding: 8px 12px;
+       border: 1px solid #0b6e84;
+       border-radius: 5px;
+       color: #0b6e84;
+       font-weight: 500;
+       background-color: #ffffff;
+       cursor: pointer;
+       transition: 0.3s ease;
+   }
+
+   .form-container select:focus {
+       outline: none;
+       box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+   }
+
 
    /* Table Styling */
    .table-container {

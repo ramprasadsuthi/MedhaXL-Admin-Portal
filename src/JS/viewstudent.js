@@ -63,26 +63,62 @@ toggleDropdown('.Batches-menu', '.Batches-submenu', '.Batches-toggle');
 toggleDropdown('.trainers-menu', '.trainers-submenu', '.trainers-toggle');
 toggleDropdown('.FInance-menu', '.FInance-submenu', '.FInance-toggle');
 toggleDropdown('.certificate-menu', '.certificate-submenu', '.certificate-toggle');
-//**endn the side bat and navbar actions */
-document.addEventListener("DOMContentLoaded", async () => {
-    try {
-        const response = await fetch("/getBatches");
-        const batches = await response.json();
 
-        const batchDropdown = document.getElementById("BatchCode");
+//**endn the side bat and navbar actions */
+
+//**API'S starts */ 
+
+// Get Statuses on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadStatuses(); // Load status list from DB
+});
+
+// Load statuses dynamically
+async function loadStatuses() {
+    const statusSelect = document.getElementById("BatchStatus");
+
+    try {
+        const response = await fetch("/getStudentBatches");
+        const statuses = await response.json();
+
+        statusSelect.innerHTML = `<option value="">Select Status</option>`;
+
+        statuses.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.Status;
+            option.textContent = item.Status;
+            statusSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Failed to fetch statuses", error);
+    }
+}
+
+// Load batch codes based on selected status
+async function loadBatchCodes() {
+    const status = document.getElementById("BatchStatus").value;
+    const batchSelect = document.getElementById("BatchCode");
+    batchSelect.innerHTML = `<option value="">Select Batch</option>`;
+
+    if (!status) return;
+
+    try {
+        const response = await fetch(`/getBatchesByStatus/${status}`);
+        const batches = await response.json();
 
         batches.forEach(batch => {
             const option = document.createElement("option");
-            option.value = batch.BatchID;
-            option.textContent = batch.BatchID;
-            batchDropdown.appendChild(option);
+            option.value = batch.BatchCode;
+            option.textContent = batch.BatchCode;
+            batchSelect.appendChild(option);
         });
     } catch (error) {
-        console.error("Failed to fetch batches", error);
+        console.error("Error loading batch codes", error);
     }
-});
+}
 
-//get the student data
+
+// Get students by batch code
 async function getStudents() {
     const batchCode = document.getElementById("BatchCode").value;
 
@@ -103,6 +139,21 @@ async function getStudents() {
             const row = `
                 <tr>
                     <td>${student.StudentID}</td>
+                    <td style="min-width: 125px;">
+                        <select onchange="updateStudentStatus('${student.StudentID}', this.value)" style="
+                    padding: 5px 10px; 
+                    border: 1px solid #ccc; 
+                    border-radius: 5px; 
+                    background-color: #f9f9f9; 
+                    font-size: 12px; 
+                    transition: 0.3s ease; 
+                    width: 100%;
+                     box-sizing: border-box;">
+                             <option value="ON Going" ${student.Status === 'ON Going' ? 'selected' : ''}>ON Going</option>
+                            <option value="Completed" ${student.Status === 'Completed' ? 'selected' : ''}>Completed</option>
+                            <option value="Up Coming" ${student.Status === 'Up Coming' ? 'selected' : ''}>Up Coming</option>
+                        </select>
+                    </td>
                     <td>${student.BatchCode}</td>
                     <td>${student.Course}</td>
                     <td>${student.FirstName} ${student.LastName}</td>
@@ -114,13 +165,14 @@ async function getStudents() {
                     <td>
                         <button onclick="getDetails('${student.StudentID}')">Get Details</button>
                     </td>
-                     <td>
+                    <td>
                         <button onclick="checkCertificate('${student.StudentID}')">Certificate</button>
                     </td>
                 </tr>
             `;
             tbody.innerHTML += row;
         });
+
     } catch (error) {
         console.error("Failed to fetch students", error);
     }
@@ -129,6 +181,33 @@ async function getStudents() {
 function getDetails(studentID) {
     window.location.href = `getpdf.html?studentID=${studentID}`;
 }
+
+
+// Update batch status for ALL students
+// Update individual student status
+async function updateStudentStatus(studentID, status) {
+    try {
+        const response = await fetch(`/updateStudentStatus`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ studentID, status })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert(`Status updated for Student ID: ${studentID}`);
+        } if (result.success) {
+            alert(`Status updated for all students in Batch Code: ${result.batchCode}`);
+        }
+        else {
+            alert("Failed to update student status.");
+        }
+    } catch (error) {
+        console.error("Error updating student status", error);
+    }
+}
+
+
 
 //** get the certificate of the student where stun=dent idd matches */
 async function checkCertificate(studentID) {

@@ -122,15 +122,30 @@
 		<div class="wrapper">
 			<h1>Search Batch</h1>
 
-			<label>Select Batch Code:</label>
-			<select id="BatchCode" onchange="getStudents()">
-				<option value="">Select Batch</option>
-			</select>
+			<div class="form-container">
+				<!-- Status Dropdown -->
+				<div>
+					<label>Select Status:</label>
+					<select id="BatchStatus" onchange="loadBatchCodes()">
+						<option value="">Select Status</option>
+					</select>
+				</div>
+			
+				<!-- Batch Code Dropdown -->
+				<div>
+					<label>Select Batch Code:</label>
+					<select id="BatchCode" onchange="getStudents()">
+						<option value="">Select Batch</option>
+					</select>
+				</div>
+			</div>
+			
 
 			<table style="font-size: 12px;">
 				<thead>
 					<tr>
 						<th>Student ID</th>
+						<th>Status</th>
 						<th>Batch Code</th>
 						<th>Course</th>
 						<th>FULL NAME</th>
@@ -167,8 +182,6 @@
 							   cursor: pointer;">Close</button>
 				</div>
 			</div>
-
-
 		</div>
 	</main>
 

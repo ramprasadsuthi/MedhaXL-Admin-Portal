@@ -14,37 +14,37 @@
 
 <body>
 
-   <!-- Header -->
-	<header class="header">
-		<!-- Left: Logo -->
-		<div class="logo">
-			<img src="../img/Medhalogo.png" alt="Medhalogo">
-		</div>
+    <!-- Header -->
+    <header class="header">
+        <!-- Left: Logo -->
+        <div class="logo">
+            <img src="../img/Medhalogo.png" alt="Medhalogo">
+        </div>
 
-		<!-- Right: Menu, Notifications, Profile -->
-		<div class="right-section">
-			<span class="menu-icon material-icons">menu</span>
+        <!-- Right: Menu, Notifications, Profile -->
+        <div class="right-section">
+            <span class="menu-icon material-icons">menu</span>
 
-			<!-- Notification Icon -->
-			<div class="notification-icon">
-				<span class="material-icons">notifications</span>
-				<span class="badge">3</span> <!-- Badge for new notifications -->
-				<div class="notification-dropdown">
-					<p>No new notifications</p>
-				</div>
-			</div>
+            <!-- Notification Icon -->
+            <div class="notification-icon">
+                <span class="material-icons">notifications</span>
+                <span class="badge">3</span> <!-- Badge for new notifications -->
+                <div class="notification-dropdown">
+                    <p>No new notifications</p>
+                </div>
+            </div>
 
-			<!-- Profile Icon -->
-			<div class="profile-icon">
-				<span class="material-icons">account_circle</span>
-				<div class="profile-dropdown">
-					<a href="#"><span class="material-icons">account_circle</span> Profile</a>
-					<a href="#"><span class="material-icons">settings</span> Settings</a>
-					<a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
-				</div>
-			</div>
-		</div>
-	</header>
+            <!-- Profile Icon -->
+            <div class="profile-icon">
+                <span class="material-icons">account_circle</span>
+                <div class="profile-dropdown">
+                    <a href="#"><span class="material-icons">account_circle</span> Profile</a>
+                    <a href="#"><span class="material-icons">settings</span> Settings</a>
+                    <a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
@@ -120,34 +120,52 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="daily-payments">
-            <h2>Daily Payments</h2>
+            <h2>Batch Payments</h2>
             <div class="batch-selection">
-                <label for="batch">Select Batch:</label>
-                <select id="batch" onchange="getDetails()">
-                    <option value="">Select Batch</option>
-                </select>
-                <button onclick="getDetails()">Get Details</button>
+        
+                <!-- Status Dropdown -->
+                <div class="form-group">
+                    <label for="BatchStatus">Status:</label>
+                    <select id="BatchStatus" onchange="loadBatchCodes()">
+                        <option value="">Select Status</option>
+                    </select>
+                </div>
+        
+                <!-- Batch Code Dropdown -->
+                <div class="form-group">
+                    <label for="BatchCode">Batch Code:</label>
+                    <select id="BatchCode">
+                        <option value="">Select Batch</option>
+                    </select>
+                </div>
+        
+                <!-- Get Data Button -->
+                <div class="form-group">
+                    <button onclick="getDetails()">Get Details</button>
+                </div>
+        
             </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Batch Code</th>
-                        <th>Course</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Course Fee</th>
-                        <th>Discount Applied</th>
-                        <th>Total Fee</th>
-                        <th>Pay</th>
-                        <th>Total Due</th>
-                        <th>Action</th>
-                        <th>Get Terms</th>
-                    </tr>
-                </thead>
-                <tbody id="studentTableBody" style="font-size: 12px;"></tbody>
-            </table>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Batch Code</th>
+                    <th>Course</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Course Fee</th>
+                    <th>Discount Applied</th>
+                    <th>Total Fee</th>
+                    <th>Pay</th>
+                    <th>Total Due</th>
+                    <th>Action</th>
+                    <th>Get Terms</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody" style="font-size: 12px;"></tbody>
+        </table>
         </div>
     </main>
 

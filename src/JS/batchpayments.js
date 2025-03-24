@@ -1,12 +1,12 @@
 // Sidebar Toggle sidebar
 document.querySelector('.menu-icon').addEventListener('click', function () {
-	document.querySelector('.sidebar').classList.toggle('show');
-	// Toggle between 'menu' and 'cancel' icon
-	if (this.textContent === "menu") {
-		this.textContent = "cancel";
-	} else {
-		this.textContent = "menu";
-	}
+    document.querySelector('.sidebar').classList.toggle('show');
+    // Toggle between 'menu' and 'cancel' icon
+    if (this.textContent === "menu") {
+        this.textContent = "cancel";
+    } else {
+        this.textContent = "menu";
+    }
 });
 
 
@@ -18,31 +18,31 @@ const profileDropdown = document.querySelector('.profile-dropdown');
 
 // Toggle notification dropdown
 notificationIcon.addEventListener('click', function (event) {
-	notificationDropdown.classList.toggle('show');
-	profileDropdown.classList.remove('show'); // Close profile if open
-	event.stopPropagation();
+    notificationDropdown.classList.toggle('show');
+    profileDropdown.classList.remove('show'); // Close profile if open
+    event.stopPropagation();
 });
 
 // Toggle profile dropdown
 profileIcon.addEventListener('click', function (event) {
-	profileDropdown.classList.toggle('show');
-	notificationDropdown.classList.remove('show'); // Close notifications if open
-	event.stopPropagation();
+    profileDropdown.classList.toggle('show');
+    notificationDropdown.classList.remove('show'); // Close notifications if open
+    event.stopPropagation();
 });
 
 // Close dropdowns when clicking outside
 window.addEventListener('click', function () {
-	notificationDropdown.classList.remove('show');
-	profileDropdown.classList.remove('show');
+    notificationDropdown.classList.remove('show');
+    profileDropdown.classList.remove('show');
 });
 
 // Prevent closing when clicking inside the dropdowns
 notificationDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 profileDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 //**end profile and notification */
@@ -68,24 +68,57 @@ toggleDropdown('.certificate-menu', '.certificate-submenu', '.certificate-toggle
 //**apis starts */
 
 //**get the batch code */
-document.addEventListener("DOMContentLoaded", () => {
-    fetchBatches();
+// Get Statuses on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadStatuses(); // Load status list from DB
 });
 
-async function fetchBatches() {
-    const response = await fetch("/getBatches");
-    const batches = await response.json();
-    const select = document.getElementById("batch");
-    batches.filter(batch => batch.Status.toLowerCase() === "active").forEach(batch => {
-        const option = document.createElement("option");
-        option.value = batch.BatchID;
-        option.textContent = `${batch.BatchID} - ${batch.CourseName} (${batch.Status})`;
-        select.appendChild(option);
-    });
+// Load statuses dynamically
+async function loadStatuses() {
+    const statusSelect = document.getElementById("BatchStatus");
+
+    try {
+        const response = await fetch("/getStudentBatches");
+        const statuses = await response.json();
+
+        statusSelect.innerHTML = `<option value="">Select Status</option>`;
+
+        statuses.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.Status;
+            option.textContent = item.Status;
+            statusSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Failed to fetch statuses", error);
+    }
+}
+
+// Load batch codes based on selected status
+async function loadBatchCodes() {
+    const status = document.getElementById("BatchStatus").value;
+    const batchSelect = document.getElementById("BatchCode");
+    batchSelect.innerHTML = `<option value="">Select Batch</option>`;
+
+    if (!status) return;
+
+    try {
+        const response = await fetch(`/getBatchesByStatus/${status}`);
+        const batches = await response.json();
+
+        batches.forEach(batch => {
+            const option = document.createElement("option");
+            option.value = batch.BatchCode;
+            option.textContent = batch.BatchCode;
+            batchSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error loading batch codes", error);
+    }
 }
 //**html actions */
 async function getDetails() {
-    const batchID = document.getElementById("batch").value;
+    const batchID = document.getElementById("BatchCode").value;
     if (!batchID) return;
 
     const response = await fetch(`/getStudentsdata?batchID=${batchID}`);
