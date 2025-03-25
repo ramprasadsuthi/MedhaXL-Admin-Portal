@@ -49,27 +49,23 @@ document.addEventListener('DOMContentLoaded', setupMobileView);
 document.getElementById("adminLoginForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // Prevent form submission
 
-    const email = document.getElementById("adminEmail").value;
+    const emailOrusername = document.getElementById("adminEmailOrusername").value;
     const password = document.getElementById("adminPassword").value;
 
     try {
         const response = await fetch("/loginpage", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ emailOrusername, password })
         });
 
-        const data = await response.json();     
+        const data = await response.json();
 
         if (data.success) {
-            // Store the JWT token in localStorage or sessionStorage
             localStorage.setItem("authToken", data.token);
-
-            // Redirect to a protected page (e.g., studentform.html)
             window.location.href = "/PAGES/Dashboard.html";
-
         } else {
-            alert("Invalid credentials! Try again.");
+            alert(data.message);
         }
     } catch (error) {
         console.error("Error during login:", error);

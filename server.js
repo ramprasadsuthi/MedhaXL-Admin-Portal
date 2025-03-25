@@ -27,10 +27,15 @@ const batchControllers = require("./src/backend/controllers/batchController");
 const trainerController = require("./src/backend/controllers/trainerController");
 const paymentscontrollers = require("./src/backend/controllers/paymentscontrollers");
 const certificateController = require("./src/backend/controllers/certificateController");
+const securityController = require("./src/backend/controllers/securityController");
 
 
 // << AUTH ROUTES >>
 app.post('/loginpage', authController.login);
+
+// <<< SECURITY ROUTS>>
+app.get('/get-user-data', securityController.getUserData);
+app.post('/update-security', securityController.updateSecurity);
 
 
 // << ENQUIRY ROUTES >>>

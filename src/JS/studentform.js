@@ -1,12 +1,12 @@
 // Sidebar Toggle sidebar
 document.querySelector('.menu-icon').addEventListener('click', function () {
-	document.querySelector('.sidebar').classList.toggle('show');
-	// Toggle between 'menu' and 'cancel' icon
-	if (this.textContent === "menu") {
-		this.textContent = "cancel";
-	} else {
-		this.textContent = "menu";
-	}
+    document.querySelector('.sidebar').classList.toggle('show');
+    // Toggle between 'menu' and 'cancel' icon
+    if (this.textContent === "menu") {
+        this.textContent = "cancel";
+    } else {
+        this.textContent = "menu";
+    }
 });
 
 
@@ -18,31 +18,31 @@ const profileDropdown = document.querySelector('.profile-dropdown');
 
 // Toggle notification dropdown
 notificationIcon.addEventListener('click', function (event) {
-	notificationDropdown.classList.toggle('show');
-	profileDropdown.classList.remove('show'); // Close profile if open
-	event.stopPropagation();
+    notificationDropdown.classList.toggle('show');
+    profileDropdown.classList.remove('show'); // Close profile if open
+    event.stopPropagation();
 });
 
 // Toggle profile dropdown
 profileIcon.addEventListener('click', function (event) {
-	profileDropdown.classList.toggle('show');
-	notificationDropdown.classList.remove('show'); // Close notifications if open
-	event.stopPropagation();
+    profileDropdown.classList.toggle('show');
+    notificationDropdown.classList.remove('show'); // Close notifications if open
+    event.stopPropagation();
 });
 
 // Close dropdowns when clicking outside
 window.addEventListener('click', function () {
-	notificationDropdown.classList.remove('show');
-	profileDropdown.classList.remove('show');
+    notificationDropdown.classList.remove('show');
+    profileDropdown.classList.remove('show');
 });
 
 // Prevent closing when clicking inside the dropdowns
 notificationDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 profileDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 //**end profile and notification */
@@ -179,6 +179,20 @@ function updateSubCategory() {
     }
 }
 
+window.onload = function () {
+    const yearSelect = document.getElementById("yearPassing");
+    const currentYear = new Date().getFullYear();
+
+    // Example range: from current year to 1980
+    for (let year = currentYear; year >= 1980; year--) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    }
+};
+
+
 // Fetch location details based on pincode
 async function fetchLocationDetails() {
     const pincodeInput = document.getElementById('pincode');
@@ -277,7 +291,8 @@ function previewForm() {
 
     // Group form data by sections
     const sections = {
-        'Training Details': ['trainingPartner', 'course'],
+        'Campus': ['Campus'],
+        'Training Details': ['trainingPartner', 'course', 'batchCode', 'Status'],
         'Personal Details': ['candidateName', 'surname', 'gender', 'dob', 'age', 'religion', 'category', 'subCategory', 'mobile', 'maritalStatus', 'bloodGroup', 'email'],
         'Educational Details': ['minQualification', 'yearPassing', 'highestQualification', 'physicallyHandicapped'],
         'Guardian Details': ['guardianName', 'guardianOccupation', 'guardianContact', 'guardianIncome'],
@@ -380,6 +395,7 @@ function handleSubmit(event) {
         trainingPartner: document.getElementById('trainingPartner').value,
         course: document.getElementById('course').value,
         batchCode: document.getElementById('batchCode').value,
+        Status: document.getElementById('Status').value,
         candidateName: document.getElementById('candidateName').value,
         surname: document.getElementById('surname').value,
         gender: document.getElementById('gender').value,

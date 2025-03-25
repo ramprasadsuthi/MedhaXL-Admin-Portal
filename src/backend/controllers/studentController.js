@@ -8,36 +8,43 @@ const studentController = {
         const {
             campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory,
             mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped,
-            guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, CourseFee, discount, totalfee, totaldue } = req.body;
+            guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, CourseFee, discount, totalfee, totaldue, Status } = req.body;
 
-        const sql = `INSERT INTO student (Campus, TrainingPartner, Course, BatchCode, FirstName, LastName, Gender, DateOfBirth, Age, Religion, Category, SubCategory, MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName, GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue) 
+        const sql =
+            `INSERT INTO student (Campus, TrainingPartner, Course, BatchCode, FirstName, LastName, Gender, DateOfBirth, Age, Religion, Category, SubCategory,
+         MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName,
+          GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue, Status) 
                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-        db.query(sql, [campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory, mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped, guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, CourseFee, discount, totalfee, totaldue], (err, result) => {
-            if (err) {
-                console.error('Error storing data:', err);
-                return res.status(500).json({ success: false, message: 'Error storing data: ' + err.message });
-            }
-            console.log('Data inserted successfully:', result);
+        db.query(sql,
+            [campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory,
+                mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped,
+                guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state,
+                aadhar, CourseFee, discount, totalfee, totaldue, Status], (err, result) => {
+                    if (err) {
+                        console.error('Error storing data:', err);
+                        return res.status(500).json({ success: false, message: 'Error storing data: ' + err.message });
+                    }
+                    console.log('Data inserted successfully:', result);
 
-            const studentID = result.insertId;
-            const paidDate = new Date();
-            const term = 1;
-            const amountPaid = totalfee;
-            const name = `${candidateName} ${surname}`;
+                    const studentID = result.insertId;
+                    const paidDate = new Date();
+                    const term = 1;
+                    const amountPaid = totalfee;
+                    const name = `${candidateName} ${surname}`;
 
-            const dailySql = `INSERT INTO dailytransactions (StudentID, BatchCode, Course, Name, MobileNumber, AmountPaid, Term, PaidDate) 
+                    const dailySql = `INSERT INTO dailytransactions (StudentID, BatchCode, Course, Name, MobileNumber, AmountPaid, Term, PaidDate) 
                               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-            db.query(dailySql, [studentID, batchCode, course, name, mobile, amountPaid, term, paidDate], (dailyErr, dailyResult) => {
-                if (dailyErr) {
-                    console.error('Error inserting into dailytransactions:', dailyErr);
-                    return res.status(500).json({ success: false, message: 'Error storing daily transaction: ' + dailyErr.message });
-                }
-                console.log('Daily transaction inserted successfully:', dailyResult);
-                res.json({ success: true, message: 'Student Registration successful!' });
-            });
-        });
+                    db.query(dailySql, [studentID, batchCode, course, name, mobile, amountPaid, term, paidDate], (dailyErr, dailyResult) => {
+                        if (dailyErr) {
+                            console.error('Error inserting into dailytransactions:', dailyErr);
+                            return res.status(500).json({ success: false, message: 'Error storing daily transaction: ' + dailyErr.message });
+                        }
+                        console.log('Daily transaction inserted successfully:', dailyResult);
+                        res.json({ success: true, message: 'Student Registration successful!' });
+                    });
+                });
     },
 
     getStudents: (req, res) => {

@@ -203,7 +203,7 @@
 
    .batch-selection label {
        font-weight: bold;
-       color: #000000;
+       color: #0e8faf;
    }
 
    .batch-selection select,
@@ -238,50 +238,133 @@
        }
    }
 
+   table {
+       width: 100%;
+       border-collapse: collapse;
+       background: #f9f9f9;
+   }
 
    th,
    td {
-       padding: 10px;
+       padding: 12px;
        text-align: center;
        border: 1px solid #ccc;
+       font-size: 14px;
+   }
+
+   th {
+       background: #0c7c90;
+       color: white;
+       font-weight: bold;
+       text-transform: uppercase;
+   }
+
+   td {
+       background: #e3f5f7;
+       color: #333;
+   }
+
+   tr:nth-child(even) {
+       background: #d4eef2;
+   }
+
+   tr:hover {
+       background: #bfe4e9;
+       transition: 0.3s ease-in-out;
    }
 
    input[type="text"] {
        width: 100px;
        padding: 5px;
+       border: 1px solid #0c7c90;
        text-align: center;
+       border-radius: 4px;
+       outline: none;
    }
 
+   input[type="text"]:focus {
+       border-color: #085d6b;
+       box-shadow: 0 0 5px rgba(12, 124, 144, 0.5);
+   }
+
+   /* Responsive Design */
    @media (max-width: 768px) {
        table {
            font-size: 12px;
        }
+
+       th,
+       td {
+           padding: 8px;
+       }
+
+       input[type="text"] {
+           width: 80px;
+           font-size: 12px;
+       }
    }
 
+
    /*popup of the vieteh data of the term amout date*/
+   /* Modal Container */
    .modal {
        display: none;
        position: fixed;
-       top: 20%;
+       top: 50%;
        left: 50%;
-       transform: translate(-50%, -20%);
-       width: 500px;
+       transform: translate(-50%, -50%);
+       width: 90%;
+       max-width: 500px;
        background-color: white;
        padding: 20px;
        border-radius: 10px;
        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
        z-index: 1000;
+       animation: fadeIn 0.3s ease-in-out;
    }
 
+   /* Modal Content */
    .modal-content {
        position: relative;
    }
 
+   /* Close Button */
    .close {
        position: absolute;
        top: 10px;
-       right: 20px;
+       right: 15px;
        cursor: pointer;
-       font-size: 20px;
+       font-size: 22px;
+       font-weight: bold;
        color: red;
+       transition: 0.3s;
+   }
+
+   .close:hover {
+       color: darkred;
+   }
+
+   /* Fade-in Animation */
+   @keyframes fadeIn {
+       from {
+           opacity: 0;
+           transform: translate(-50%, -55%);
+       }
+
+       to {
+           opacity: 1;
+           transform: translate(-50%, -50%);
+       }
+   }
+
+   /* Responsive Design */
+   @media (max-width: 600px) {
+       .modal {
+           width: 95%;
+           padding: 15px;
+       }
+
+       .close {
+           font-size: 18px;
+       }
    }

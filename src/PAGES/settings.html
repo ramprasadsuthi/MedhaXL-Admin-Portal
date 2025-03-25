@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Settings</title>
+  <link rel="stylesheet" href="../CSS/settings.css">
+</head>
+
+<body>
+
+  <h1>Settings</h1>
+
+  <div class="tabs">
+    <button data-tab="general" class="active">Name & App Info</button>
+    <button data-tab="users">Users & Roles</button>
+    <button data-tab="security">Security</button>
+  </div>
+
+  <div id="general" class="tab-content active">
+    <h2>Edit App Name</h2>
+    <input type="text" placeholder="App Name">
+    <button class="submit">Save Changes</button>
+  </div>
+
+  <div id="users" class="tab-content">
+    <h2>Register New Admin</h2>
+    <input type="text" id="admin-username" placeholder="Admin Username">
+    <input type="password" id="admin-password" placeholder="Admin Password">
+    <button class="submit" onclick="registerAdmin()">Register Admin</button>
+
+    <h2>Register New Student</h2>
+    <input type="text" id="student-username" placeholder="Student Username">
+    <input type="password" id="student-password" placeholder="Student Password">
+    <button class="submit" onclick="registerStudent()">Register Student</button>
+  </div>
+
+  <div id="security" class="tab-content">
+    <h2>Security Settings</h2>
+
+    <input type="email" id="email" placeholder="Enter Current Email" oninput="showReEnter('email')">
+    <input type="email" id="confirm-email" placeholder="Enter New Email" class="hidden">
+
+    <input type="text" id="username" placeholder="Enter Current Username" oninput="showReEnter('username')">
+    <input type="text" id="confirm-username" placeholder="Enter New Username" class="hidden">
+
+    <input type="password" id="password" placeholder="Enter Current Password" oninput="showReEnter('password')">
+    <input type="password" id="confirm-password" placeholder="Enter New Password" class="hidden">
+
+    <p id="error-message" class="error"></p>
+
+    <button class="submit" onclick="updateSecurity()">Update Security Info</button>
+  </div>
+
+
+</body>
+<script src="../JS/settings.js"></script>
+
+</html>

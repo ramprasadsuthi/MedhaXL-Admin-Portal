@@ -144,10 +144,9 @@ async function getDetails() {
           <td id="totalFee-${student.StudentID}">${student.TotalFee}</td>
           <td><input type="text" id="pay-${student.StudentID}" placeholder="Enter Amount"></td>
           <td id="due-${student.StudentID}">${student.TotalDue}</td>
-          <td><button onclick="openPopup(${student.StudentID})">Pay</button></td>
-           <td>
-            <button onclick="getTerms(${student.StudentID})">View</button>
-          </td>
+          <td><button onclick="openPopup(${student.StudentID})" style="color: #0c7c90; border: 2px solid #0c7c90; background: transparent; padding: 8px 15px; font-size: 14px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s;">Pay</button></td> 
+          <td><button onclick="getTerms(${student.StudentID})" style="color: #fff; background: #0c7c90; border: none; padding: 8px 15px; font-size: 14px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s;">View</button></td>
+
         </tr>`;
         tableBody.innerHTML += row;
     });
