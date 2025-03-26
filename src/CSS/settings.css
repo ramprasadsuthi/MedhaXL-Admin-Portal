@@ -2,19 +2,19 @@ body {
     font-family: Arial, sans-serif;
     padding: 20px;
     background: #f9f9f9;
-  }
+}
 
-  h1 {
+h1 {
     color: #0e8faf;
-  }
+}
 
-  .tabs {
+.tabs {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-  }
+}
 
-  .tabs button {
+.tabs button {
     padding: 10px 20px;
     border: 2px solid #0e8faf;
     background: #fff;
@@ -22,26 +22,26 @@ body {
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.3s ease;
-  }
+}
 
-  .tabs button.active {
+.tabs button.active {
     background: #0e8faf;
     color: #fff;
-  }
+}
 
-  .tab-content {
+.tab-content {
     display: none;
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .tab-content.active {
+.tab-content.active {
     display: block;
-  }
+}
 
-  input {
+input {
     display: block;
     margin: 10px 0;
     padding: 10px;
@@ -49,9 +49,9 @@ body {
     max-width: 400px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
+}
 
-  button.submit {
+button.submit {
     background: #0e8faf;
     color: #fff;
     border: none;
@@ -59,19 +59,24 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
+}
 
-  button.submit:hover {
+button.submit:hover {
     background: #0c7c94;
-  }
+}
 
-  .error {
+.error {
     color: red;
     font-size: 14px;
     margin-top: -8px;
     margin-bottom: 10px;
-  }
+}
 
-  .hidden {
+.hidden {
     display: none;
-  }
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+}

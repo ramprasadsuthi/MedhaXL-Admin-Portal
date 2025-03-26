@@ -52,7 +52,7 @@ async function checkEmail() {
     const result = await response.json();
 
     if (!result.success) {
-        emailError.textContent = "Email not found.";
+        emailError.textContent = "Your Email doesn't exist";
         document.getElementById("username").disabled = true;
     } else {
         document.getElementById("username").disabled = false;
@@ -76,7 +76,7 @@ async function checkUsername() {
     const result = await response.json();
 
     if (!result.success) {
-        usernameError.textContent = "Incorrect username.";
+        usernameError.textContent = "Invalid username";
         document.getElementById("current-password").disabled = true;
     } else {
         document.getElementById("current-password").disabled = false;
@@ -100,7 +100,7 @@ async function checkPassword() {
     const result = await response.json();
 
     if (!result.success) {
-        passwordError.textContent = "Incorrect password.";
+        passwordError.textContent = "Your password is Incorrect";
         document.getElementById("new-password").disabled = true;
     } else {
         document.getElementById("new-password").disabled = false;
@@ -130,8 +130,15 @@ async function updateSecurity() {
     console.log("Response:", result);
 
     if (result.success) {
-        successMessage.textContent = "Changes done successfully. Now you can log in with the new password.";
+        successMessage.textContent = "Update's Done. LOGIN With New Password.";
+        successMessage.classList.add("success");
         updateError.textContent = "";
+
+        // Redirect to login page after 2 seconds
+        setTimeout(() => {
+            window.location.href = "/PAGES/loginpage.html";
+        }, 2000);
+
     } else {
         updateError.textContent = "Failed to update security settings.";
     }
