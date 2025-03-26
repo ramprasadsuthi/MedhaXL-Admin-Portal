@@ -6,7 +6,7 @@ require('dotenv').config();
 
 // Import auth middleware
 const { verifyToken } = require('./src/backend/middleware/authMiddleware');
-const { get } = require('http');
+const { get } = require('https');
 
 const app = express();
 const PORT = 3000;
@@ -28,6 +28,7 @@ const trainerController = require("./src/backend/controllers/trainerController")
 const paymentscontrollers = require("./src/backend/controllers/paymentscontrollers");
 const certificateController = require("./src/backend/controllers/certificateController");
 const securityController = require("./src/backend/controllers/securityController");
+const settingsController = require("./src/backend/controllers/settingsController");
 
 
 // << AUTH ROUTES >>
@@ -39,6 +40,9 @@ app.post("/check-username", securityController.checkUsername);
 app.post("/check-password", securityController.checkPassword);
 app.post("/update-security", securityController.updateSecurity);
 
+// << SETTINGS >>
+app.get("/getAdminDetails", settingsController.getAdminDetails);
+app.post("/updateAdminDetails", settingsController.updateAdminDetails);
 
 
 // << ENQUIRY ROUTES >>>

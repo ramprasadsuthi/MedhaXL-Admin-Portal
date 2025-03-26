@@ -41,6 +41,10 @@ h1 {
     display: block;
 }
 
+.input-container {
+    margin-bottom: 15px;
+}
+
 input {
     display: block;
     margin: 10px 0;
@@ -51,7 +55,7 @@ input {
     border-radius: 5px;
 }
 
-button.submit {
+.submit {
     background: #0e8faf;
     color: #fff;
     border: none;
@@ -59,9 +63,10 @@ button.submit {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 16px;
 }
 
-button.submit:hover {
+.submit:hover {
     background: #0c7c94;
 }
 
@@ -70,10 +75,6 @@ button.submit:hover {
     font-size: 14px;
     margin-top: -8px;
     margin-bottom: 10px;
-}
-
-.hidden {
-    display: none;
 }
 
 .success {

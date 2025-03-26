@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Settings</title>
+  <!-- Google Icons Link -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/settings.css">
 </head>
 
@@ -13,17 +15,29 @@
   <h1>Settings</h1>
 
   <div class="tabs">
-    <button data-tab="general" class="active">Name & App Info</button>
+    <button data-tab="profile" class="active">Admin Details</button>
     <button data-tab="users">Users & Roles</button>
     <button data-tab="security">Security</button>
   </div>
 
-  <div id="general" class="tab-content active">
-    <h2>Edit App Name</h2>
-    <input type="text" placeholder="App Name">
-    <button class="submit">Save Changes</button>
+  <!-- Admin Details -->
+  <div id="profile" class="tab-content active">
+    <h2>Admin Profile</h2>
+
+    <div class="input-container">
+      <label for="profile-username"><strong>Username:</strong></label>
+      <input type="text" id="profile-username">
+    </div>
+    
+    <div class="input-container">
+      <label for="profile-email"><strong>Email Address:</strong></label>
+      <input type="email" id="profile-email">
+    </div>
+    
+    <button class="submit" onclick="saveProfile()">Save Changes</button>
   </div>
 
+  <!-- Users & Roles Section -->
   <div id="users" class="tab-content">
     <h2>Register New Admin</h2>
     <input type="text" id="admin-username" placeholder="Admin Username">

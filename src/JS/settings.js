@@ -1,33 +1,99 @@
-const tabs = document.querySelectorAll('.tabs button');
-const contents = document.querySelectorAll('.tab-content');
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        contents.forEach(c => c.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
+document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".tabs button");
+    const contents = document.querySelectorAll(".tab-content");
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove("active"));
+            contents.forEach(c => c.classList.remove("active"));
+
+            // Add active class to the clicked tab and the corresponding content
+            tab.classList.add("active");
+            document.getElementById(tab.dataset.tab).classList.add("active");
+        });
     });
 });
 
-function showReEnter(type) {
-    const value = document.getElementById(type).value;
-    const confirmField = document.getElementById('confirm-' + type);
-    if (value.trim() !== "") {
-        confirmField.classList.remove('hidden');
-    } else {
-        confirmField.classList.add('hidden');
+//**Admin Details */
+async function fetchAdminDetails(userId) {
+    try {
+        const response = await fetch(`/getAdminDetails?userId=${userId}`); // Send userId in URL
+        const data = await response.json();
+
+        if (data.success) {
+            document.getElementById("profile-username").value = data.username;
+            document.getElementById("profile-email").value = data.email;
+        } else {
+            console.error("Failed to fetch user details:", data.message);
+        }
+    } catch (error) {
+        console.error("Error fetching user details:", error);
     }
 }
 
-function registerAdmin() {
-    const adminUsername = document.getElementById('admin-username').value;
-    alert('New Admin Registered: ' + adminUsername);
+// Function to save updated profile details
+async function saveProfile() {
+    const updatedUsername = document.getElementById("profile-username").value;
+    const updatedEmail = document.getElementById("profile-email").value;
+
+    try {
+        const response = await fetch("/updateAdminDetails", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userId: loggedInUserId, // Send the logged-in user ID
+                username: updatedUsername,
+                email: updatedEmail
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert("Profile updated successfully!");
+        } else {
+            alert("Failed to update profile: " + result.message);
+        }
+    } catch (error) {
+        console.error("Error updating profile:", error);
+    }
 }
 
-function registerStudent() {
-    const studentUsername = document.getElementById('student-username').value;
-    alert('New Student Registered: ' + studentUsername);
+
+// Example Usage: Set logged-in user ID dynamically
+const loggedInUserId = 1; // Change based on session or authentication
+window.onload = () => fetchAdminDetails(loggedInUserId);
+
+//**Admin Details */
+
+
+// Register Admin
+function registerAdmin() {
+    const adminUsername = document.getElementById("admin-username").value.trim();
+    const adminPassword = document.getElementById("admin-password").value.trim();
+
+    if (!adminUsername || !adminPassword) {
+        alert("Please enter both username and password for the admin.");
+        return;
+    }
+
+    alert("New Admin Registered: " + adminUsername);
 }
+
+// Register Student
+function registerStudent() {
+    const studentUsername = document.getElementById("student-username").value.trim();
+    const studentPassword = document.getElementById("student-password").value.trim();
+
+    if (!studentUsername || !studentPassword) {
+        alert("Please enter both username and password for the student.");
+        return;
+    }
+
+    alert("New Student Registered: " + studentUsername);
+}
+
 
 //  update the passwaord
 
