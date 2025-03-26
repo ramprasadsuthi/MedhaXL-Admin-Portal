@@ -1,53 +1,62 @@
-const db = require('../config/database');
-const bcrypt = require('bcrypt');
-
-
+const db = require("../config/database");
+const bcrypt = require("bcrypt");
 
 const securityController = {
-    // Fetch current user data
-    getUserData: (req, res) => {
-        const userId = req.query.userId; // Assuming userId is sent in request
-
-        const query = 'SELECT email, username, password FROM login WHERE id = ?';
-        db.query(query, [userId], (err, result) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({ success: false, message: 'Database error' });
+    // Validate email
+    checkEmail: async (req, res) => {
+        const { email } = req.body;
+        try {
+            const [rows] = await db.promise().query("SELECT * FROM login WHERE email = ?", [email]);
+            if (rows.length > 0) {
+                res.json({ success: true });
+            } else {
+                res.json({ success: false });
             }
-            if (result.length === 0) {
-                return res.status(404).json({ success: false, message: 'User not found' });
-            }
-
-            res.json(result[0]); // Send user details
-        });
+        } catch (error) {
+            res.status(500).json({ success: false, message: "Database error" });
+        }
     },
 
-    // Update security details
-    updateSecurity: async (req, res) => {
-        const { userId, email, username, password } = req.body;
-
+    // Validate username
+    checkUsername: async (req, res) => {
+        const { email, username } = req.body;
         try {
-            // Validate password strength
-            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordRegex.test(password)) {
-                return res.status(400).json({ success: false, message: 'Weak password! Must contain uppercase, lowercase, number, and special character.' });
+            const [rows] = await db.promise().query("SELECT * FROM login WHERE email = ? AND username = ?", [email, username]);
+            if (rows.length > 0) {
+                res.json({ success: true });
+            } else {
+                res.json({ success: false });
             }
-
-            // Hash new password
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            // Update database
-            const query = 'UPDATE login SET email = ?, username = ?, password = ? WHERE id = ?';
-            db.query(query, [email, username, hashedPassword, userId], (err, result) => {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).json({ success: false, message: 'Failed to update security details' });
-                }
-                res.json({ success: true, message: 'Security details updated successfully' });
-            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ success: false, message: 'Server error' });
+            res.status(500).json({ success: false, message: "Database error" });
+        }
+    },
+
+    // Verify password
+
+    checkPassword: async (req, res) => {
+        const { email, password } = req.body;
+        try {
+            const [rows] = await db.promise().query("SELECT password FROM login WHERE email = ?", [email]);
+            if (rows.length === 0) return res.json({ success: false });
+
+            const match = await bcrypt.compare(password, rows[0].password);
+            res.json({ success: match });
+        } catch (error) {
+            res.status(500).json({ success: false, message: "Database error" });
+        }
+    },
+
+
+    // Update Security Settings
+    updateSecurity: async (req, res) => {
+        const { email, newPassword } = req.body;
+        try {
+            const hashedPassword = await bcrypt.hash(newPassword, 12);
+            await db.promise().query("UPDATE login SET password = ? WHERE email = ?", [hashedPassword, email]);
+            res.json({ success: true });
+        } catch (error) {
+            res.status(500).json({ success: false, message: "Database error" });
         }
     },
 };

@@ -39,20 +39,21 @@
   <div id="security" class="tab-content">
     <h2>Security Settings</h2>
 
-    <input type="email" id="email" placeholder="Enter Current Email" oninput="showReEnter('email')">
-    <input type="email" id="confirm-email" placeholder="Enter New Email" class="hidden">
+    <input type="email" id="email" placeholder="Enter Your Email">
+    <span id="email-error" class="error"></span>
 
-    <input type="text" id="username" placeholder="Enter Current Username" oninput="showReEnter('username')">
-    <input type="text" id="confirm-username" placeholder="Enter New Username" class="hidden">
+    <input type="text" id="username" placeholder="Enter Current Username" disabled>
+    <span id="username-error" class="error"></span>
 
-    <input type="password" id="password" placeholder="Enter Current Password" oninput="showReEnter('password')">
-    <input type="password" id="confirm-password" placeholder="Enter New Password" class="hidden">
+    <input type="password" id="current-password" placeholder="Enter Current Password" disabled>
+    <span id="password-error" class="error"></span>
 
-    <p id="error-message" class="error"></p>
+    <input type="password" id="new-password" placeholder="Enter New Password" disabled>
+    <span id="update-error" class="error"></span>
 
     <button class="submit" onclick="updateSecurity()">Update Security Info</button>
+    <p id="success-message" class="success"></p>
   </div>
-
 
 </body>
 <script src="../JS/settings.js"></script>

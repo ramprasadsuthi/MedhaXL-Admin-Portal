@@ -34,8 +34,11 @@ const securityController = require("./src/backend/controllers/securityController
 app.post('/loginpage', authController.login);
 
 // <<< SECURITY ROUTS>>
-app.get('/get-user-data', securityController.getUserData);
-app.post('/update-security', securityController.updateSecurity);
+app.post("/check-email", securityController.checkEmail);
+app.post("/check-username", securityController.checkUsername);
+app.post("/check-password", securityController.checkPassword);
+app.post("/update-security", securityController.updateSecurity);
+
 
 
 // << ENQUIRY ROUTES >>>
