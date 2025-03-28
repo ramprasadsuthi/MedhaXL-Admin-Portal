@@ -1,33 +1,52 @@
-// Check for the JWT token in localStorage and verify its validity  
+// Function to check the validity of the JWT token stored in localStorage
 function checkToken() {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
+
     if (!token) {
-        // No token found, redirect to login
-        window.location.href = '/PAGES/loginpage.html';
+        redirectToLogin("No token found. Please log in.");
         return;
     }
 
-    // Parse the token and check if it's expired
     const decodedToken = parseJwt(token);
+    if (!decodedToken || !decodedToken.exp) {
+        redirectToLogin("Invalid session. Please log in again.");
+        return;
+    }
+
     const currentTime = Math.floor(Date.now() / 1000);
 
     if (decodedToken.exp < currentTime) {
-        // Token expired, redirect to login
-        alert('Session expired. Please log in again.');
-        localStorage.removeItem('authToken');
-        window.location.href = '/PAGES/loginpage.html';
+        localStorage.removeItem("authToken");
+        redirectToLogin("Session expired. Please log in again.");
     }
 }
 
-// Helper function to decode JWT
+// Function to decode JWT safely
 function parseJwt(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
+    try {
+        const base64Url = token.split(".")[1];
+        if (!base64Url) return null;
+
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split("")
+                .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+                .join("")
+        );
+
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        console.error("Error decoding JWT:", error);
+        return null;
+    }
 }
 
-// Call checkToken on page load
-window.onload = checkToken;
+// Redirect to login with an optional alert message
+function redirectToLogin(message) {
+    if (message) alert(message);
+    window.location.href = "/PAGES/loginpage.html";
+}
+
+// Call checkToken when the page loads
+document.addEventListener("DOMContentLoaded", checkToken);

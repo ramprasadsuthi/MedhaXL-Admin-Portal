@@ -8,6 +8,7 @@
   <!-- Google Icons Link -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/settings.css">
+  <script src="../backend/middleware/tokenvalidity.js"></script>
 </head>
 
 <body>
@@ -28,23 +29,26 @@
       <label for="profile-username"><strong>Username:</strong></label>
       <input type="text" id="profile-username">
     </div>
-    
+
     <div class="input-container">
       <label for="profile-email"><strong>Email Address:</strong></label>
       <input type="email" id="profile-email">
     </div>
-    
+
     <button class="submit" onclick="saveProfile()">Save Changes</button>
   </div>
 
   <!-- Users & Roles Section -->
   <div id="users" class="tab-content">
     <h2>Register New Admin</h2>
+    <input type="text" id="admin-email" placeholder="Admin email">
     <input type="text" id="admin-username" placeholder="Admin Username">
     <input type="password" id="admin-password" placeholder="Admin Password">
     <button class="submit" onclick="registerAdmin()">Register Admin</button>
 
     <h2>Register New Student</h2>
+    <input type="text" id="student-fullname" placeholder="Student Full Name">
+    <input type="text" id="student-email" placeholder="Student Email">
     <input type="text" id="student-username" placeholder="Student Username">
     <input type="password" id="student-password" placeholder="Student Password">
     <button class="submit" onclick="registerStudent()">Register Student</button>

@@ -153,130 +153,121 @@
    	padding: 1rem;
    }
 
-   /* Wrapper for Search Bar & Container */
+   /* Wrapper */
    .wrapper {
+   	background: #fff;
+   	padding: 20px;
+   	border-radius: 8px;
+   	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
    	display: flex;
-   	align-items: center;
    	justify-content: space-between;
-   	gap: 30px;
-   	padding: 15px;
+   	align-items: center;
    	flex-wrap: wrap;
-   	/* Allows wrapping for smaller screens */
+   	gap: 20px;
    }
 
-   /* Search Bar Styling */
+   /* Search Bar */
    .search-bar {
    	display: flex;
    	align-items: center;
-   	background: #ffffff;
-   	padding: 10px 15px;
-   	border-radius: 8px;
-   	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-   	width: 465px;
-   	/* Adjust width */
+   	gap: 10px;
+   	background: #fff;
+   	border: 1px solid #ccc;
+   	padding: 10px;
+   	border-radius: 5px;
+   	max-width: 400px;
+   	min-width: 300px;
    	flex-grow: 1;
    }
 
    .search-bar input {
    	border: none;
    	outline: none;
-   	padding: 5px 10px;
+   	flex: 1;
    	font-size: 14px;
-   	flex-grow: 1;
    }
 
-   .search-bar span {
-   	font-size: 22px;
-   	color: #555;
+   .search-bar .material-icons {
    	cursor: pointer;
+   	color: #0e8faf;
+   	transition: color 0.3s ease;
    }
 
-   /* Fixed Width Container */
-   .container {
-   	width: 700px;
-   	max-width: 100%;
-   	background: #ffffff;
-   	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   	border-radius: 8px;
-   	padding: 20px;
-   	display: flex;
-   	flex-direction: column;
-   	gap: 20px;
+   .search-bar .material-icons:hover {
+   	color: #0c7c94;
    }
 
    /* Button Container */
    .btn-container {
-   	list-style: none;
    	display: flex;
    	align-items: center;
-   	justify-content: space-between;
-   	flex-wrap: wrap;
+   	gap: 20px;
+   	list-style: none;
    	padding: 0;
-   	margin: 0;
-   	gap: 15px;
+   	flex-wrap: wrap;
+   	flex-grow: 1;
+   	justify-content: flex-end;
    }
 
-   /* Dropdown Styling */
-   #batchCodeDropdown {
+   .btn-container label {
+   	font-weight: 700;
+   	margin-right: 5px;
+   }
+
+   select {
    	padding: 8px;
-   	border-radius: 5px;
    	border: 1px solid #ccc;
+   	border-radius: 5px;
+   	font-size: 14px;
+   	background: #fff;
+   	cursor: pointer;
    }
 
    /* Buttons */
    button {
-   	padding: 8px 12px;
-   	border: none;
-   	border-radius: 5px;
    	background: #0e8faf;
    	color: white;
-   	cursor: pointer;
+   	border: none;
+   	padding: 10px 15px;
    	font-size: 14px;
+   	border-radius: 5px;
+   	cursor: pointer;
+   	transition: background 0.3s ease;
    }
 
    button:hover {
-   	background: #046e88;
+   	background: #0c7c94;
    }
 
-   /* New Registration Button */
-   .btn-new-registration {
-   	display: flex;
-   	align-items: center;
-   	background: #28a745;
-   	color: white;
-   	padding: 8px 15px;
-   	border-radius: 5px;
-   	text-decoration: none;
-   	font-size: 14px;
+   button[onclick*="studentform.html"] {
+   	background-color: #019D01;
+   	transition: background 0.3s ease;
    }
 
-   .btn-new-registration:hover {
-   	background: #088525;
+   button[onclick*="studentform.html"]:hover {
+   	background-color: #017A01;
    }
 
    /* Responsive Design */
-   @media screen and (max-width: 900px) {
+   @media (max-width: 768px) {
    	.wrapper {
    		flex-direction: column;
+   		/* Stacks elements on smaller screens */
    		align-items: center;
    		gap: 15px;
    	}
 
-   	.search-bar {
+   	.search-bar,
+   	.btn-container {
+   		width: 100%;
+   		max-width: 100%;
+   		justify-content: center;
+   	}
+
+   	select {
    		width: 100%;
    	}
-
-   	.container {
-   		width: 90%;
-   		max-width: 600px;
-   	}
-
-   	.btn-container {
-   		flex-direction: column;
-   		align-items: center;
-   	}
    }
-
 
 
    /* Table Container */

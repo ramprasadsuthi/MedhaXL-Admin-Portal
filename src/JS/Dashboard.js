@@ -44,7 +44,6 @@ notificationDropdown.addEventListener('click', function (event) {
 profileDropdown.addEventListener('click', function (event) {
 	event.stopPropagation();
 });
-
 //**end profile and notification */
 
 // Dropdown Toggle Function
@@ -221,37 +220,68 @@ function fetchLatestEnquiries() {
 }
 //** END,,,,,GET THE LATEST 10 ENQURIES API  */
 
-//**excel  download api */
-// Fetch Batch Codes from Server
-async function fetchBatchCodes() {
-	const response = await fetch("/get-batch-codes");
-	const data = await response.json();
+// Load statuses dynamically on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadStatuses(); // Load status list from DB
+});
 
-	const dropdown = document.getElementById("batchCodeDropdown");
-	dropdown.innerHTML = `<option value="">Select Batch Code</option>`; // Reset dropdown
+// Load statuses from server
+async function loadStatuses() {
+    const statusSelect = document.getElementById("BatchStatus");
 
-	data.forEach(batch => {
-		const option = document.createElement("option");
-		option.value = batch.BatchCode;
-		option.textContent = batch.BatchCode;
-		dropdown.appendChild(option);
-	});
+    try {
+        const response = await fetch("/getStudentBatches");
+        const statuses = await response.json();
+
+        statusSelect.innerHTML = `<option value="">Select Status</option>`;
+
+        statuses.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.Status;
+            option.textContent = item.Status;
+            statusSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Failed to fetch statuses", error);
+    }
 }
-//**End the batch code fetch api */
+
+// Fetch batch codes based on selected status
+async function loadBatchCodes() {
+    const status = document.getElementById("BatchStatus").value;
+    const batchSelect = document.getElementById("batchCodeDropdown"); // Fixed reference
+    batchSelect.innerHTML = `<option value="">Select Batch</option>`;
+
+    if (!status) return;
+
+    try {
+        const response = await fetch(`/getBatchesByStatus/${status}`);
+        const batches = await response.json();
+
+        batches.forEach(batch => {
+            const option = document.createElement("option");
+            option.value = batch.BatchCode;
+            option.textContent = batch.BatchCode;
+            batchSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error loading batch codes", error);
+    }
+}
 
 // Download Excel File for Selected Batch
 function downloadExcel() {
-	const batchCode = document.getElementById("batchCodeDropdown").value;
-	if (!batchCode) {
-		alert("Please select a batch code.");
-		return;
-	}
-	window.location.href = `http://localhost:3000/export-students?batchCode=${batchCode}`;
+    const batchCode = document.getElementById("batchCodeDropdown").value; // Fixed reference
+    if (!batchCode) {
+        alert("Please select a batch code.");
+        return;
+    }
+    window.location.href = `/export-students?batchCode=${batchCode}`;
 }
 
-// Load batch codes on page load
-window.onload = fetchBatchCodes;
-// end the excel downloaded code
+// Load statuses on page load (fixed reference)
+window.onload = loadStatuses;
+
 
 // view content on screen pop up 
 let studentsData = []; // Store all students data

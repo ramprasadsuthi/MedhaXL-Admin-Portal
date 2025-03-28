@@ -184,7 +184,7 @@ function getDetails(studentID) {
 
 
 // Update batch status for ALL students
-// Update individual student status
+
 async function updateStudentStatus(studentID, status) {
     try {
         const response = await fetch(`/updateStudentStatus`, {

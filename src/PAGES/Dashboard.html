@@ -38,7 +38,7 @@
 			<div class="profile-icon">
 				<span class="material-icons">account_circle</span>
 				<div class="profile-dropdown">
-					<a href="#"><span class="material-icons">account_circle</span> Profile</a>
+					<a href="#" id="profile-link"><span class="material-icons">account_circle</span> Profile</a>
 					<a href="settings.html"><span class="material-icons">settings</span> Settings</a>
 					<a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
 				</div>
@@ -116,7 +116,7 @@
 
 		<a href="#"><span class="material-icons">analytics</span> Analytics</a>
 		<a href="#"><span class="material-icons">notifications</span> Notifications</a>
-		<a href="#"><span class="material-icons">settings</span> Settings</a>
+		<a href="settings.html"><span class="material-icons">settings</span> Settings</a>
 	</nav>
 
 	<!-- Main Content -->
@@ -133,21 +133,21 @@
 			<div class="container">
 				<ul class="btn-container">
 					<li>
+						<label>Select Status:</label>
+						<select id="BatchStatus" onchange="loadBatchCodes()">
+							<option value="">Select Status</option>
+						</select>
 						<label for="batchCode">Select Batch:</label>
 						<select id="batchCodeDropdown">
-							<option value="">Select batchCode</option>
+							<option value="">Select batch</option>
 						</select>
 					</li>
 
 					<li>
 						<button onclick="viewStudents()">View</button>
-						&nbsp;
 						<button onclick="downloadExcel()">Download Excel</button>
+						<button onclick="location.href='../PAGES/studentform.html'">New Registration</button>
 					</li>
-					<a href="../PAGES/studentform.html" class="btn-new-registration">
-						<i class='bx bxs-user-plus'></i>
-						<span class="text">New Registration</span>
-					</a>
 				</ul>
 			</div>
 		</div>
