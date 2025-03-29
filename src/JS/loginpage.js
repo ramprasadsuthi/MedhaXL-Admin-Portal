@@ -107,3 +107,40 @@ function parseJwt(token) {
 
 // Call checkTokenExpiration periodically to ensure session validity
 setInterval(checkTokenExpiration, 60 * 1000); // Check every minute
+
+
+//**student login */
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("studentLoginForm").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        const emailOrCanID = document.getElementById("studentEmailOrCanID").value.trim();
+        const password = document.getElementById("studentPassword").value.trim();
+
+        if (!emailOrCanID || !password) {
+            alert("Please fill in both fields.");
+            return;
+        }
+
+        const loginData = { emailOrCanID, password };
+
+        try {
+            const response = await fetch("/studentlogin", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(loginData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                window.location.href = result.redirectTo; // Direct redirection, no alert
+            } else {
+                alert(result.message || "Invalid credentials. Please check your CAN-ID, email, or password.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error logging in. Please try again.");
+        }
+    });
+});

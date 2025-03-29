@@ -41,18 +41,20 @@
   <!-- Users & Roles Section -->
   <div id="users" class="tab-content">
     <h2>Register New Admin</h2>
-    <input type="text" id="admin-email" placeholder="Admin email">
-    <input type="text" id="admin-username" placeholder="Admin Username">
-    <input type="password" id="admin-password" placeholder="Admin Password">
+    <input type="email" id="admin-email" name="admin-email" placeholder="Admin Email" required>
+    <input type="text" id="admin-username" name="admin-username" placeholder="Admin Username" required>
+    <input type="password" id="admin-password" name="admin-password" placeholder="Admin Password" required>
     <button class="submit" onclick="registerAdmin()">Register Admin</button>
 
     <h2>Register New Student</h2>
-    <input type="text" id="student-fullname" placeholder="Student Full Name">
-    <input type="text" id="student-email" placeholder="Student Email">
-    <input type="text" id="student-username" placeholder="Student Username">
-    <input type="password" id="student-password" placeholder="Student Password">
-    <button class="submit" onclick="registerStudent()">Register Student</button>
+    <input type="text" id="student-CAN-ID" name="student-CAN-ID" placeholder="Student CAN-ID" required>
+    <input type="text" id="student-fullname" name="student-fullname" placeholder="Student Full Name" required>
+    <input type="email" id="student-email" name="student-email" placeholder="Student Email" required>
+    <input type="text" id="student-username" name="student-username" placeholder="Student Username" required>
+    <input type="password" id="student-password" name="student-password" placeholder="Student Password" required>
+    <button id="registerStudentBtn" class="submit">Register Student</button>
   </div>
+
 
   <div id="security" class="tab-content">
     <h2>Security Settings</h2>

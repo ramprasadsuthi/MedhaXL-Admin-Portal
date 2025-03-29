@@ -15,6 +15,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+//**create the student logging */
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("registerStudentBtn").addEventListener("click", async function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        const studentData = {
+            can_id: document.getElementById("student-CAN-ID").value,
+            fullname: document.getElementById("student-fullname").value,
+            email: document.getElementById("student-email").value,
+            username: document.getElementById("student-username").value,
+            password: document.getElementById("student-password").value
+        };
+
+        try {
+            const response = await fetch("/new-register-student", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(studentData)
+            });
+
+            const result = await response.json();
+            alert(result.message); // Show success or error message
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error registering student");
+        }
+    });
+});
+
+
+
 //**Admin Details */
 async function fetchAdminDetails(userId) {
     try {

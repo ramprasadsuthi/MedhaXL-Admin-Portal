@@ -33,6 +33,8 @@ const settingsController = require("./src/backend/controllers/settingsController
 
 // << AUTH ROUTES >>
 app.post('/loginpage', authController.login);
+app.post("/new-register-student", authController.registerStudent);
+app.post("/studentlogin", authController.loginStudent);
 
 // <<< SECURITY ROUTS>>
 app.post("/check-email", securityController.checkEmail);
