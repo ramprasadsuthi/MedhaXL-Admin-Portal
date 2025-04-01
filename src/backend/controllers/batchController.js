@@ -10,19 +10,22 @@ const batchControllers = {
             sql += " WHERE status = ?";
         }
 
+        // Execute the query, with or without status filter
         db.query(sql, status !== "All" ? [status] : [], (err, result) => {
             if (err) {
                 console.error("Error fetching batches:", err);
                 return res.status(500).json({ error: "Database error" });
             }
-            res.json(result);
+            res.json(result);// Send the result back
         });
     },
 
+    // Function to update batch status (from the dropdown in frontend)
     updateBatchStatus: (req, res) => {
-        const { batchID, status } = req.body;
+        const { batchID, status } = req.body; // Assuming data comes from request body
         const sql = "UPDATE batches SET status = ? WHERE batchid = ?";
 
+        // Execute update query
         db.query(sql, [status, batchID], (err, result) => {
             if (err) {
                 console.error("Error updating batch status:", err);
@@ -34,7 +37,7 @@ const batchControllers = {
 
     //**for student from */
     Batcheactive: (req, res) => {
-        const sql = "SELECT batchid FROM batches WHERE Status = 'Active'";
+        const sql = "SELECT batchid FROM batches WHERE Status = 'Up Coming'";
         db.query(sql, (err, result) => {
             if (err) {
                 console.error("Error fetching batches:", err);

@@ -1,12 +1,12 @@
 // Sidebar Toggle sidebar
 document.querySelector('.menu-icon').addEventListener('click', function () {
-	document.querySelector('.sidebar').classList.toggle('show');
-	// Toggle between 'menu' and 'cancel' icon
-	if (this.textContent === "menu") {
-		this.textContent = "cancel";
-	} else {
-		this.textContent = "menu";
-	}
+    document.querySelector('.sidebar').classList.toggle('show');
+    // Toggle between 'menu' and 'cancel' icon
+    if (this.textContent === "menu") {
+        this.textContent = "cancel";
+    } else {
+        this.textContent = "menu";
+    }
 });
 
 
@@ -18,31 +18,31 @@ const profileDropdown = document.querySelector('.profile-dropdown');
 
 // Toggle notification dropdown
 notificationIcon.addEventListener('click', function (event) {
-	notificationDropdown.classList.toggle('show');
-	profileDropdown.classList.remove('show'); // Close profile if open
-	event.stopPropagation();
+    notificationDropdown.classList.toggle('show');
+    profileDropdown.classList.remove('show'); // Close profile if open
+    event.stopPropagation();
 });
 
 // Toggle profile dropdown
 profileIcon.addEventListener('click', function (event) {
-	profileDropdown.classList.toggle('show');
-	notificationDropdown.classList.remove('show'); // Close notifications if open
-	event.stopPropagation();
+    profileDropdown.classList.toggle('show');
+    notificationDropdown.classList.remove('show'); // Close notifications if open
+    event.stopPropagation();
 });
 
 // Close dropdowns when clicking outside
 window.addEventListener('click', function () {
-	notificationDropdown.classList.remove('show');
-	profileDropdown.classList.remove('show');
+    notificationDropdown.classList.remove('show');
+    profileDropdown.classList.remove('show');
 });
 
 // Prevent closing when clicking inside the dropdowns
 notificationDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 profileDropdown.addEventListener('click', function (event) {
-	event.stopPropagation();
+    event.stopPropagation();
 });
 
 //**end profile and notification */
@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const statusFilter = document.getElementById("statusFilter");
     const batchTableBody = document.getElementById("batchTableBody");
 
+    // Function to fetch batches based on the status filter
     function fetchBatches(status) {
         fetch(`/batches?status=${status}`)
             .then(response => response.json())
@@ -84,14 +85,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td>${batch.status}</td>
                         <td>
                             <select class="status-dropdown" data-id="${batch.batchid}">
-                                <option value="Active" ${batch.status === "Active" ? "selected" : ""}>Active</option>
-                                <option value="Inactive" ${batch.status === "Inactive" ? "selected" : ""}>Inactive</option>
+                                <option value="ON Going" ${batch.status === "ON Going" ? "selected" : ""}>ON Going</option>
+                                <option value="Completed" ${batch.status === "Completed" ? "selected" : ""}>Completed</option>
+                                <option value="Up Coming" ${batch.status === "Up Coming" ? "selected" : ""}>Up Coming</option>
                             </select>
                         </td>
                     `;
                     batchTableBody.appendChild(row);
                 });
 
+                // Add event listener to the status dropdown for each batch row
                 document.querySelectorAll(".status-dropdown").forEach(select => {
                     select.addEventListener("change", function () {
                         updateBatchStatus(this.dataset.id, this.value);
@@ -101,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Error fetching batches:", error));
     }
 
+    // Function to update batch status
     function updateBatchStatus(batchID, newStatus) {
         fetch("/updateBatchStatus", {
             method: "POST",
@@ -111,14 +115,17 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(response => response.json())
             .then(data => {
-                alert(data.message);
-                fetchBatches(statusFilter.value);
+                alert(data.message); // Show success message
+                fetchBatches(statusFilter.value); // Re-fetch batches to show the updated status
             })
             .catch(error => console.error("Error updating status:", error));
     }
 
+    // Event listener for changing the filter status
     statusFilter.addEventListener("change", () => fetchBatches(statusFilter.value));
 
-    fetchBatches("Active"); // Load active batches by default
+    // Fetch batches with "ON Going" status by default
+    fetchBatches("ON Going"); // Load batches with "ON Going" status by default
 });
+
 

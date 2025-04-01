@@ -1,0 +1,185 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    background-color: #007BFF;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hamburger Menu (Hidden on Desktop) */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+/* Show Hamburger Menu only on Mobile */
+@media (max-width: 768px) {
+    .menu-btn {
+        display: block;
+    }
+}
+
+/* Profile Container */
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Profile */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.profile i {
+    font-size: 28px;
+}
+
+/* Logout Button */
+#logoutBtn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    display: none;
+}
+
+#logoutBtn.show {
+    display: block;
+}
+
+#logoutBtn:hover {
+    background-color: #e60000;
+}
+
+/* Sidebar */
+aside {
+    background: #222;
+    color: white;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    padding: 20px 10px;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hide Sidebar on Mobile */
+@media (max-width: 768px) {
+    aside {
+        transform: translateX(-260px);
+        position: fixed;
+    }
+
+    aside.active {
+        transform: translateX(0);
+    }
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+aside ul li {
+    padding: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+aside ul li:hover,
+aside ul li.active {
+    background: #007BFF;
+}
+
+/* Main Content */
+main {
+    margin-left: 270px;
+    margin-top: 80px;
+    padding: 20px;
+    flex: 1;
+}
+
+/* Adjust Main Content for Mobile */
+@media (max-width: 768px) {
+    main {
+        margin-left: 0;
+    }
+}
+
+/* Dashboard Widgets (Cards) */
+.dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card Styles */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Icon */
+.card i {
+    font-size: 40px;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+/* Hide & Show Elements */
+.hidden {
+    display: none;
+}

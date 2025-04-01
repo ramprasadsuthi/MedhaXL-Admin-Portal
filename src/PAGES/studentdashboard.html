@@ -4,11 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../CSS/studentdashboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-    <h1>under process</h1>
+
+    <!-- Top Navigation Bar -->
+    <header>
+        <h2>MedhaXL Student Dashboard</h2>
+        <div class="profile-container">
+            <div class="profile" onclick="toggleProfileMenu()">
+                <span id="studentName">loading..</span>
+                <i class="material-icons">account_circle</i>
+            </div>
+            <button id="logoutBtn" class="hidden">Logout</button>
+        </div>
+
+        <!-- Hamburger Menu (Only on Mobile) -->
+        <button class="menu-btn" onclick="toggleSidebar()">
+            <i class="material-icons">menu</i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar">
+        <ul>
+            <li class="active"><i class="material-icons">dashboard</i> Dashboard</li>
+            <li><i class="material-icons">book</i> My Courses</li>
+            <li><i class="material-icons">assignment</i> Attendance</li>
+            <li><i class="material-icons">payment</i> Fees</li>
+            <li><i class="material-icons">emoji_events</i> Certificates</li>
+            <li><i class="material-icons">support</i> Support</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <div class="dashboard-widgets">
+            <div class="card">
+                <i class="material-icons">book</i>
+                <h3>Enrolled Course</h3>
+                <p id="courseName">Loading...</p>
+            </div>
+            <div class="card">
+                <i class="material-icons">attach_money</i>
+                <h3>Total Fees</h3>
+                <p>₹<span id="totalFees">0</span></p>
+            </div>
+            <div class="card">
+                <i class="material-icons">payment</i>
+                <h3>Paid Fees</h3>
+                <p>₹<span id="feesPaid">0</span></p>
+            </div>
+            <div class="card">
+                <i class="material-icons">account_balance_wallet</i>
+                <h3>Due Amount</h3>
+                <p>₹<span id="dueAmount">0</span></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 MedhaXL. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../JS/studentdashboard.js"></script>
 </body>
 
 </html>
