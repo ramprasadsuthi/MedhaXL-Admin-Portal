@@ -318,9 +318,9 @@ const studentController = {
 
     // Update Status for entire batch
     updateStudentStatus: (req, res) => {
-        const { studentID, status } = req.body;
+        const { studentID } = req.body;
 
-        // Step 1: Get the BatchCode of the student
+        // Fetch the BatchCode of the student
         const getBatchQuery = `SELECT BatchCode FROM student WHERE StudentID = ?`;
 
         db.query(getBatchQuery, [studentID], (err, result) => {
@@ -331,21 +331,10 @@ const studentController = {
 
             const batchCode = result[0].BatchCode;
 
-            // Step 2: Update all students with that BatchCode
-            const updateBatchQuery = `UPDATE student SET Status = ? WHERE BatchCode = ?`;
-
-            db.query(updateBatchQuery, [status, batchCode], (err2) => {
-                if (err2) {
-                    console.error("DB Error (Update Batch):", err2);
-                    return res.status(500).json({ success: false, message: "Failed to update batch status" });
-                }
-
-                res.json({ success: true, batchCode });
-            });
+            // Instead of updating, return success with batchCode for redirection
+            res.json({ success: true, batchCode });
         });
-    }
-
-
+    },
 
 };
 module.exports = studentController;

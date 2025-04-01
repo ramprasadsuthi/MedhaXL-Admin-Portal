@@ -185,28 +185,29 @@ function getDetails(studentID) {
 
 // Update batch status for ALL students
 
-async function updateStudentStatus(studentID, status) {
+async function updateStudentStatus(studentID) {
     try {
         const response = await fetch(`/updateStudentStatus`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ studentID, status })
+            body: JSON.stringify({ studentID })
         });
 
         const result = await response.json();
+
         if (result.success) {
-            alert(`Status updated for Student ID: ${studentID}`);
-        } if (result.success) {
-            alert(`Status updated for all students in Batch Code: ${result.batchCode}`);
-        }
-        else {
-            alert("Failed to update student status.");
+            const batchCode = result.batchCode;
+
+            // Alert the user and redirect to updateBatchStatus.html
+            alert(`Batch status cannot be updated here. Redirecting to batch update page.`);
+            window.location.href = `updateBatchStatus.html?batchCode=${batchCode}`;
+        } else {
+            alert("Failed to fetch batch code.");
         }
     } catch (error) {
-        console.error("Error updating student status", error);
+        console.error("Error fetching batch code", error);
     }
 }
-
 
 
 //** get the certificate of the student where stun=dent idd matches */
