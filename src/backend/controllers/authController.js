@@ -24,13 +24,16 @@ const authController = {
                     return res.status(401).json({ success: false, message: "Invalid email/username or password" });
                 }
 
-                const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn: '90m' });
+                // Set token expiration time (10 minutes idle timeout)
+                const expiresIn = 10 * 60; // 10 minutes
+                const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn });
+
 
                 res.json({
                     success: true,
                     message: 'Login successful',
                     token: token,
-                    expiresIn: '90m'
+                    expiresIn: expiresIn
                 });
             } else {
                 return res.status(401).json({ success: false, message: "Invalid email/username or password" });

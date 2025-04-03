@@ -7,47 +7,49 @@
     <title>Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/updateBatchStatus.css">
+    <link rel="stylesheet" href="../CSS/studentlogindata.css">
 
 
 </head>
 
 <body>
 
-   <!-- Header -->
-	<header class="header">
-		<!-- Left: Logo -->
-		<div class="logo">
-			<img src="../img/Medhalogo.png" alt="Medhalogo">
-		</div>
+    <!-- Header -->
+    <header class="header">
+        <!-- Left: Logo -->
+        <div class="logo">
+            <img src="../img/Medhalogo.png" alt="Medhalogo">
+        </div>
 
-		<!-- Right: Menu, Notifications, Profile -->
-		<div class="right-section">
-			<span class="menu-icon material-icons">menu</span>
+        <!-- Right: Menu, Notifications, Profile -->
+        <div class="right-section">
+            <span class="menu-icon material-icons">menu</span>
 
-			<!-- Notification Icon -->
-			<div class="notification-icon">
-				<span class="material-icons">notifications</span>
-				<span class="badge">3</span> <!-- Badge for new notifications -->
-				<div class="notification-dropdown">
-					<p>No new notifications</p>
-				</div>
-			</div>
+            <!-- Notification Icon -->
+            <div class="notification-icon">
+                <span class="material-icons">notifications</span>
+                <span class="badge">3</span> <!-- Badge for new notifications -->
+                <div class="notification-dropdown">
+                    <p>Notifications lodging...</p>
+                </div>
+            </div>
 
-			<!-- Profile Icon -->
-			<div class="profile-icon">
-				<span class="material-icons">account_circle</span>
-				<div class="profile-dropdown">
-					<a href="#"><span class="material-icons">account_circle</span> Profile</a>
-					<a href="settings.html"><span class="material-icons">settings</span> Settings</a>
-					<a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
-				</div>
-			</div>
-		</div>
-	</header>
+            <!-- Profile Icon -->
+            <div class="profile-icon">
+                <span class="material-icons">account_circle</span>
+                <div class="profile-dropdown">
+                    <a href="#" id="profile-link"><span class="material-icons">account_circle</span> Profile</a>
+                    <a href="settings.html"><span class="material-icons">settings</span> Settings</a>
+                    <a href="loginpage.html"><span class="material-icons">logout</span> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
+
         <a href="Dashboard.html"><span class="material-icons">dashboard</span> Home</a>
 
         <div class="dropdown-menu students-menu">
@@ -57,7 +59,7 @@
         <div class="submenu students-submenu">
             <a href="studentform.html"><span class="material-icons">group_add</span> Add Student</a>
             <a href="viewstudent.html"><span class="material-icons">visibility</span> View Students</a>
-            <a href="studentlogindata.html"><span class="material-icons">lock</span> Student Login</a>
+            <a href="studentlogin.html"><span class="material-icons">lock</span> Student Login</a>
         </div>
 
         <div class="dropdown-menu courses-menu">
@@ -107,10 +109,10 @@
             <span class="material-icons toggle-icon FInance-toggle">expand_more</span>
         </div>
         <div class="submenu FInance-submenu">
-            <a href="dailypayments.html"><span class="material-icons"><span class="material-symbols-outlined">
+            <a href="batchpayments.html"><span class="material-icons"><span class="material-symbols-outlined">
                         payments
                     </span></span> Batch Payments</a>
-            <a href="#"><span class="material-icons">visibility</span> View Trainers</a>
+            <a href="dailytransactions.html"><span class="material-icons">visibility</span> Daily Payments</a>
         </div>
 
         <a href="#"><span class="material-icons">analytics</span> Analytics</a>
@@ -120,38 +122,32 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="container">
-            <h1>Batch Management</h1>
+        <div class="Wapper">
+            <h2>Student Login Management</h2>
 
-            <label for="statusFilter">Filter Batches:</label>
-            <select id="statusFilter">
-                <option value="ON Going">ON Going</option>
-                <option value="Completed">Completed</option>
-                <option value="Up Coming">Up Coming</option>
-            </select>
+            <!-- Search Input -->
+            <input type="text" id="search-input" placeholder="Search by Email, ID, or Username">
 
             <table>
                 <thead>
-                    <tr style="font-size: small;">
-                        <th>Batch ID</th>
-                        <th>Course Name</th>
-                        <th>Duration</th>
-                        <th>Trainer</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="batchTableBody">
-                    <!-- Batch data will be inserted here -->
+                <tbody id="student-login-table">
+                    <!-- Data will be loaded here via JavaScript -->
                 </tbody>
             </table>
         </div>
 
     </main>
 
-    <!-- Modal Styling -->
-
-    <script src="../JS/updateBatchStatus.js"></script>
+    <script src="../JS/studentlogindata.js"></script>
 
 </body>
 

@@ -99,6 +99,8 @@ app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
 app.get("/getBatchesByStatus/:status", studentController.getBatchesByStatus);
 app.post("/updateStudentStatus", studentController.updateStudentStatus);
 app.get("/getStudentBatches", studentController.getStudentBatches);
+app.get("/student-logins", studentController.getAllStudentLogins);
+app.delete("/student-logins/:can_id", studentController.deleteStudentLogin);
 
 // << BATCH ROUTES >>
 //**FETCH THE API TO VEW THE count of teh running course */

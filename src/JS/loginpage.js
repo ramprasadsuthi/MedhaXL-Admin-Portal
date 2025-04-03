@@ -73,24 +73,32 @@ document.getElementById("adminLoginForm").addEventListener("submit", async funct
     }
 });
 
-// Automatically log out when the token expires
+let idleTimeout; // Store the timeout reference
+
+function resetTokenTimer() {
+    clearTimeout(idleTimeout);
+    idleTimeout = setTimeout(() => {
+        localStorage.removeItem("authToken");
+        alert("Session expired due to inactivity. Please log in again.");
+        window.location.href = "/PAGES/loginpage.html";
+    }, 10 * 60 * 1000); // 10 minutes idle timeout    
+}
+
 function checkTokenExpiration() {
     const token = localStorage.getItem("authToken");
     if (token) {
         const decodedToken = parseJwt(token);
-        const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+        const currentTime = Math.floor(Date.now() / 1000);
 
         if (decodedToken && decodedToken.exp < currentTime) {
-
             alert("Session expired. Please log in again.");
-
             localStorage.removeItem("authToken");
-            window.location.href = "/PAGES/loginpage.html"; // Redirect to login page
+            window.location.href = "/PAGES/loginpage.html";
         }
     }
 }
 
-// Helper function to decode JWT (to check expiration)
+// Decode JWT helper function
 function parseJwt(token) {
     try {
         const base64Url = token.split('.')[1];
@@ -105,8 +113,15 @@ function parseJwt(token) {
     }
 }
 
-// Call checkTokenExpiration periodically to ensure session validity
-setInterval(checkTokenExpiration, 60 * 1000); // Check every minute
+// Reset token expiration timer on user activity
+["mousemove", "keypress", "click"].forEach(event =>
+    document.addEventListener(event, resetTokenTimer)
+);
+
+// Start the timer and check expiration every minute
+resetTokenTimer();
+setInterval(checkTokenExpiration, 60 * 1000);
+
 
 
 //**student login */

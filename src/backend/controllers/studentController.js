@@ -15,7 +15,7 @@ const studentController = {
          MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName,
           GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue, Status) 
                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
+            
         db.query(sql,
             [campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory,
                 mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped,
@@ -333,6 +333,39 @@ const studentController = {
 
             // Instead of updating, return success with batchCode for redirection
             res.json({ success: true, batchCode });
+        });
+    },
+
+    // Fetch all student logins with optional search
+    getAllStudentLogins: (req, res) => {
+        const search = req.query.search || "";
+        const query = `
+        SELECT can_id, fullname, email, username, password
+        FROM student_login
+        WHERE can_id LIKE ? OR email LIKE ? OR username LIKE ?
+    `;
+
+        db.query(query, [`%${search}%`, `%${search}%`, `%${search}%`], (err, results) => {
+            if (err) {
+                console.error("Error fetching student logins:", err);
+                return res.status(500).json({ message: "Server error" });
+            }
+
+            res.json(results); // Send full data including username & password
+        });
+    },
+
+    // Delete a student login
+    deleteStudentLogin: (req, res) => {
+        const { can_id } = req.params;
+        const query = "DELETE FROM student_login WHERE can_id = ?";
+
+        db.query(query, [can_id], (err, result) => {
+            if (err) {
+                console.error("Error deleting student login:", err);
+                return res.status(500).json({ message: "Server error" });
+            }
+            res.json({ message: "Student login deleted successfully!" });
         });
     },
 

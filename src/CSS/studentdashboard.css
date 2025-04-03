@@ -1,185 +1,351 @@
-/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f3f4f6;
+}
+
+.dashboard {
     min-height: 100vh;
-    overflow-x: hidden;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 256px;
+    background-color: #000000;
+    color: white;
+    position: fixed;
+    height: 100vh;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the logo if needed */
+    padding: 1rem;
+}
+
+.logo img {
+    max-width: 200px; /* Ensures it doesn't exceed 200px */
+    height: auto; /* Maintains aspect ratio */
+}
+
+.nav-menu {
+    margin-top: 2rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    /* Adjusted padding for better alignment */
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.menu-toggle {
+    display: block;
+    /* Ensure the menu toggle is visible on mobile */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+
+.nav-item:hover {
+    background-color: #1b1b1c;
+}
+
+.nav-item.active {
+    background-color: #48484a;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 256px;
 }
 
 /* Header */
-header {
-    background-color: #007BFF;
+.header {
+    background-color: white;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+.profile-dropdown {
+    position: relative;
+}
+
+#profile-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+#profile-toggle:hover {
+    background-color: #f3f4f6;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 12rem;
+    padding: 0.5rem 0;
+    z-index: 100;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dropdown-menu a i {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f3f4f6;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #dc2626 !important;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 0.3rem;
+}
+
+.logout i {
+    font-size: 1.2rem;
+    /* Adjust icon size */
+
+}
+
+.logout.person span {
+    flex-grow: 1;
+    line-height: 1;
+    position: relative;
+    top: -1px;
+}
+
+
+/* Content */
+.content {
+    padding: 1.5rem;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.card {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    position: fixed;
+    /* Adjusted alignment for better icon positioning */
+}
+
+
+.card.blue {
+    background-color: #2563eb;
+}
+
+.card.green {
+    background-color: #16a34a;
+}
+
+.card.purple {
+    background-color: #9333ea;
+}
+
+.card.red {
+    background-color: #dc2626;
+}
+
+.card p {
+    font-size: 0.875rem;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+/* Recent Courses */
+.recent-courses {
+    margin-top: 2rem;
+}
+
+.recent-courses h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.course-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.course-card img {
     width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 12rem;
+    object-fit: cover;
 }
 
-/* Hamburger Menu (Hidden on Desktop) */
-.menu-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-    display: none;
+.course-content {
+    padding: 1rem;
 }
 
-/* Show Hamburger Menu only on Mobile */
-@media (max-width: 768px) {
-    .menu-btn {
-        display: block;
-    }
+.course-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
 }
 
-/* Profile Container */
-.profile-container {
-    position: relative;
+.course-content p {
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+.progress {
+    margin-top: 1rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-/* Profile */
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+.progress span {
+    font-size: 0.875rem;
+    color: #6b7280;
 }
 
-.profile i {
-    font-size: 28px;
+.progress-bar {
+    width: 8rem;
+    height: 0.5rem;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
 }
 
-/* Logout Button */
-#logoutBtn {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    top: 40px;
-    display: none;
+.progress-fill {
+    width: 60%;
+    height: 100%;
+    background-color: #22c55e;
+    border-radius: 9999px;
 }
 
-#logoutBtn.show {
-    display: block;
+/* Footer */
+.footer {
+    background-color: white;
+    margin-top: 2rem;
+    padding: 1rem;
+    text-align: center;
+    color: #6b7280;
 }
 
-#logoutBtn:hover {
-    background-color: #e60000;
-}
-
-/* Sidebar */
-aside {
-    background: #222;
-    color: white;
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    padding: 20px 10px;
-    overflow-y: auto;
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Hide Sidebar on Mobile */
-@media (max-width: 768px) {
-    aside {
-        transform: translateX(-260px);
-        position: fixed;
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    aside.active {
+    .courses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 50;
+    }
+
+    .sidebar.show {
         transform: translateX(0);
     }
-}
 
-aside ul {
-    list-style: none;
-    padding: 0;
-}
-
-aside ul li {
-    padding: 15px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-aside ul li:hover,
-aside ul li.active {
-    background: #007BFF;
-}
-
-/* Main Content */
-main {
-    margin-left: 270px;
-    margin-top: 80px;
-    padding: 20px;
-    flex: 1;
-}
-
-/* Adjust Main Content for Mobile */
-@media (max-width: 768px) {
-    main {
+    .main-content {
         margin-left: 0;
     }
-}
 
-/* Dashboard Widgets (Cards) */
-.dashboard-widgets {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
+    .menu-toggle {
+        display: block;
+    }
 
-/* Card Styles */
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: 0.3s ease-in-out;
-}
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Card Icon */
-.card i {
-    font-size: 40px;
-    color: #007BFF;
-    margin-bottom: 10px;
-}
-
-/* Hide & Show Elements */
-.hidden {
-    display: none;
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
 }
