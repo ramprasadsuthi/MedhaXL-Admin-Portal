@@ -89,25 +89,29 @@ const authController = {
         if (!emailOrCanID || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
-
+                    
         try {
-            const checkUserQuery = "SELECT * FROM student_login WHERE can_id = ? OR email = ?";
-            db.query(checkUserQuery, [emailOrCanID, emailOrCanID], async (err, results) => {
+            const query = "SELECT * FROM student_login WHERE can_id = ? OR email = ?";
+            db.query(query, [emailOrCanID, emailOrCanID], async (err, results) => {
                 if (err) return res.status(500).json({ message: "Database error", error: err });
 
                 if (results.length === 0) {
-                    return res.status(401).json({ message: "Invalid CAN-ID, Email, or Password. If the issue persists, please contact the MedhaXl Admin Team." });
+                    return res.status(401).json({ message: "Invalid CAN-ID, Email, or Password." });
                 }
 
                 const student = results[0];
-
                 const isMatch = await bcrypt.compare(password, student.password);
+
                 if (!isMatch) {
-                    return res.status(401).json({ message: "Invalid CAN-ID, Email, or Password. If the issue persists, please contact the MedhaXl Admin Team." });
+                    return res.status(401).json({ message: "Invalid CAN-ID, Email, or Password." });
                 }
 
-                // Redirect without a success message
-                res.status(200).json({ redirectTo: "/PAGES/studentdashboard.html" });
+                const token = jwt.sign({ userId: student.id }, secretKey, { expiresIn: "1h" });
+
+                res.status(200).json({
+                    token,
+                    redirectTo: "/PAGES/studentdashboard.html"
+                });
             });
         } catch (error) {
             res.status(500).json({ message: "Server error", error: error.message });

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 
+
 // Import auth middleware
 const { verifyToken } = require('./src/backend/middleware/authMiddleware');
 const { get } = require('https');
@@ -29,7 +30,7 @@ const paymentscontrollers = require("./src/backend/controllers/paymentscontrolle
 const certificateController = require("./src/backend/controllers/certificateController");
 const securityController = require("./src/backend/controllers/securityController");
 const settingsController = require("./src/backend/controllers/settingsController");
-
+const studentdashboardController = require("./src/backend/controllers/studentdashboardController");
 
 // << AUTH ROUTES >>
 app.post('/loginpage', authController.login);
@@ -41,6 +42,9 @@ app.post("/check-email", securityController.checkEmail);
 app.post("/check-username", securityController.checkUsername);
 app.post("/check-password", securityController.checkPassword);
 app.post("/update-security", securityController.updateSecurity);
+
+//<< student dashboard>>>
+app.get("/profile", verifyToken, studentdashboardController.getProfile);
 
 // << SETTINGS >>
 app.get("/getAdminDetails", settingsController.getAdminDetails);

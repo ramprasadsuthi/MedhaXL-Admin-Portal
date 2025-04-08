@@ -40,3 +40,32 @@ document.addEventListener('click', (event) => {
         }
     }
 });
+
+
+//** API'S START'S */
+document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        window.location.href = "/PAGES/loginpage.html";
+        return;
+    }
+
+    fetch("/profile", {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load profile");
+            return res.json();
+        })
+        .then(data => {
+            const { FullName } = data;
+            document.getElementById("welcome-name").textContent = `Welcome, ${FullName}`;
+        })
+        .catch(err => {
+            console.error("Error loading profile:", err);
+            window.location.href = "/PAGES/loginpage.html";
+        });
+});

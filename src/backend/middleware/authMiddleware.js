@@ -11,19 +11,20 @@ if (!secretKey) {
 function verifyToken(req, res, next) {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader) {
         return res.status(403).json({ success: false, message: "Access denied. No token provided." });
     }
 
-    const token = authHeader.split(" ")[1];
+    // If token starts with "Bearer ", split it out
+    const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
 
     jwt.verify(token, secretKey, (err, decoded) => {
         if (err) {
             return res.status(401).json({ success: false, message: "Invalid or expired token." });
         }
 
-        req.userId = decoded.userId; // Attach user ID to request
-        next(); // Proceed to the next middleware/route
+        req.userId = decoded.userId;
+        next();
     });
 }
 

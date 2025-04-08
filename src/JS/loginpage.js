@@ -127,7 +127,7 @@ setInterval(checkTokenExpiration, 60 * 1000);
 //**student login */
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("studentLoginForm").addEventListener("submit", async function (event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
 
         const emailOrCanID = document.getElementById("studentEmailOrCanID").value.trim();
         const password = document.getElementById("studentPassword").value.trim();
@@ -148,8 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const result = await response.json();
 
-            if (response.ok) {
-                window.location.href = result.redirectTo; // Direct redirection, no alert
+            if (response.ok && result.token) {
+                localStorage.setItem("authToken", result.token);
+                window.location.href = result.redirectTo;
             } else {
                 alert(result.message || "Invalid credentials. Please check your CAN-ID, email, or password.");
             }
