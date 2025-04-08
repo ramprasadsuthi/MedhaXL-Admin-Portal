@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch("/profile", {
         headers: {
-            "Authorization": `Bearer ${token}`
+            "Authorization": "Bearer " + token
         }
     })
         .then(res => {
@@ -61,8 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return res.json();
         })
         .then(data => {
-            const { FullName } = data;
+            const { FullName, Course } = data;
+
             document.getElementById("welcome-name").textContent = `Welcome, ${FullName}`;
+            document.getElementById("enrolled-course").textContent = Course || "No course enrolled";
         })
         .catch(err => {
             console.error("Error loading profile:", err);
