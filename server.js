@@ -143,7 +143,8 @@ app.get('/protected', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'Dashboard.html'));
 });
 // Static file serving
-app.use(express.static(path.join(__dirname, 'src'))); // Serve all static files from the src directory
+// server.js
+app.use(express.static(path.join(__dirname, "src")));// Serve all static files from the src directory
 
 
 // Start server

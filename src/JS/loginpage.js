@@ -150,8 +150,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.ok && result.token) {
                 localStorage.setItem("authToken", result.token);
-                window.location.href = result.redirectTo;
-            } else {
+
+                const redirectTo = result.redirectTo || "/PAGES/studentdashboard.html";
+                console.log("Redirecting to:", redirectTo);
+                window.location.href = redirectTo;
+            }
+
+            else {
                 alert(result.message || "Invalid credentials. Please check your CAN-ID, email, or password.");
             }
         } catch (error) {

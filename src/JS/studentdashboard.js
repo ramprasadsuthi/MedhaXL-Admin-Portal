@@ -61,11 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
             return res.json();
         })
         .then(data => {
-            const { FullName, Course } = data;
+            const { FullName, Course, CourseFee, DiscountAppiled, TotalFee, TotalDue } = data;
+
+            const fee = parseFloat(CourseFee) || 0;
+            const discount = parseFloat(DiscountAppiled) || 0;
+            const totalfee = fee - discount;
 
             document.getElementById("welcome-name").textContent = `Welcome, ${FullName}`;
             document.getElementById("enrolled-course").textContent = Course || "No course enrolled";
+            document.getElementById("totalfee").textContent = `₹${totalfee.toLocaleString()}`;
+            document.getElementById("feepaid").textContent = `₹${TotalFee.toLocaleString()}`;
+            document.getElementById("due-amount").textContent = `₹${TotalDue?.toLocaleString() || "0"}`;
         })
+
         .catch(err => {
             console.error("Error loading profile:", err);
             window.location.href = "/PAGES/loginpage.html";
