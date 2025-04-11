@@ -282,48 +282,55 @@ function validateForm() {
 
 function previewForm() {
     if (!validateForm()) {
+        alert('Please fill all required fields correctly before previewing.');
         return;
     }
 
     const form = document.getElementById('registrationForm');
     const formData = new FormData(form);
-    let previewHTML = '';
+    let previewHTML = '<div class="preview-container">';
 
-    // Group form data by sections
+    // Group form data by sections with all fields included
     const sections = {
-        'Campus': ['Campus'],
+        'Campus Details': ['campus'],
         'Training Details': ['trainingPartner', 'course', 'batchCode', 'Status'],
         'Personal Details': ['candidateName', 'surname', 'gender', 'dob', 'age', 'religion', 'category', 'subCategory', 'mobile', 'maritalStatus', 'bloodGroup', 'email'],
         'Educational Details': ['minQualification', 'yearPassing', 'highestQualification', 'physicallyHandicapped'],
         'Guardian Details': ['guardianName', 'guardianOccupation', 'guardianContact', 'guardianIncome'],
         'Address Details': ['doorNo', 'village', 'mandal', 'pincode', 'district', 'state'],
         'Identity Details': ['aadhar'],
-        'Fee': ['CourseFee', 'discount', 'totalfee', 'totaldue']
+        'Fee Details': ['CourseFee', 'discount', 'totalfee', 'totaldue']
     };
 
-    // Generate preview HTML
+
+    // Generate preview HTML with better formatting
     for (const [section, fields] of Object.entries(sections)) {
         previewHTML += `
             <div class="preview-section">
-                <h3>${section}</h3>
+                <h3 class="section-title">${section}</h3>
                 <div class="preview-grid">
         `;
 
         fields.forEach(field => {
             const element = document.getElementById(field);
-            const value = element.type === 'select-one' ?
-                element.options[element.selectedIndex]?.text :
-                element.value;
+            if (element) {
+                let value = '';
+                if (element.type === 'select-one') {
+                    value = element.options[element.selectedIndex]?.text || 'Not selected';
+                } else {
+                    value = element.value || 'Not provided';
+                }
 
-            if (value) {
+                const label = element.previousElementSibling?.textContent.replace(' *', '') || field;
                 previewHTML += `
-                    <div class="preview-item" style="display: flex; justify-content: space-between; align-items: center;">
-                        <div class="preview-label" style="flex: 1;">${element.previousElementSibling.textContent.replace(' *', '')}</div>
-                        <div class="preview-value" style="flex: 2;">${value}</div>
+                    <div class="preview-item">
+                        <div class="preview-label">${label}</div>
+                        <div class="preview-value">${value}</div>
                     </div>
                 `;
             }
         });
+
 
         previewHTML += `
                 </div>
@@ -331,9 +338,17 @@ function previewForm() {
         `;
     }
 
-    document.getElementById('previewContent').innerHTML = previewHTML;
-    document.getElementById('previewModal').style.display = 'block';
+    previewHTML += '</div>'; // Close preview-container
+    
+    const previewContent = document.getElementById('previewContent');
+    previewContent.innerHTML = previewHTML;
+    
+    const modal = document.getElementById('previewModal');
+    modal.style.display = 'block';
+    modal.style.zIndex = '1000';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
 }
+
 
 function closePreview() {
     document.getElementById('previewModal').style.display = 'none';
