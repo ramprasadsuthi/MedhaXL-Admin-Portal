@@ -288,30 +288,62 @@ function previewForm() {
 
     const form = document.getElementById('registrationForm');
     const formData = new FormData(form);
-    let previewHTML = '<div class="preview-container">';
+    let previewHTML = `
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Application Preview</h1>
+                <p>Please review your information before submitting</p>
+            </div>
+    `;
 
-    // Group form data by sections with all fields included
-    const sections = {
-        'Campus Details': ['campus'],
-        'Training Details': ['trainingPartner', 'course', 'batchCode', 'Status'],
-        'Personal Details': ['candidateName', 'surname', 'gender', 'dob', 'age', 'religion', 'category', 'subCategory', 'mobile', 'maritalStatus', 'bloodGroup', 'email'],
-        'Educational Details': ['minQualification', 'yearPassing', 'highestQualification', 'physicallyHandicapped'],
-        'Guardian Details': ['guardianName', 'guardianOccupation', 'guardianContact', 'guardianIncome'],
-        'Address Details': ['doorNo', 'village', 'mandal', 'pincode', 'district', 'state'],
-        'Identity Details': ['aadhar'],
-        'Fee Details': ['CourseFee', 'discount', 'totalfee', 'totaldue']
-    };
+    // Create form sections matching the original form structure
+    const formSections = [
+        {
+            title: 'Campus Details',
+            fields: ['campus']
+        },
+        {
+            title: 'Training Details',
+            fields: ['trainingPartner', 'course', 'batchCode', 'Status']
+        },
+        {
+            title: 'Personal Details',
+            fields: ['candidateName', 'surname', 'gender', 'dob', 'age', 'religion', 
+                    'category', 'subCategory', 'mobile', 'maritalStatus', 'bloodGroup', 'email']
+        },
+        {
+            title: 'Educational Details',
+            fields: ['minQualification', 'yearPassing', 'highestQualification', 'physicallyHandicapped']
+        },
+        {
+            title: 'Guardian Details',
+            fields: ['guardianName', 'guardianOccupation', 'guardianContact', 'guardianIncome']
+        },
+        {
+            title: 'Address Details',
+            fields: ['doorNo', 'village', 'mandal', 'pincode', 'district', 'state']
+        },
+        {
+            title: 'Identity Details',
+            fields: ['aadhar']
+        },
+        {
+            title: 'Fee Details',
+            fields: ['CourseFee', 'discount', 'totalfee', 'totaldue']
+        }
+    ];
 
-
-    // Generate preview HTML with better formatting
-    for (const [section, fields] of Object.entries(sections)) {
+    // Generate form-like preview
+    formSections.forEach(section => {
         previewHTML += `
-            <div class="preview-section">
-                <h3 class="section-title">${section}</h3>
-                <div class="preview-grid">
+            <div class="form-section">
+                <div class="section-header">
+                    <h2>${section.title}</h2>
+                </div>
+                <div class="form-grid">
         `;
 
-        fields.forEach(field => {
+        section.fields.forEach(field => {
             const element = document.getElementById(field);
             if (element) {
                 let value = '';
@@ -323,22 +355,22 @@ function previewForm() {
 
                 const label = element.previousElementSibling?.textContent.replace(' *', '') || field;
                 previewHTML += `
-                    <div class="preview-item">
-                        <div class="preview-label">${label}</div>
+                    <div class="form-group">
+                        <label>${label}</label>
                         <div class="preview-value">${value}</div>
                     </div>
                 `;
             }
         });
 
-
         previewHTML += `
                 </div>
             </div>
         `;
-    }
+    });
 
-    previewHTML += '</div>'; // Close preview-container
+    previewHTML += `</div>`; // Close form-container
+
     
     const previewContent = document.getElementById('previewContent');
     previewContent.innerHTML = previewHTML;
@@ -348,7 +380,6 @@ function previewForm() {
     modal.style.zIndex = '1000';
     modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
 }
-
 
 function closePreview() {
     document.getElementById('previewModal').style.display = 'none';
