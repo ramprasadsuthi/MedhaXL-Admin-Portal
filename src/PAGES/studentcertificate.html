@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - MedhaXL</title>
+    <link rel="stylesheet" href="../CSS/studentcertificate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="../img/logo1.png" alt="Medhalogo">
+            </div>
+
+            <nav class="nav-menu">
+                <a href="studentdashboard.html" class="nav-item">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="material-icons">book</i>
+                    <span>My Courses</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="material-icons">assignment</i>
+                    <span>Assignments</span>
+                </a>
+                <a href="studentcertificate.html" class="nav-item">
+                    <i class="material-icons">emoji_events</i>
+                    <span>Certificates</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="material-icons">help</i>
+                    <span>Support</span>
+                </a>
+            </nav>
+        </aside>
+
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <button id="sidebar-toggle" class="menu-toggle">
+                    <i class="material-icons">menu</i>
+                </button>
+
+                <div class="user-menu">
+                    <span id="welcome-name">Welcome, </span>
+                    <div class="profile-dropdown">
+                        <button id="profile-toggle">
+                            <i class="material-icons">person</i>
+                        </button>
+                        <div class="dropdown-menu" id="profile-menu">
+                            <a href="#"> <i class="material-icons">edit</i>
+                                <span>Edit Profile</span></a>
+                            <a href="loginpage.html" class="logout">
+                                <i class="material-icons">logout</i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="content">
+                <div id="certificateContainer">
+                    <p>Loading certificate...</p>
+                </div>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer">
+                © 2025 MedhaXL. All Rights Reserved.
+            </footer>
+        </div>
+    </div>
+
+    <script src="../JS/studentcertificate.js"></script>
+</body>
+
+</html>

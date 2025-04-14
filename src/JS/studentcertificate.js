@@ -59,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
 //** API'S START'S */
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("authToken");
@@ -79,19 +78,26 @@ document.addEventListener("DOMContentLoaded", () => {
             return res.json();
         })
         .then(data => {
-            const { FullName, Course, CourseFee, DiscountAppiled, TotalFee, TotalDue } = data;
+            const { FullName, CertificateData, FileType } = data;
 
-            const fee = parseFloat(CourseFee) || 0;
-            const discount = parseFloat(DiscountAppiled) || 0;
-            const totalfee = fee - discount;
-
+            // Show welcome message
             document.getElementById("welcome-name").textContent = `Welcome, ${FullName}`;
-            document.getElementById("enrolled-course").textContent = Course || "No course enrolled";
-            document.getElementById("totalfee").textContent = `₹${totalfee.toLocaleString()}`;
-            document.getElementById("feepaid").textContent = `₹${TotalFee.toLocaleString()}`;
-            document.getElementById("due-amount").textContent = `₹${TotalDue?.toLocaleString() || "0"}`;
-        })
 
+            const certContainer = document.getElementById("certificateContainer");
+
+            if (CertificateData) {
+                certContainer.innerHTML = `
+                    <h3>Your Certificate</h3>
+                    <embed src="data:application/pdf;base64,${CertificateData}" width="100%" height="500px" type="application/pdf">
+                `;
+            } else {
+                certContainer.innerHTML = `
+                    <p style="font-size: 18px; color: gray;">
+                        Will be available soon after completion of your course.
+                    </p>
+                `;
+            }
+        })
         .catch(err => {
             console.error("Error loading profile:", err);
             window.location.href = "/PAGES/loginpage.html";
