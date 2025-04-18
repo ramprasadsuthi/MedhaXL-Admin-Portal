@@ -123,7 +123,15 @@
         <div class="daily-payments">
             <h2>Batch Payments</h2>
             <div class="batch-selection">
-        
+
+                <!-- Course Type Dropdown -->
+                <div class="form-group">
+                    <label for="CourseType">Course Type:</label>
+                    <select id="CourseType" onchange="loadStatuses()">
+                        <option value="">Select Course Type</option>
+                    </select>
+                </div>
+
                 <!-- Status Dropdown -->
                 <div class="form-group">
                     <label for="BatchStatus">Status:</label>
@@ -131,7 +139,7 @@
                         <option value="">Select Status</option>
                     </select>
                 </div>
-        
+
                 <!-- Batch Code Dropdown -->
                 <div class="form-group">
                     <label for="BatchCode">Batch Code:</label>
@@ -139,15 +147,15 @@
                         <option value="">Select Batch</option>
                     </select>
                 </div>
-        
+
                 <!-- Get Data Button -->
                 <div class="form-group">
                     <button onclick="getDetails()">Get Details</button>
                 </div>
-        
+
             </div>
         </div>
-        
+
         <table>
             <thead>
                 <tr>

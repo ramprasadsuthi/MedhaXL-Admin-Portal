@@ -304,12 +304,12 @@ function previewForm() {
         },
         {
             title: 'Training Details',
-            fields: ['trainingPartner', 'course', 'batchCode', 'Status']
+            fields: ['trainingPartner', 'course', 'batchCode', 'Status', 'CourseType']
         },
         {
             title: 'Personal Details',
-            fields: ['candidateName', 'surname', 'gender', 'dob', 'age', 'religion', 
-                    'category', 'subCategory', 'mobile', 'maritalStatus', 'bloodGroup', 'email']
+            fields: ['candidateName', 'surname', 'gender', 'dob', 'age', 'religion',
+                'category', 'subCategory', 'mobile', 'maritalStatus', 'bloodGroup', 'email']
         },
         {
             title: 'Educational Details',
@@ -371,10 +371,10 @@ function previewForm() {
 
     previewHTML += `</div>`; // Close form-container
 
-    
+
     const previewContent = document.getElementById('previewContent');
     previewContent.innerHTML = previewHTML;
-    
+
     const modal = document.getElementById('previewModal');
     modal.style.display = 'block';
     modal.style.zIndex = '1000';

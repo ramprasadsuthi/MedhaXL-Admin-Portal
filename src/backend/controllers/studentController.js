@@ -8,19 +8,19 @@ const studentController = {
         const {
             campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory,
             mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped,
-            guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, CourseFee, discount, totalfee, totaldue, Status } = req.body;
+            guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state, aadhar, CourseFee, discount, totalfee, totaldue, Status, CourseType } = req.body;
 
         const sql =
             `INSERT INTO student (Campus, TrainingPartner, Course, BatchCode, FirstName, LastName, Gender, DateOfBirth, Age, Religion, Category, SubCategory,
              MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName,
-             GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue, Status) 
+             GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue, Status, CourseType) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
         db.query(sql,
             [campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory,
                 mobile, maritalStatus, bloodGroup, email, minQualification, yearPassing, highestQualification, physicallyHandicapped,
                 guardianName, guardianOccupation, guardianContact, guardianIncome, doorNo, village, mandal, pincode, district, state,
-                aadhar, CourseFee, discount, totalfee, totaldue, Status], (err, result) => {
+                aadhar, CourseFee, discount, totalfee, totaldue, Status, CourseType], (err, result) => {
                     if (err) {
                         console.error('Error storing data:', err);
                         return res.status(500).json({ success: false, message: 'Error storing data: ' + err.message });
@@ -272,6 +272,7 @@ const studentController = {
         });
     },
 
+    // Existing: Get students by batch code
     getStudentsByBatch: (req, res) => {
         const { batchCode } = req.params;
         const query = `SELECT StudentID, BatchCode, Course, FirstName, LastName, MobileNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue, Status FROM student WHERE BatchCode = ?`;
@@ -286,6 +287,47 @@ const studentController = {
         });
     },
 
+    // Get Course Types
+    getCourseTypes: (req, res) => {
+        const query = `SELECT DISTINCT CourseType FROM student`;
+
+        db.query(query, (err, result) => {
+            if (err) {
+                console.error("Error fetching course types:", err);
+                return res.status(500).json({ message: "Failed to fetch course types" });
+            }
+            res.json(result);
+        });
+    },
+
+    // Get status by course type
+    getStatusesByCourseType: (req, res) => {
+        const { courseType } = req.params;
+        const query = `SELECT DISTINCT Status FROM student WHERE CourseType = ?`;
+
+        db.query(query, [courseType], (err, result) => {
+            if (err) {
+                console.error("Error fetching statuses:", err);
+                return res.status(500).json({ message: "Failed to fetch statuses" });
+            }
+            res.json(result);
+        });
+    },
+
+    // Get batch codes by course type and status
+    getBatchesByCourseTypeAndStatus: (req, res) => {
+        const { courseType, status } = req.params;
+        const query = `SELECT DISTINCT BatchCode FROM student WHERE CourseType = ? AND Status = ?`;
+
+        db.query(query, [courseType, status], (err, result) => {
+            if (err) {
+                console.error("Error fetching batches:", err);
+                return res.status(500).json({ message: "Failed to fetch batches" });
+            }
+            res.json(result);
+        });
+    },
+
     // Get distinct statuses from DB
     getStudentBatches: (req, res) => {
         const query = `SELECT DISTINCT Status FROM student WHERE Status IS NOT NULL`;
@@ -296,23 +338,6 @@ const studentController = {
                 return res.status(500).json({ message: "Failed to fetch statuses" });
             }
             res.json(results);
-        });
-    },
-
-
-
-    // Get Batch Codes by Status
-    getBatchesByStatus: (req, res) => {
-        const { status } = req.params;
-        const query = `SELECT DISTINCT BatchCode FROM student WHERE Status = ?`;
-
-        db.query(query, [status], (err, result) => {
-            if (err) {
-                console.error("DB Error:", err);
-                res.status(500).json({ message: "Failed to fetch batches" });
-            } else {
-                res.json(result);
-            }
         });
     },
 

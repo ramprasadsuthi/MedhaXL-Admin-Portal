@@ -99,10 +99,12 @@ app.get("/search", studentController.searchStudents);
 //**fetch the aoi to edit teh data of the students */
 app.put("/update/:id", studentController.updateStudent);
 //**disly the datata to view the fee pending */
+app.get("/getCourseTypes", studentController.getCourseTypes);
+app.get("/getStatusesByCourseType/:courseType", studentController.getStatusesByCourseType);
+app.get("/getBatches/:courseType/:status", studentController.getBatchesByCourseTypeAndStatus);
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
-app.get("/getBatchesByStatus/:status", studentController.getBatchesByStatus);
 app.post("/updateStudentStatus", studentController.updateStudentStatus);
-app.get("/getStudentBatches", studentController.getStudentBatches);
+app.get("/getStudentBatches", studentController.getStudentBatches);  
 app.get("/student-logins", studentController.getAllStudentLogins);
 app.delete("/student-logins/:can_id", studentController.deleteStudentLogin);
 

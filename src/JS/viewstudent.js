@@ -70,40 +70,66 @@ toggleDropdown('.certificate-menu', '.certificate-submenu', '.certificate-toggle
 
 // Get Statuses on page load
 document.addEventListener("DOMContentLoaded", async () => {
-    await loadStatuses(); // Load status list from DB
+    await loadCourseTypes();
 });
 
-// Load statuses dynamically
-async function loadStatuses() {
-    const statusSelect = document.getElementById("BatchStatus");
+// Load Course Types
+async function loadCourseTypes() {
+    const courseTypeSelect = document.getElementById("CourseType");
 
     try {
-        const response = await fetch("/getStudentBatches");
+        const response = await fetch("/getCourseTypes");
+        const types = await response.json();
+
+        courseTypeSelect.innerHTML = `<option value="">Select Course Type</option>`;
+        types.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.CourseType;
+            option.textContent = item.CourseType;
+            courseTypeSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Failed to load course types", error);
+    }
+}
+
+// Load statuses based on Course Type
+async function loadStatuses() {
+    const courseType = document.getElementById("CourseType").value;
+    const statusSelect = document.getElementById("BatchStatus");
+
+    if (!courseType) return;
+
+    try {
+        const response = await fetch(`/getStatusesByCourseType/${courseType}`);
         const statuses = await response.json();
 
         statusSelect.innerHTML = `<option value="">Select Status</option>`;
-
         statuses.forEach(item => {
             const option = document.createElement("option");
             option.value = item.Status;
             option.textContent = item.Status;
             statusSelect.appendChild(option);
         });
+
+        // Clear batch code dropdown
+        document.getElementById("BatchCode").innerHTML = `<option value="">Select Batch</option>`;
     } catch (error) {
         console.error("Failed to fetch statuses", error);
     }
 }
 
-// Load batch codes based on selected status
+// Load batch codes based on selected status and course type
 async function loadBatchCodes() {
     const status = document.getElementById("BatchStatus").value;
+    const courseType = document.getElementById("CourseType").value;
     const batchSelect = document.getElementById("BatchCode");
     batchSelect.innerHTML = `<option value="">Select Batch</option>`;
 
-    if (!status) return;
+    if (!status || !courseType) return;
 
     try {
-        const response = await fetch(`/getBatchesByStatus/${status}`);
+        const response = await fetch(`/getBatches/${courseType}/${status}`);
         const batches = await response.json();
 
         batches.forEach(batch => {
@@ -116,7 +142,6 @@ async function loadBatchCodes() {
         console.error("Error loading batch codes", error);
     }
 }
-
 
 // Get students by batch code
 async function getStudents() {
@@ -141,15 +166,15 @@ async function getStudents() {
                     <td>${student.StudentID}</td>
                     <td style="min-width: 125px;">
                         <select onchange="updateStudentStatus('${student.StudentID}', this.value)" style="
-                    padding: 5px 10px; 
-                    border: 1px solid #ccc; 
-                    border-radius: 5px; 
-                    background-color: #f9f9f9; 
-                    font-size: 12px; 
-                    transition: 0.3s ease; 
-                    width: 100%;
-                     box-sizing: border-box;">
-                             <option value="ON Going" ${student.Status === 'ON Going' ? 'selected' : ''}>ON Going</option>
+                            padding: 5px 10px; 
+                            border: 1px solid #ccc; 
+                            border-radius: 5px; 
+                            background-color: #f9f9f9; 
+                            font-size: 12px; 
+                            transition: 0.3s ease; 
+                            width: 100%;
+                            box-sizing: border-box;">
+                            <option value="ON Going" ${student.Status === 'ON Going' ? 'selected' : ''}>ON Going</option>
                             <option value="Completed" ${student.Status === 'Completed' ? 'selected' : ''}>Completed</option>
                             <option value="Up Coming" ${student.Status === 'Up Coming' ? 'selected' : ''}>Up Coming</option>
                         </select>
@@ -162,12 +187,8 @@ async function getStudents() {
                     <td>${student.DiscountAppiled}</td>
                     <td>${student.TotalFee}</td>
                     <td>${student.TotalDue}</td>
-                    <td>
-                        <button onclick="getDetails('${student.StudentID}')">Get Details</button>
-                    </td>
-                    <td>
-                        <button onclick="checkCertificate('${student.StudentID}')">Certificate</button>
-                    </td>
+                    <td><button onclick="getDetails('${student.StudentID}')">Get Details</button></td>
+                    <td><button onclick="checkCertificate('${student.StudentID}')">Certificate</button></td>
                 </tr>
             `;
             tbody.innerHTML += row;
