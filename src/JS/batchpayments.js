@@ -67,21 +67,43 @@ toggleDropdown('.certificate-menu', '.certificate-submenu', '.certificate-toggle
 
 //**apis starts */
 
-//**get the batch code */
-// Get Statuses on page load
+
+// Load Course Types
 document.addEventListener("DOMContentLoaded", async () => {
-    await loadStatuses(); // Load status list from DB
+    await loadCourseTypes(); // Load course types initially
 });
 
-// Load statuses dynamically
-async function loadStatuses() {
-    const statusSelect = document.getElementById("BatchStatus");
+async function loadCourseTypes() {
+    const courseTypeSelect = document.getElementById("CourseType");
 
     try {
-        const response = await fetch("/getStudentBatches");
-        const statuses = await response.json();
+        const response = await fetch("/getCourseTypes");
+        const courseTypes = await response.json();
 
-        statusSelect.innerHTML = `<option value="">Select Status</option>`;
+        courseTypeSelect.innerHTML = `<option value="">Select Course Type</option>`;
+
+        courseTypes.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.CourseType;
+            option.textContent = item.CourseType;
+            courseTypeSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Failed to fetch course types", error);
+    }
+}
+
+//Pass Selected CourseType
+async function loadStatuses() {
+    const courseType = document.getElementById("CourseType").value;
+    const statusSelect = document.getElementById("BatchStatus");
+    statusSelect.innerHTML = `<option value="">Select Status</option>`;
+
+    if (!courseType) return;
+
+    try {
+        const response = await fetch(`/getStatusesByCourseType/${courseType}`);
+        const statuses = await response.json();
 
         statuses.forEach(item => {
             const option = document.createElement("option");
@@ -94,16 +116,17 @@ async function loadStatuses() {
     }
 }
 
-// Load batch codes based on selected status
+// Use CourseType and Status
 async function loadBatchCodes() {
+    const courseType = document.getElementById("CourseType").value;
     const status = document.getElementById("BatchStatus").value;
     const batchSelect = document.getElementById("BatchCode");
     batchSelect.innerHTML = `<option value="">Select Batch</option>`;
 
-    if (!status) return;
+    if (!courseType || !status) return;
 
     try {
-        const response = await fetch(`/getBatchesByStatus/${status}`);
+        const response = await fetch(`/getBatches/${courseType}/${status}`);
         const batches = await response.json();
 
         batches.forEach(batch => {
@@ -116,6 +139,8 @@ async function loadBatchCodes() {
         console.error("Error loading batch codes", error);
     }
 }
+
+
 //**html actions */
 async function getDetails() {
     const batchID = document.getElementById("BatchCode").value;
