@@ -49,9 +49,9 @@ const batchControllers = {
     },
 
 
-    //**active courses count */
+    //**Up Coming courses count */
     Activecount: (req, res) => {
-        const query = "SELECT COUNT(*) AS activeCourses FROM batches WHERE status = 'Active'";
+        const query = "SELECT COUNT(*) AS activeCourses FROM batches WHERE status = 'Up Coming'";
         db.query(query, (err, result) => {
             if (err) {
                 console.log(err);
@@ -78,13 +78,13 @@ const batchControllers = {
         });
     },
 
-    //** get the active courses pop up */
+    //** get the On Going courses pop up */
     getActiveCourses: (req, res) => {
-        const sql = `SELECT batchid, coursename, duration, trainer, status FROM batches WHERE status = 'Active'`;
+        const sql = `SELECT batchid, coursename, duration, trainer, status FROM batches WHERE status = 'On Going'`;
 
         db.query(sql, (err, results) => {
             if (err) {
-                console.error("Fetching Active Courses Error:", err);
+                console.error("Fetching On Going Courses Error:", err);
                 res.status(500).json({ message: "Database Error" });
             } else {
                 res.status(200).json(results);
