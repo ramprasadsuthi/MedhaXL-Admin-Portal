@@ -73,54 +73,41 @@ document.getElementById("adminLoginForm").addEventListener("submit", async funct
     }
 });
 
-let idleTimeout; // Store the timeout reference
+let idleTimeout;
+const IDLE_LIMIT = 60 * 60 * 1000; // 60 minutes
 
-function resetTokenTimer() {
+function startIdleTimer() {
     clearTimeout(idleTimeout);
+
     idleTimeout = setTimeout(() => {
-        localStorage.removeItem("authToken");
+        // Set a flag to indicate the session has expired due to inactivity
+        localStorage.setItem("idleExpired", "true");
+    }, IDLE_LIMIT);
+}
+
+function checkIdleExpiryOnActivity() {
+    const expired = localStorage.getItem("idleExpired");
+
+    if (expired === "true") {
         alert("Session expired due to inactivity. Please log in again.");
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("idleExpired");
         window.location.href = "/PAGES/loginpage.html";
-    }, 10 * 60 * 1000); // 10 minutes idle timeout    
-}
-
-function checkTokenExpiration() {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-        const decodedToken = parseJwt(token);
-        const currentTime = Math.floor(Date.now() / 1000);
-
-        if (decodedToken && decodedToken.exp < currentTime) {
-            alert("Session expired. Please log in again.");
-            localStorage.removeItem("authToken");
-            window.location.href = "/PAGES/loginpage.html";
-        }
+    } else {
+        startIdleTimer(); // Reset the timer if still active
     }
 }
 
-// Decode JWT helper function
-function parseJwt(token) {
-    try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-        return JSON.parse(jsonPayload);
-    } catch (error) {
-        console.error("Failed to parse JWT token:", error);
-        return null;
-    }
-}
-
-// Reset token expiration timer on user activity
+// Events that reset the timer or handle expiration
 ["mousemove", "keypress", "click"].forEach(event =>
-    document.addEventListener(event, resetTokenTimer)
+    document.addEventListener(event, checkIdleExpiryOnActivity)
 );
 
-// Start the timer and check expiration every minute
-resetTokenTimer();
-setInterval(checkTokenExpiration, 60 * 1000);
+// Start the timer on page load
+document.addEventListener("DOMContentLoaded", () => {
+    startIdleTimer();
+});
+
 
 
 

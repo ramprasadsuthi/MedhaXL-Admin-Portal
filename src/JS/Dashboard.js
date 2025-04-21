@@ -246,12 +246,12 @@ async function loadStatuses() {
     }
 }
 
-// Fetch batch codes based on selected status
+// Load batch codes based on selected status
 async function loadBatchCodes() {
     const status = document.getElementById("BatchStatus").value;
-    const batchSelect = document.getElementById("batchCodeDropdown"); // Fixed reference
-    batchSelect.innerHTML = `<option value="">Select Batch</option>`;
+    const batchSelect = document.getElementById("batchCodeDropdown");
 
+    batchSelect.innerHTML = `<option value="">Select Batch</option>`;
     if (!status) return;
 
     try {

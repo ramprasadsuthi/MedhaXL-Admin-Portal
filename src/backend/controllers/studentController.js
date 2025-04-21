@@ -14,7 +14,7 @@ const studentController = {
             `INSERT INTO student (Campus, TrainingPartner, Course, BatchCode, FirstName, LastName, Gender, DateOfBirth, Age, Religion, Category, SubCategory,
              MobileNumber, MaritalStatus, BloodGroup, EmailID, MinQualification, YearOfPassingQualifyingExam, HighestQualification, PhysicallyHandicapped, GuardianName,
              GuardianOccupation, GuardianPhone, GuardianAnnualIncome, DoorNo, Town, Mandal, PinCode, District, State, AadharNumber, CourseFee, DiscountAppiled, TotalFee, TotalDue, Status, CourseType) 
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
         db.query(sql,
             [campus, trainingPartner, course, batchCode, candidateName, surname, gender, dob, age, religion, category, subCategory,
@@ -145,8 +145,6 @@ const studentController = {
         });
     },
     //**end the  Batch Codes*/
-
-
 
     // **API to Export Students Data to Excel**
     exportStudents: async (req, res) => {
@@ -336,6 +334,20 @@ const studentController = {
             if (err) {
                 console.error("DB Error (Get Statuses):", err);
                 return res.status(500).json({ message: "Failed to fetch statuses" });
+            }
+            res.json(results);
+        });
+    },
+    // Get all batch codes by selected Status
+    getBatchesByStatus: (req, res) => {
+        const status = req.params.status;
+
+        const query = `SELECT DISTINCT BatchCode FROM student WHERE Status = ? AND BatchCode IS NOT NULL`;
+
+        db.query(query, [status], (err, results) => {
+            if (err) {
+                console.error("DB Error (Get BatchCodes):", err);
+                return res.status(500).json({ message: "Failed to fetch batch codes" });
             }
             res.json(results);
         });

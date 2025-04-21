@@ -104,7 +104,9 @@ app.get("/getStatusesByCourseType/:courseType", studentController.getStatusesByC
 app.get("/getBatches/:courseType/:status", studentController.getBatchesByCourseTypeAndStatus);
 app.get("/getStudents/:batchCode", studentController.getStudentsByBatch);
 app.post("/updateStudentStatus", studentController.updateStudentStatus);
-app.get("/getStudentBatches", studentController.getStudentBatches);  
+app.get("/getStudentBatches", studentController.getStudentBatches);
+app.get("/getBatchesByStatus/:status", studentController.getBatchesByStatus);
+app.get("/getBatchesByStatus/:status", studentController.getBatchCodes)
 app.get("/student-logins", studentController.getAllStudentLogins);
 app.delete("/student-logins/:can_id", studentController.deleteStudentLogin);
 
