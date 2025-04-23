@@ -33,9 +33,9 @@ const settingsController = require("./src/backend/controllers/settingsController
 const studentdashboardController = require("./src/backend/controllers/studentdashboardController");
 
 // << AUTH ROUTES >>
-app.post('/loginpage', authController.login);
+app.post('/login', authController.loginUnified);
 app.post("/new-register-student", authController.registerStudent);
-app.post("/studentlogin", authController.loginStudent);
+
 
 // <<< SECURITY ROUTS>>
 app.post("/check-email", securityController.checkEmail);

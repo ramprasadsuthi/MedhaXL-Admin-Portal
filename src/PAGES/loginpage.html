@@ -2,61 +2,95 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedhaXL Login</title>
-    <link rel="stylesheet" href="../CSS/loginpagge.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/loginpagge.css" />
+    <title>Signin & Sign up</title>
 </head>
 
 <body>
-    <div class="logo-container">
-        <img src="../img/Medhalogo.png" alt="MedhaXL Logo" class="logo">
+    <div style="text-align: center; margin-top: 2rem;">
+        <img src="../img/Medhalogo.png" alt="Medhalogo" style="max-width: 200px; width: 100%; height: auto;" />
     </div>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form id="studentLoginForm">
-                <h1>Student Login</h1>
-                <span>Login with your credentials</span>
-                <div class="input-group">
-                    <input type="text" id="studentEmailOrCanID" placeholder="Enter CAN-ID or Email" required />
+    <div class="wrapper">
+        <div class="form-container sign-up">
+            <form action="#">
+                <h2>sign up</h2>
+                <div class="form-group">
+                    <input type="text" required />
+                    <i class="fas fa-user"></i>
+                    <label for="">username</label>
                 </div>
-                <div class="input-group">
-                    <input type="password" id="studentPassword" placeholder="Enter password" required />
+                <div class="form-group">
+                    <input type="email" required />
+                    <i class="fas fa-at"></i>
+                    <label for="">email</label>
                 </div>
-                <button type="submit">Sign in</button>
+                <div class="form-group">
+                    <input type="password" required />
+                    <i class="fas fa-lock"></i>
+                    <label for="">password</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" required />
+                    <i class="fas fa-lock"></i>
+                    <label for="">confirm password</label>
+                </div>
+                <button type="submit" class="btn">sign up</button>
+                <div class="link">
+                    <p>You already have an account?<a href="#" class="signin-link"> sign in</a></p>
+                </div>
             </form>
         </div>
-
-
-        <div class="form-container sign-in-container">
-            <form id="adminLoginForm">
-                <h1>Admin Login</h1>
-                <span>Login with your credentials</span>
-                <div class="input-group">
-                    <input type="text" id="adminEmailOrusername" placeholder="Enter email or username" required />
+        <div class="form-container sign-in">
+            <form id="universalLoginForm">
+                <h2>login</h2>
+                <div class="form-group">
+                    <input type="text" id="userIdentifier"  required />
+                    <i class="fas fa-user"></i>
+                    <label for="">username</label>
                 </div>
-                <div class="input-group">
-                    <input type="password" id="adminPassword" placeholder=" Enter password" required />
+                <div class="form-group">
+                    <input type="password" id="userPassword" required />
+                    <i class="fas fa-lock"></i>
+                    <label for="">password</label>
                 </div>
-                <button type="submit">Sign in</button>
+                <div class="forgot-pass">
+                    <a href="#" class="forgot-password-link">forgot password?</a>
+                </div>
+                <button type="submit" class="btn">login</button>
+                <div class="link">
+                    <p>Don't have an account?<a href="#" class="signup-link"> sign up</a></p>
+                </div>
             </form>
         </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Please login with your personal credentials to access the system</p>
-                    <button class="ghost" id="signIn">Admin Login</button>
+        <div class="form-container forgot-password" style="display:none;">
+            <form action="#">
+                <h2>Forgot Password</h2>
+                <div class="form-group">
+                    <input type="text" required />
+                    <i class="fas fa-user"></i>
+                    <label for="">username</label>
                 </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Hello, Student!</h1>
-                    <p>Enter your details and start your journey with MedhaXL</p>
-                    <button class="ghost" id="signUp">Student Login</button>
+                <div class="form-group">
+                    <input type="text" required />
+                    <i class="fas fa-key"></i>
+                    <label for="">OTP</label>
                 </div>
-            </div>
+                <div class="form-group">
+                    <input type="password" required />
+                    <i class="fas fa-lock"></i>
+                    <label for="">new password</label>
+                </div>
+                <button type="submit" class="btn">done</button>
+                <div class="link">
+                    <p>Remembered your password?<a href="#" class="signin-link"> sign in</a></p>
+                </div>
+            </form>
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
     <script src="../JS/loginpage.js"></script>
 </body>
 
