@@ -3,95 +3,91 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../CSS/loginpagge.css" />
-    <title>Signin & Sign up</title>
+    <title>Animated Login System</title>
+    <link rel="stylesheet" href="../CSS/loginpagge.css">
 </head>
 
 <body>
-    <div style="text-align: center; margin-top: 2rem;">
-        <img src="../img/Medhalogo.png" alt="Medhalogo" style="max-width: 200px; width: 100%; height: auto;" />
-    </div>
-    <div class="wrapper">
-        <div class="form-container sign-up">
-            <form action="#">
-                <h2>sign up</h2>
-                <div class="form-group">
-                    <input type="text" required />
-                    <i class="fas fa-user"></i>
-                    <label for="">username</label>
-                </div>
-                <div class="form-group">
-                    <input type="email" required />
-                    <i class="fas fa-at"></i>
-                    <label for="">email</label>
-                </div>
-                <div class="form-group">
-                    <input type="password" required />
-                    <i class="fas fa-lock"></i>
-                    <label for="">password</label>
-                </div>
-                <div class="form-group">
-                    <input type="password" required />
-                    <i class="fas fa-lock"></i>
-                    <label for="">confirm password</label>
-                </div>
-                <button type="submit" class="btn">sign up</button>
-                <div class="link">
-                    <p>You already have an account?<a href="#" class="signin-link"> sign in</a></p>
-                </div>
-            </form>
-        </div>
-        <div class="form-container sign-in">
+
+    <div class="container">
+        <!-- Login -->
+
+        <div class="card active" id="loginCard">
+            <h2>Login</h2>
             <form id="universalLoginForm">
-                <h2>login</h2>
                 <div class="form-group">
-                    <input type="text" id="userIdentifier"  required />
-                    <i class="fas fa-user"></i>
-                    <label for="">username</label>
+                    <input type="text" id="userIdentifier" placeholder=" " />
+                    <label>Username</label>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="userPassword" required />
-                    <i class="fas fa-lock"></i>
-                    <label for="">password</label>
+                    <input type="password" id="userPassword" placeholder=" " />
+                    <label>Passcode</label>
                 </div>
-                <div class="forgot-pass">
-                    <a href="#" class="forgot-password-link">forgot password?</a>
-                </div>
-                <button type="submit" class="btn">login</button>
-                <div class="link">
-                    <p>Don't have an account?<a href="#" class="signup-link"> sign up</a></p>
-                </div>
+                <button type="submit" class="btn">Login</button>
             </form>
+            <div class="switch-link" onclick="switchCard('forgotCard')">Forgot Passcode?</div>
+            <div class="switch-link" onclick="switchCard('signupCard')">Sign Up</div>
         </div>
-        <div class="form-container forgot-password" style="display:none;">
-            <form action="#">
-                <h2>Forgot Password</h2>
+
+        <!-- Sign Up -->
+        <div class="card" id="signupCard">
+            <h2>Sign Up</h2>
+            <form action="">
                 <div class="form-group">
-                    <input type="text" required />
-                    <i class="fas fa-user"></i>
-                    <label for="">username</label>
-                </div>
-                <div class="form-group">
-                    <input type="text" required />
-                    <i class="fas fa-key"></i>
-                    <label for="">OTP</label>
+                    <input type="text" placeholder=" " id="signupUser" />
+                    <label>Username</label>
                 </div>
                 <div class="form-group">
-                    <input type="password" required />
-                    <i class="fas fa-lock"></i>
-                    <label for="">new password</label>
+                    <input type="text" placeholder=" " id="signupPhone" />
+                    <label>Phone Number</label>
                 </div>
-                <button type="submit" class="btn">done</button>
-                <div class="link">
-                    <p>Remembered your password?<a href="#" class="signin-link"> sign in</a></p>
+                <div class="form-group">
+                    <input type="password" placeholder=" " id="signupPass" />
+                    <label>New Passcode</label>
                 </div>
+                <button onclick="signup()">Sign Up</button>
             </form>
+            <div class="switch-link" onclick="switchCard('loginCard')">Back to Login</div>
+        </div>
+
+        <!-- Forgot Passcode -->
+        <div class="card" id="forgotCard">
+            <h2>Reset Passcode</h2>
+            <div id="step1">
+                <div class="form-group">
+                    <input type="text" placeholder=" " id="forgotPhone" />
+                    <label>Enter Phone</label>
+                </div>
+                <button onclick="sendOTP()">Send OTP</button>
+            </div>
+
+            <div id="step2" style="display: none;">
+                <div class="form-group">
+                    <input type="text" placeholder=" " id="otpInput" />
+                    <label>Enter OTP</label>
+                </div>
+                <button onclick="verifyOTP()">Verify</button>
+            </div>
+
+            <div id="step3" style="display: none;">
+                <div class="form-group">
+                    <input type="password" placeholder=" " id="newPass1" />
+                    <label>New Passcode</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder=" " id="newPass2" />
+                    <label>Confirm Passcode</label>
+                </div>
+                <button onclick="resetDone()">Done</button>
+            </div>
+
+            <div class="switch-link" onclick="switchCard('loginCard')">Back to Login</div>
         </div>
     </div>
-    <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
+
     <script src="../JS/loginpage.js"></script>
+
 </body>
 
 </html>
