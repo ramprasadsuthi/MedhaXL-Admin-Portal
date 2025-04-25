@@ -5,89 +5,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Animated Login System</title>
-    <link rel="stylesheet" href="../CSS/loginpagge.css">
+    <link rel="stylesheet" href="../CSS/loginpagge.css" />
 </head>
 
 <body>
-
     <div class="container">
-        <!-- Login -->
-
-        <div class="card active" id="loginCard">
-            <h2>Login</h2>
-            <form id="universalLoginForm">
-                <div class="form-group">
-                    <input type="text" id="userIdentifier" placeholder=" " />
-                    <label>Username</label>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="userPassword" placeholder=" " />
-                    <label>Passcode</label>
-                </div>
-                <button type="submit" class="btn">Login</button>
-            </form>
-            <div class="switch-link" onclick="switchCard('forgotCard')">Forgot Passcode?</div>
-            <div class="switch-link" onclick="switchCard('signupCard')">Sign Up</div>
-        </div>
-
-        <!-- Sign Up -->
-        <div class="card" id="signupCard">
-            <h2>Sign Up</h2>
-            <form action="">
-                <div class="form-group">
-                    <input type="text" placeholder=" " id="signupUser" />
-                    <label>Username</label>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder=" " id="signupPhone" />
-                    <label>Phone Number</label>
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder=" " id="signupPass" />
-                    <label>New Passcode</label>
-                </div>
-                <button onclick="signup()">Sign Up</button>
-            </form>
-            <div class="switch-link" onclick="switchCard('loginCard')">Back to Login</div>
-        </div>
-
-        <!-- Forgot Passcode -->
-        <div class="card" id="forgotCard">
-            <h2>Reset Passcode</h2>
-            <div id="step1">
-                <div class="form-group">
-                    <input type="text" placeholder=" " id="forgotPhone" />
-                    <label>Enter Phone</label>
-                </div>
-                <button onclick="sendOTP()">Send OTP</button>
+        <div class="card-wrapper">
+            <!-- Login Card -->
+            <div class="card login active" id="loginCard">
+                <h2>Login</h2>
+                <form id="universalLoginForm">
+                    <div class="form-group">
+                        <input type="text" id="userIdentifier" placeholder=" " required />
+                        <label>Username</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="userPassword" placeholder=" " required />
+                        <label>Passcode</label>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="switch-link" onclick="flipTo('forgotCard')">Forgot Passcode?</div>
+                <div class="switch-link" onclick="flipTo('signupCard')">Sign Up</div>
             </div>
 
-            <div id="step2" style="display: none;">
-                <div class="form-group">
-                    <input type="text" placeholder=" " id="otpInput" />
-                    <label>Enter OTP</label>
-                </div>
-                <button onclick="verifyOTP()">Verify</button>
+            <!-- Sign Up Card -->
+            <div class="card signup" id="signupCard">
+                <h2>Sign Up</h2>
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder=" " id="signupUser" required />
+                        <label>Username</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder=" " id="signupPhone" required />
+                        <label>Phone Number</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder=" " id="signupPass" required />
+                        <label>New Passcode</label>
+                    </div>
+                    <button type="submit">Create Account</button>
+                </form>
+                <div class="switch-link" onclick="flipTo('loginCard')">Back to Login</div>
             </div>
 
-            <div id="step3" style="display: none;">
-                <div class="form-group">
-                    <input type="password" placeholder=" " id="newPass1" />
-                    <label>New Passcode</label>
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder=" " id="newPass2" />
-                    <label>Confirm Passcode</label>
-                </div>
-                <button onclick="resetDone()">Done</button>
-            </div>
+            <!-- Forgot Password Card -->
+            <div class="card forgot" id="forgotCard">
+                <h2>Reset Passcode</h2>
+                <form>
+                    <div id="step1">
+                        <div class="form-group">
+                            <input type="text" placeholder=" " id="forgotPhone" />
+                            <label>Enter Phone</label>
+                        </div>
+                        <button type="button" onclick="sendOTP()">Send OTP</button>
+                    </div>
 
-            <div class="switch-link" onclick="switchCard('loginCard')">Back to Login</div>
+                    <div id="step2" style="display: none;">
+                        <div class="form-group">
+                            <input type="text" placeholder=" " id="otpInput" />
+                            <label>Enter OTP</label>
+                        </div>
+                        <button type="button" onclick="verifyOTP()">Verify</button>
+                    </div>
+
+                    <div id="step3" style="display: none;">
+                        <div class="form-group">
+                            <input type="password" placeholder=" " id="newPass1" />
+                            <label>New Passcode</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder=" " id="newPass2" />
+                            <label>Confirm Passcode</label>
+                        </div>
+                        <button type="button" onclick="resetDone()">Done</button>
+                    </div>
+                </form>
+                <div class="switch-link" onclick="flipTo('loginCard')">Back to Login</div>
+            </div>
         </div>
     </div>
 
     <script src="../JS/loginpage.js"></script>
-
 </body>
 
 </html>

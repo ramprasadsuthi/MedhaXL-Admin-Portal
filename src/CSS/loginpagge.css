@@ -15,7 +15,17 @@ body {
 
 .container {
     width: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-wrapper {
+    width: 100%;
+    min-height: 500px; /* Add a minimum height for center alignment */
     position: relative;
+    transition: transform 0.8s ease-in-out;
+    transform-style: preserve-3d;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,17 +39,16 @@ body {
     background: rgba(181, 185, 220, 0.2);
     backdrop-filter: blur(15px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-    transform: scale(0.95) translateY(30px);
+    transform: rotateY(180deg);
     opacity: 0;
-    transition: all 0.6s ease;
-    z-index: 0;
     pointer-events: none;
+    transition: all 0.6s ease;
 }
 
 .card.active {
-    transform: scale(1) translateY(0);
+    transform: rotateY(0deg);
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
     z-index: 2;
 }
 
@@ -47,7 +56,6 @@ body {
     text-align: center;
     color: #b5b9dc;
     margin-bottom: 25px;
-    font-size: 1.6rem;
 }
 
 .form-group {
@@ -63,7 +71,6 @@ body {
     background: rgba(181, 185, 220, 0.2);
     color: #fff;
     font-size: 1rem;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group input:focus {
@@ -78,7 +85,6 @@ body {
     color: #d0d3e4;
     transition: 0.3s ease;
     pointer-events: none;
-    font-size: 1rem;
 }
 
 .form-group input:focus+label,
@@ -99,12 +105,10 @@ button {
     font-size: 1rem;
     cursor: pointer;
     box-shadow: 0 4px 20px rgba(112, 136, 198, 0.4);
-    transition: transform 0.2s;
 }
 
 button:hover {
     transform: scale(1.05);
-    background: linear-gradient(135deg, #015869, #283a6c);
 }
 
 .switch-link {
