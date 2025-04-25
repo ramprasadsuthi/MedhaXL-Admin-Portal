@@ -34,7 +34,10 @@ const studentdashboardController = require("./src/backend/controllers/studentdas
 
 // << AUTH ROUTES >>
 app.post('/login', authController.loginUnified);
-app.post("/new-register-student", authController.registerStudent);
+app.post("/new-register-student", authController.registernewStudent);
+app.post("/verify-phone", authController.verifyPhone);
+app.post("/verify-aadhar", authController.verifyAadhar);
+app.post("/reset-password", authController.resetPassword);
 
 
 // <<< SECURITY ROUTS>>

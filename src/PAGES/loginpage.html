@@ -59,15 +59,15 @@
                             <input type="text" placeholder=" " id="forgotPhone" />
                             <label>Enter Phone</label>
                         </div>
-                        <button type="button" onclick="sendOTP()">Send OTP</button>
+                        <button type="button" onclick="sendOTP()">Verify</button>
                     </div>
 
                     <div id="step2" style="display: none;">
                         <div class="form-group">
-                            <input type="text" placeholder=" " id="otpInput" />
-                            <label>Enter OTP</label>
+                            <input type="text" placeholder=" " id="aadharInput" />
+                            <label>Enter Aadhar Number</label>
                         </div>
-                        <button type="button" onclick="verifyOTP()">Verify</button>
+                        <button type="button" onclick="verifyAadhar()">Verify</button>
                     </div>
 
                     <div id="step3" style="display: none;">
@@ -79,7 +79,7 @@
                             <input type="password" placeholder=" " id="newPass2" />
                             <label>Confirm Passcode</label>
                         </div>
-                        <button type="button" onclick="resetDone()">Done</button>
+                        <button type="button" onclick="resetDone()" window.location.href="loginCard" ;>Done</button>
                     </div>
                 </form>
                 <div class="switch-link" onclick="flipTo('loginCard')">Back to Login</div>

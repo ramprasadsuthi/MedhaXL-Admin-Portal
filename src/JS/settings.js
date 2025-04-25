@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             can_id: document.getElementById("student-CAN-ID").value,
             fullname: document.getElementById("student-fullname").value,
             email: document.getElementById("student-email").value,
+            phone: document.getElementById("student-phone").value,
             username: document.getElementById("student-username").value,
             password: document.getElementById("student-password").value
         };
