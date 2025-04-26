@@ -106,64 +106,64 @@ const authController = {
     },
 
     //** RESETT PASSCODE */
-    verifymobile: (req, res) => {
+    verifyMobile: (req, res) => {
         const { phone } = req.body;
         const query = "SELECT * FROM student_login WHERE phone = ?";
         db.query(query, [phone], (err, results) => {
-          if (err) return res.status(500).json({ success: false, message: "Database error." });
-          if (results.length === 0) return res.json({ success: false, message: "Phone not registered." });
-          res.json({ success: true });
+            if (err) return res.status(500).json({ success: false, message: "Database error." });
+            if (results.length === 0) return res.json({ success: false, message: "Phone not registered." });
+            res.json({ success: true });
         });
-      },
-      
-      verifyAaadhar: (req, res) => {
+    },
+
+    verifyAadhar: (req, res) => {
         const { phone, aadhar } = req.body;
         const query = "SELECT * FROM student WHERE MobileNumber = ? AND AadharNumber = ?";
         db.query(query, [phone, aadhar], (err, results) => {
-          if (err) return res.status(500).json({ success: false, message: "Database error." });
-          if (results.length === 0) return res.json({ success: false, message: "Aadhaar does not match." });
-          res.json({ success: true });
+            if (err) return res.status(500).json({ success: false, message: "Database error." });
+            if (results.length === 0) return res.json({ success: false, message: "Aadhaar does not match." });
+            res.json({ success: true });
         });
-      },
-      
-      verifyBatch: (req, res) => {
+    },
+
+    verifyBatch: (req, res) => {
         const { phone, aadhar, batch } = req.body;
         const query = "SELECT * FROM student WHERE MobileNumber = ? AND AadharNumber = ? AND BatchCode = ?";
         db.query(query, [phone, aadhar, batch], (err, results) => {
-          if (err) return res.status(500).json({ success: false, message: "Database error." });
-          if (results.length === 0) return res.json({ success: false, message: "Batch code invalid." });
-          const canId = results[0].StudentID;
-          res.json({ success: true, canId });
+            if (err) return res.status(500).json({ success: false, message: "Database error." });
+            if (results.length === 0) return res.json({ success: false, message: "Batch code invalid." });
+            const canId = results[0].StudentID;
+            res.json({ success: true, canId });
         });
-      },
-      
-      resetPassword: async (req, res) => {
+    },
+
+    resetPassword: async (req, res) => {
         const { phone, aadhar, canId, newPassword } = req.body;
-    
+
         const validateQuery = `
             SELECT * FROM student
             WHERE MobileNumber = ? AND AadharNumber = ? AND StudentID = ?
         `;
-    
+
         db.query(validateQuery, [phone, aadhar, canId], async (err, results) => {
             if (err) return res.status(500).json({ success: false, message: "Error checking identity." });
-    
+
             if (results.length === 0) {
                 return res.json({
                     success: false,
                     message: "Sorry, something went wrong with the universe. Please contact the MEDHAXL admin team.",
                 });
             }
-    
+
             try {
                 const hashedPassword = await bcrypt.hash(newPassword, 10);
-    
+
                 const updateQuery = "UPDATE student_login SET password = ? WHERE phone = ? AND can_id = ?";
                 db.query(updateQuery, [hashedPassword, phone, canId], (updateErr, result) => {
                     if (updateErr) {
                         return res.status(500).json({ success: false, message: "Error updating password." });
                     }
-    
+
                     res.json({ success: true });
                 });
             } catch (error) {
@@ -171,7 +171,7 @@ const authController = {
             }
         });
     },
-      
+
 
 
     //**create new account  */

@@ -36,13 +36,14 @@ const studentdashboardController = require("./src/backend/controllers/studentdas
 app.post('/login', authController.loginUnified);
 app.post("/new-register-student", authController.registernewStudent);
 app.post("/verify-phone", authController.verifyPhone);
-app.post("/verify-aadhar", authController.verifyAaadhar);
-app.post("/reset-password", authController.resetPassword);
 app.post('/signup', authController.createAccount);
 app.post('/verify-email', authController.verifyEmail);
-app.post('/verify-phone', authController.verifyPhone);
-app.post('/verify-mobile', authController.verifymobile)
+app.post('/reset-password', authController.resetPassword);
 app.post('/verify-batch', authController.verifyBatch);
+app.post('/verify-aadhar', authController.verifyAadhar);
+app.post('/verify-mobile', authController.verifyMobile);
+
+
 
 
 
@@ -155,8 +156,9 @@ app.get("/certificate/:id", certificateController.getCertificate); // Route for 
 app.get('/protected', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'Dashboard.html'));
 });
+
 // Static file serving
-// server.js
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "src")));// Serve all static files from the src directory
 
 

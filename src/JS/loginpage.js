@@ -86,7 +86,7 @@ let verifiedAadhar = "";
 let verifiedBatch = "";
 let confirmedCanId = "";
 
-function verifyPhone() {
+function verifyForgotPhone() {
   const phone = document.getElementById("forgotPhone").value;
 
   alert("Please wait, verifying phone...");
@@ -186,6 +186,7 @@ function resetDone() {
       }
     });
 }
+
 
 
 //**create new account */
