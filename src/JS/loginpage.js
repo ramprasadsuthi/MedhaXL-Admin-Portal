@@ -83,12 +83,14 @@ document.getElementById("universalLoginForm").addEventListener("submit", async f
 //** forgot passode api and verification */
 let verifiedPhone = "";
 let verifiedAadhar = "";
-let verifiedCanId = "";
+let verifiedBatch = "";
+let confirmedCanId = "";
 
-function sendOTP() {
+function verifyPhone() {
   const phone = document.getElementById("forgotPhone").value;
 
-  fetch("/verify-phone", {
+  alert("Please wait, verifying phone...");
+  fetch("/verify-mobile", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ phone })
@@ -97,9 +99,9 @@ function sendOTP() {
     .then(data => {
       if (data.success) {
         verifiedPhone = phone;
-        alert("Your mobile number was verified successfully.");
+        alert("Phone verified successfully.");
         document.getElementById("step1").style.display = "none";
-        document.getElementById("step2").style.display = "block";
+        document.getElementById("step2").style.display = "block"; cvvv
       } else {
         alert(data.message);
       }
@@ -109,6 +111,7 @@ function sendOTP() {
 function verifyAadhar() {
   const aadhar = document.getElementById("aadharInput").value;
 
+  alert("Please wait, verifying Aadhaar...");
   fetch("/verify-aadhar", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -118,9 +121,32 @@ function verifyAadhar() {
     .then(data => {
       if (data.success) {
         verifiedAadhar = aadhar;
-        alert("Your Aadhaar number was verified successfully.");
+        alert("Aadhaar verified successfully.");
         document.getElementById("step2").style.display = "none";
         document.getElementById("step3").style.display = "block";
+      } else {
+        alert(data.message);
+      }
+    });
+}
+
+function verifyBatch() {
+  const batch = document.getElementById("batchInput").value;
+
+  alert("Verifying Batch Code...");
+  fetch("/verify-batch", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ phone: verifiedPhone, aadhar: verifiedAadhar, batch })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        verifiedBatch = batch;
+        confirmedCanId = data.canId;
+        alert("Batch verified successfully.");
+        document.getElementById("step3").style.display = "none";
+        document.getElementById("step4").style.display = "block";
       } else {
         alert(data.message);
       }
@@ -152,8 +178,120 @@ function resetDone() {
       if (data.success) {
         alert("Password reset successful!");
         flipTo('loginCard');
+        setTimeout(() => {
+          window.location.reload();  // allow card flip animation to complete
+        }, 500);
       } else {
         alert(data.message);
       }
     });
 }
+
+
+//**create new account */
+let isEmailVerified = false;
+let isPhoneVerified = false;
+
+async function verifyEmail() {
+  const email = document.getElementById("signupEmail").value.trim();
+  if (!email) return;
+
+  const res = await fetch("/verify-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+  const data = await res.json();
+
+  const status = document.getElementById("emailStatus");
+  if (data.found) {
+    status.textContent = "Email verified. Please wait...";
+    status.style.color = "green";
+    isEmailVerified = true;
+  } else {
+    status.textContent = "Email not found in records.";
+    status.style.color = "red";
+    isEmailVerified = false;
+  }
+
+  togglePasscodeVisibility();
+}
+
+async function verifyPhone() {
+  const phone = document.getElementById("signupPhone").value.trim();
+  if (!phone) return;
+
+  const res = await fetch("/verify-phone", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ phone }),
+  });
+  const data = await res.json();
+
+  const status = document.getElementById("phoneStatus");
+  if (data.found) {
+    status.textContent = "Phone number verified.";
+    status.style.color = "green";
+    isPhoneVerified = true;
+  } else {
+    status.textContent = "Phone number not found.";
+    status.style.color = "red";
+    isPhoneVerified = false;
+  }
+
+  togglePasscodeVisibility();
+}
+
+function togglePasscodeVisibility() {
+  const passGroup = document.getElementById("passGroup");
+  passGroup.style.display = (isEmailVerified && isPhoneVerified) ? "block" : "none";
+}
+
+async function createAccount(event) {
+  event.preventDefault();
+
+  if (!isEmailVerified || !isPhoneVerified) {
+    alert("Verify Email and Phone Number first.");
+    return;
+  }
+
+  const username = document.getElementById("signupUser").value.trim();
+  const fullName = document.getElementById("signupFullName").value.trim();
+  const email = document.getElementById("signupEmail").value.trim();
+  const phone = document.getElementById("signupPhone").value.trim();
+  const password = document.getElementById("signupPass").value.trim();
+
+  if (!username || !fullName || !email || !phone || !password) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  const canId = prompt("Enter your CAN-ID to complete registration:");
+  if (!canId || !canId.trim()) {
+    alert("CAN-ID is required.");
+    return;
+  }
+
+  const payload = { username, fullName, email, phone, password, canId: canId.trim() };
+
+  try {
+    const res = await fetch("/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    alert(data.message);
+    if (data.success) {
+      flipTo("loginCard");
+      setTimeout(() => window.location.reload(), 1000);
+    }
+  } catch (err) {
+    console.error("Signup Error:", err);
+    alert("Something went wrong.");
+  }
+}
+
+document.getElementById("signupForm").addEventListener("submit", createAccount);

@@ -106,31 +106,38 @@ const authController = {
     },
 
     //** RESETT PASSCODE */
-    verifyPhone: (req, res) => {
+    verifymobile: (req, res) => {
         const { phone } = req.body;
-
-        const query = "SELECT * FROM student WHERE MobileNumber = ?";
+        const query = "SELECT * FROM student_login WHERE phone = ?";
         db.query(query, [phone], (err, results) => {
-            if (err) return res.status(500).json({ success: false, message: "Database error." });
-            if (results.length === 0) return res.json({ success: false, message: "Phone number not registered." });
-
-            res.json({ success: true });
+          if (err) return res.status(500).json({ success: false, message: "Database error." });
+          if (results.length === 0) return res.json({ success: false, message: "Phone not registered." });
+          res.json({ success: true });
         });
-    },
-
-    verifyAadhar: (req, res) => {
+      },
+      
+      verifyAaadhar: (req, res) => {
         const { phone, aadhar } = req.body;
-
         const query = "SELECT * FROM student WHERE MobileNumber = ? AND AadharNumber = ?";
         db.query(query, [phone, aadhar], (err, results) => {
-            if (err) return res.status(500).json({ success: false, message: "Database error." });
-            if (results.length === 0) return res.json({ success: false, message: "Aadhaar does not match." });
-
-            res.json({ success: true });
+          if (err) return res.status(500).json({ success: false, message: "Database error." });
+          if (results.length === 0) return res.json({ success: false, message: "Aadhaar does not match." });
+          res.json({ success: true });
         });
-    },
-
-    resetPassword: async (req, res) => {
+      },
+      
+      verifyBatch: (req, res) => {
+        const { phone, aadhar, batch } = req.body;
+        const query = "SELECT * FROM student WHERE MobileNumber = ? AND AadharNumber = ? AND BatchCode = ?";
+        db.query(query, [phone, aadhar, batch], (err, results) => {
+          if (err) return res.status(500).json({ success: false, message: "Database error." });
+          if (results.length === 0) return res.json({ success: false, message: "Batch code invalid." });
+          const canId = results[0].StudentID;
+          res.json({ success: true, canId });
+        });
+      },
+      
+      resetPassword: async (req, res) => {
         const { phone, aadhar, canId, newPassword } = req.body;
     
         const validateQuery = `
@@ -163,9 +170,75 @@ const authController = {
                 res.status(500).json({ success: false, message: "Error hashing password." });
             }
         });
-    },    
+    },
+      
 
 
+    //**create new account  */
+    verifyEmail: (req, res) => {
+        const { email } = req.body;
+        db.query("SELECT * FROM student WHERE EmailID = ?", [email], (err, results) => {
+            if (err) return res.status(500).json({ found: false });
+            return res.json({ found: results.length > 0 });
+        });
+    },
+
+    verifyPhone: (req, res) => {
+        const { phone } = req.body;
+        db.query("SELECT * FROM student WHERE MobileNumber = ?", [phone], (err, results) => {
+            if (err) return res.status(500).json({ found: false });
+            return res.json({ found: results.length > 0 });
+        });
+    },
+
+    createAccount: async (req, res) => {
+        const { username, fullName, email, phone, password, canId } = req.body;
+
+        const checkStudentQuery = `
+            SELECT * FROM student 
+            WHERE EmailID = ? AND MobileNumber = ? AND StudentID = ?
+        `;
+
+        db.query(checkStudentQuery, [email, phone, canId], async (err, results) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: 'Database error.' });
+            }
+
+            if (results.length === 0) {
+                return res.json({
+                    success: false,
+                    message: 'Student details not found. Please contact MEDHAXL admin team.'
+                });
+            }
+
+            try {
+                const hashedPassword = await bcrypt.hash(password, 10);
+
+                const insertQuery = `
+                    INSERT INTO student_login (username, fullname, email, phone, password, can_id)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                `;
+
+                db.query(insertQuery, [username, fullName, email, phone, hashedPassword, canId], (insertErr, result) => {
+                    if (insertErr) {
+                        // Handle duplicate entry for username or CAN-ID
+                        if (insertErr.code === 'ER_DUP_ENTRY') {
+                            return res.status(409).json({
+                                success: false,
+                                message: 'Account already exists with the same Username or CAN-ID.'
+                            });
+                        }
+
+                        return res.status(500).json({ success: false, message: 'Failed to create account.' });
+                    }
+
+                    return res.json({ success: true, message: 'Account created successfully. Please login.' });
+                });
+            } catch (hashErr) {
+                return res.status(500).json({ success: false, message: 'Password hashing failed.' });
+            }
+        });
+    },
 };
 
 module.exports = authController;
