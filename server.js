@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -15,7 +16,12 @@ const PORT = 3000;
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:59159',
+    methods: ['GET', 'POST'],
+    credentials: true
+  }));
 console.log('Connected to MySQL Database.');
 
 
@@ -150,8 +156,27 @@ app.get('/protected', verifyToken, (req, res) => {
 // server.js
 app.use(express.static(path.join(__dirname, "src")));// Serve all static files from the src directory
 
+// APP related to the student dashboard
+const { applogin } = require('./src/JS/appdb.js');
+
+app.use(bodyParser.json());
+app.use(express.json());  // Add this middleware in your server.js to parse JSON requests
+
+app.post('/applogin', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const result = await applogin(username, password);
+    console.log('Login attempt:', result);
+    res.status(200).json(result);
+  } catch (err) {
+    console.error('Error during login:', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running at http://localhost:${PORT}/`);
 });
