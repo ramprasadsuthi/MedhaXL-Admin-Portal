@@ -10,7 +10,8 @@ const paymentscontrollers = {
         const limit = 10;
         const offset = (page - 1) * limit;
 
-        const query = `SELECT TransactionID, StudentID, BatchCode, Course, Name, MobileNumber, AmountPaid, Term, PaidDate FROM dailytransactions LIMIT ? OFFSET ?`;
+        const query = `SELECT TransactionID, StudentID, BatchCode, Course, Name, MobileNumber,
+         AmountPaid, Term, PaidDate FROM dailytransactions  ORDER BY TransactionID DESC LIMIT ? OFFSET ?`;
 
         db.query(query, [limit, offset], (err, results) => {
             if (err) {
