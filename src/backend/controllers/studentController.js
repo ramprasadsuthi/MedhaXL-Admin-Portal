@@ -91,7 +91,7 @@ const studentController = {
         const sql = `SELECT StudentID, BatchCode, CONCAT(FirstName, ' ', LastName) AS FullName, MobileNumber, Course, Town AS City 
                      FROM student 
                      ORDER BY StudentID DESC 
-                     LIMIT 10`;
+                     LIMIT 20`;
 
         db.query(sql, (err, results) => {
             if (err) {

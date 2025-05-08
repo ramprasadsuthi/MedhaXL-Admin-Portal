@@ -11,90 +11,90 @@
    }
 
    /* Header */
-    /* Header */
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        width: 100%;
-    }
- 
-    /* Logo */
-    .logo img {
-        width: 175px;
-    }
- 
-    /* Right Section - Icons */
-    .right-section {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-left: auto;
-    }
- 
-    /* Menu Icon - Show in small screens */
-    .menu-icon {
-        display: none;
-        font-size: 1.8rem;
-        cursor: pointer;
-    }
- 
-    /* Notification & Profile Icons */
-    .notification-icon,
-    .profile-icon {
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-    }
- 
-    /* Notification Badge */
-    .badge {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: red;
-        color: white;
-        font-size: 12px;
-        padding: 2px 6px;
-        border-radius: 50%;
-    }
- 
-    /* Dropdown Styling */
-    .notification-dropdown,
-    .profile-dropdown {
-        position: absolute;
-        top: 40px;
-        right: 0;
-        background: white;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        width: 200px;
-        display: none;
-    }
- 
-    /* Show Dropdown */
-    .notification-dropdown.show,
-    .profile-dropdown.show {
-        display: block;
-    }
- 
-    /* Dropdown Links */
-    .profile-dropdown a {
-        display: flex;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        text-decoration: none;
-        color: #333;
-    }
- 
-    .profile-dropdown a:hover {
-        background-color: #f0f0f0;
-    }
- 
+   /* Header */
+   .header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding: 1rem 2rem;
+       background-color: #ffffff;
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       width: 100%;
+   }
+
+   /* Logo */
+   .logo img {
+       width: 175px;
+   }
+
+   /* Right Section - Icons */
+   .right-section {
+       display: flex;
+       align-items: center;
+       gap: 20px;
+       margin-left: auto;
+   }
+
+   /* Menu Icon - Show in small screens */
+   .menu-icon {
+       display: none;
+       font-size: 1.8rem;
+       cursor: pointer;
+   }
+
+   /* Notification & Profile Icons */
+   .notification-icon,
+   .profile-icon {
+       position: relative;
+       cursor: pointer;
+       display: flex;
+       align-items: center;
+   }
+
+   /* Notification Badge */
+   .badge {
+       position: absolute;
+       top: -5px;
+       right: -5px;
+       background: red;
+       color: white;
+       font-size: 12px;
+       padding: 2px 6px;
+       border-radius: 50%;
+   }
+
+   /* Dropdown Styling */
+   .notification-dropdown,
+   .profile-dropdown {
+       position: absolute;
+       top: 40px;
+       right: 0;
+       background: white;
+       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+       border-radius: 5px;
+       width: 200px;
+       display: none;
+   }
+
+   /* Show Dropdown */
+   .notification-dropdown.show,
+   .profile-dropdown.show {
+       display: block;
+   }
+
+   /* Dropdown Links */
+   .profile-dropdown a {
+       display: flex;
+       align-items: center;
+       padding: 0.5rem 1rem;
+       text-decoration: none;
+       color: #333;
+   }
+
+   .profile-dropdown a:hover {
+       background-color: #f0f0f0;
+   }
+
 
    /* Sidebar */
    .sidebar {
@@ -178,6 +178,7 @@
    /*Main content css starts*/
 
 
+   /* Wrapper for Form */
    .wrapper {
        width: 90%;
        max-width: 1400px;
@@ -186,30 +187,27 @@
        border-radius: 12px;
        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
        text-align: center;
+       margin: 30px auto;
    }
 
-   /* Form Styling */
+   /* Form Container */
    form {
        display: flex;
-       align-items: flex-end;
-       justify-content: space-between;
        flex-wrap: wrap;
        gap: 15px;
+       justify-content: space-between;
        width: 100%;
-       margin-bottom: 20px;
        margin-top: 30px;
+       margin-bottom: 20px;
    }
 
-   /* Form Groups (Proper Spacing for Labels and Inputs) */
+   /* Form Groups */
    .form-group {
        display: flex;
        flex-direction: column;
-       align-items: flex-start;
-       text-align: left;
-       flex: 1;
        min-width: 220px;
-       margin-bottom: 10px;
-       /* Added spacing to prevent overlap */
+       flex: 1;
+       text-align: left;
    }
 
    /* Labels */
@@ -217,37 +215,36 @@
        font-weight: bold;
        font-size: 16px;
        margin-bottom: 8px;
-       /* Increased spacing between label and input */
-       color: #000000;
+       color: #000;
    }
 
-   /* Inputs */
+   /* Input Fields */
    .form-group input {
        padding: 10px;
        border: 2px solid #0e8faf;
        border-radius: 6px;
        font-size: 16px;
-       transition: 0.3s ease-in-out;
        width: 100%;
-       min-width: 100%;
-       /* Ensuring input takes full width of form-group */
        box-sizing: border-box;
-       /* Prevents overflow */
+       transition: border 0.3s ease-in-out;
    }
 
-   /* File Input */
-   .form-group input[type="file"] {
-       width: 100%;
+   /* Button Styling */
+   button {
+       background-color: #0e8faf;
+       color: white;
+       border: none;
+       font-weight: bold;
+       padding: 12px 20px;
+       border-radius: 8px;
+       font-size: 16px;
+       cursor: pointer;
+       transition: background 0.3s ease, transform 0.3s ease;
+       height: 44px;
    }
 
-   /* Submit Button (Aligned with Inputs) */
-   .submit-btn {
-       align-self: flex-start;
-       /* Align with input fields */
-       height: 42px;
-       width: 160px;
-       justify-content: center;
-       margin-top: 20px;
+   button:hover {
+       background-color: #0b6e84;
    }
 
    /* Button Styling */
@@ -258,145 +255,125 @@
        cursor: pointer;
        font-weight: bold;
        padding: 12px 20px;
-       /* Increased padding for better button size */
        border-radius: 8px;
-       /* Adjusted border radius for a smoother look */
        transition: all 0.3s ease;
        font-size: 16px;
        height: 44px;
-       /* Slightly increased height for better alignment */
+       margin-top: 24px;
+       /* 👈 This is the new line */
    }
+
 
    button:hover {
        background-color: #0b6e84;
    }
 
-   /* Message Text */
+   /* Success Message */
    #message {
        font-size: 14px;
        color: green;
        margin-top: 10px;
    }
 
-   /* Responsive Fixes */
-   @media (max-width: 768px) {
-       form {
-           flex-direction: column;
-       }
-
-       .form-group {
-           width: 100%;
-       }
-   }
-
    /* Course List Container */
    .course-list {
-       width: 90%;
-       max-width: 900px;
+    width: 90%;
+    max-width: 900px;
+    padding: 25px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    margin: 30px auto;
+    text-align: center;
+    background-color: white;
+}
 
-       padding: 25px;
-       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-       border-radius: 12px;
-       margin: 30px auto;
-       text-align: center;
-       color: rgb(0, 0, 0);
-       transition: all 0.3s ease-in-out;
-   }
+/* Title */
+.course-list h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 
-   /* Course List Heading */
-   .course-list h2 {
-       font-size: 24px;
-       margin-bottom: 15px;
-       text-transform: uppercase;
-       font-weight: bold;
-       letter-spacing: 1px;
-   }
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    font-size: 14px;
+}
 
-   /* Table Styling */
-   table {
-       width: 100%;
-       border-collapse: collapse;
-       background: white;
-       border-radius: 10px;
-       overflow: hidden;
-   }
+/* Table Headers */
+th {
+    background-color: #044c5a;
+    color: white;
+    padding: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-   /* Table Headers */
-   th {
-       background: #044c5a;
-       color: white;
-       padding: 12px;
-       font-size: 12px;
-       text-transform: uppercase;
-       border-right: 1px solid rgba(255, 255, 255, 0.2);
-   }
+th:last-child {
+    border-right: none;
+}
 
-   /* Last Column Border Removal */
-   th:last-child {
-       border-right: none;
-   }
+/* Table Data */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    color: #333;
+}
 
-   /* Table Rows */
-   td {
-       padding: 10px;
-       border-bottom: 1px solid #ddd;
-       text-align: center;
-       font-size: 14px;
-       color: #333;
-       transition: background 0.3s ease-in-out;
-   }
+/* Alternate Row Background */
+tbody tr:nth-child(even) {
+    background-color: #f1f9fc;
+}
 
-   /* Alternate Row Background */
-   tbody tr:nth-child(even) {
-       background-color: #f1f9fc;
-   }
+/* Row Hover */
+tbody tr:hover {
+    background-color: rgba(14, 143, 175, 0.2);
+    transition: background-color 0.2s ease-in-out;
+}
 
-   /* Hover Effect on Rows */
-   tbody tr:hover {
-       background-color: rgba(14, 143, 175, 0.2);
-       transform: scale(1.02);
-       transition: all 0.3s ease-in-out;
-   }
+/* Delete Button */
+.delete-btn {
+    background: linear-gradient(135deg, #d00000, #a00000);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.3);
+}
 
-   /* Delete Button Styling */
-   .delete-btn {
-       background: linear-gradient(135deg, #d00000, #a00000);
-       color: white;
-       border: none;
-       padding: 6px 12px;
-       font-size: 12px;
-       font-weight: bold;
-       border-radius: 6px;
-       cursor: pointer;
-       transition: transform 0.2s ease-in-out;
-       box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.3);
-   }
+.delete-btn:hover {
+    background: linear-gradient(135deg, #ff0000, #c00000);
+    transform: scale(1.1);
+    box-shadow: 0px 6px 12px rgba(255, 0, 0, 0.5);
+}
 
-   /* Delete Button Hover Effect */
-   .delete-btn:hover {
-       background: linear-gradient(135deg, #ff0000, #c00000);
-       transform: scale(1.1);
-       box-shadow: 0px 6px 12px rgba(255, 0, 0, 0.5);
-   }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .course-list {
+        padding: 20px;
+    }
 
-   /* Responsive Design */
-   @media (max-width: 768px) {
-       .course-list {
-           width: 100%;
-           padding: 20px;
-       }
+    table {
+        font-size: 12px;
+    }
 
-       table {
-           font-size: 12px;
-       }
+    th,
+    td {
+        padding: 8px;
+    }
 
-       th,
-       td {
-           padding: 10px;
-       }
-
-       .delete-btn {
-           padding: 5px 10px;
-           font-size: 10px;
-       }
-   }
+    .delete-btn {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+}
