@@ -6,7 +6,7 @@ const enquiryController = {
     submitEnquiry: (req, res) => {
         const { name, email, mobile, course, city, education } = req.body;
 
-        const sql = `INSERT INTO enroll (name, email, phone, course, city, education,) VALUES (?, ?, ?, ?, ?, ?)`;
+        const sql = `INSERT INTO enroll (name, email, phone, course, city, education) VALUES (?, ?, ?, ?, ?, ?)`;
 
         db.query(sql, [name, email, mobile, course, city, education], (err, result) => {
             if (err) {
